@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockBot", "StockBot.csproj", "{00BA35F5-52DD-42FB-BFFB-979339F12CE5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00BA35F5-52DD-42FB-BFFB-979339F12CE5}.Debug|x86.ActiveCfg = Debug|x86
+		{00BA35F5-52DD-42FB-BFFB-979339F12CE5}.Debug|x86.Build.0 = Debug|x86
+		{00BA35F5-52DD-42FB-BFFB-979339F12CE5}.Release|x86.ActiveCfg = Release|x86
+		{00BA35F5-52DD-42FB-BFFB-979339F12CE5}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A66F2BD6-BEB7-419B-AD8F-B5C858C8B26A}
+	EndGlobalSection
+EndGlobal
