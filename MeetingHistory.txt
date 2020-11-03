@@ -1,0 +1,9 @@
+11/2/2020
+
+Today, we will be discussing:
+  What do we want to do
+  What technologies will we utilize
+  Do we have a timeline
+  Separate out responsibilities so we can start coding ASAP
+  Let's try to stay concious of the engineering principles we have learned
+  I might keep a little cheat sheet near me when I'm working with the important design concepts
