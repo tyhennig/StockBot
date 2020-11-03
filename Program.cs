@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 public class Stock
 {
@@ -9,24 +9,52 @@ public class Stock
     private decimal dailyHigh;
     private decimal dailyLow;
 
-    Stock(string ticker, decimal latestPrice)
+    Stock(string ticker)
     {
         this.ticker = ticker;
-        this.latestPrice = latestPrice;
+        updatePrice();
+        updateHigh();
+        updateLow();
+        getName();
     }
 
-    private void updatePrice()
+    public void updatePrice()
+    {
+        //interface with API or webpage to get the latest quote
+
+        //latestPrice = API.getPrice(ticker);
+    }
+
+    public void updateHigh()
     {
 
     }
 
+    public void updateLow()
+    {
 
+    }
+
+    public void getName()
+    {
+
+    }
 }
 
 public class User
 {
     private string username;
     private string password;
+    private List<Stock> portfolio;
+
+    User(string username, string password)
+    {
+        this.username = username;
+        this.password = password;
+        portfolio = new List<Stock>();  //initialize the portfolio in memory once a user is created
+
+    }
+
 
 }
 
