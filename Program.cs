@@ -1,21 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 
+public static class API //just a temp class to test functionality
+{
+    public static bool isTicker(string ticker)
+    {
+        if (ticker == "abc")
+            return true;
+        else
+            return false;
+    }
+}
+
 public class Stock
 {
     private string ticker;
     private string name;
     private decimal latestPrice;
-    private decimal dailyHigh;
+    private decimal dailyHigh; //or some other value we want to keep track of
     private decimal dailyLow;
 
-    Stock(string ticker)
+    public Stock(string ticker)
     {
-        this.ticker = ticker;
-        updatePrice();
-        updateHigh();
-        updateLow();
-        getName();
+        if (API.isTicker(ticker)) //uses some API or something to check if it is a valid ticker
+        {
+            this.ticker = ticker;
+            updatePrice();
+            updateHigh();
+            updateLow();
+            getName();
+        } else
+        {
+            throw new ArgumentException("You entered an invalid Ticker");
+        }
+    }
+    public override string ToString()
+    {
+        return ticker;
     }
 
     public void updatePrice()
@@ -47,7 +68,7 @@ public class User
     private string password;
     private List<Stock> portfolio;
 
-    User(string username, string password)
+    public User(string username, string password)
     {
         this.username = username;
         this.password = password;
@@ -55,6 +76,18 @@ public class User
 
     }
 
+    public void addStock(Stock stock)
+    {
+        portfolio.Add(stock);
+    }
+
+    public void displayPortfolio()
+    {
+        foreach (Stock stock in portfolio) //iterates list, writes stock ToString() to console
+        {
+            Console.WriteLine(stock);
+        }
+    }
 
 }
 
@@ -67,6 +100,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World!");
+        Stock stock1 = new Stock("abc");
+        User user1 = new User("james", "password");
+        user1.addStock(stock1);
+        user1.displayPortfolio();
+        Console.ReadLine();
     }
 }
