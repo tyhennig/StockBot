@@ -62,10 +62,25 @@ public class Stock
     }
 }
 
-public class User
+public class Portfolio
+{
+    private string displayName;
+    private string id;
+    private string owner;
+    private List<Stock> contents;
+
+    public Portfolio(string owner)
+    {
+        this.owner = owner;
+        contents = new List<Stock>();
+    }
+}
+
+public class User 
 {
     private string username;
     private string password;
+    //I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
     private List<Stock> portfolio;
 
     public User(string username, string password)
@@ -79,6 +94,11 @@ public class User
     public void addStock(Stock stock)
     {
         portfolio.Add(stock);
+    }
+
+    public void removeStock(Stock stock)
+    {
+        portfolio.Remove(stock);
     }
 
     public void displayPortfolio()
