@@ -1,6 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
+/*TODO:
+ * 
+ * Mishra's Wants
+ *  Find best stocks to buy
+ *  Sorting by stocks that have decremented the most
+ *  Basically what we were going to do anyways
+ * 
+ */
+
+
+
+
 public static class API //just a temp class to test functionality
 {
     public static bool isTicker(string ticker)
