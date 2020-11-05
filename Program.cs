@@ -4,10 +4,9 @@ using System.Collections.Generic;
 
 /*TODO:
  * 
- * Mishra's Wants
- *  Find best stocks to buy
- *  Sorting by stocks that have decremented the most
- *  Basically what we were going to do anyways
+ * 11/5/2020
+ * Figure out how the portfolio class and user class will work
+ * Creating a portfolio through users? or creating protfolio from a user?
  * 
  */
 
@@ -78,14 +77,33 @@ public class Stock
 public class Portfolio
 {
     private string displayName;
-    private string id;
     private string owner;
     private List<Stock> contents;
 
-    public Portfolio(string owner)
+    public Portfolio(string owner, string displayName)
     {
         this.owner = owner;
+        this.displayName = displayName;
         contents = new List<Stock>();
+    }
+
+
+    public void addStock(Stock stock)
+    {
+        contents.Add(stock);
+    }
+
+    public void removeStock(Stock stock)
+    {
+        contents.Remove(stock);
+    }
+
+    public void displayPortfolio()
+    {
+        foreach (Stock stock in contents) //iterates list, writes stock ToString() to console
+        {
+            Console.WriteLine(stock);
+        }
     }
 }
 
@@ -93,34 +111,25 @@ public class User
 {
     private string username;
     private string password;
+    private List<Portfolio> portfolios;
     //I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
-    private List<Stock> portfolio;
 
     public User(string username, string password)
     {
         this.username = username;
         this.password = password;
-        portfolio = new List<Stock>();  //initialize the portfolio in memory once a user is created
-
     }
 
-    public void addStock(Stock stock)
+    public string getUsername()
     {
-        portfolio.Add(stock);
+        return username;
     }
 
-    public void removeStock(Stock stock)
+    public Portfolio createPortfolio(string displayName)
     {
-        portfolio.Remove(stock);
+        return new Portfolio(username, displayName);
     }
 
-    public void displayPortfolio()
-    {
-        foreach (Stock stock in portfolio) //iterates list, writes stock ToString() to console
-        {
-            Console.WriteLine(stock);
-        }
-    }
 
 }
 
@@ -135,8 +144,8 @@ class Program
     {
         Stock stock1 = new Stock("abc");
         User user1 = new User("james", "password");
-        user1.addStock(stock1);
-        user1.displayPortfolio();
+        user1.createPortfolio("first");
+
         Console.ReadLine();
     }
 }
