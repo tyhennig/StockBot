@@ -111,6 +111,7 @@
   <ItemGroup>
     <Compile Include="API.cs" />
     <Compile Include="Display.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Portfolio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Stock.cs" />

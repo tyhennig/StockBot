@@ -20,6 +20,14 @@ namespace StockBot
 
     class Program
     {
+
+        static void createMenu()
+        {
+            Menu mainMenu = new Menu(false);
+        }
+
+
+
         static void Main(string[] args)
         {
             bool running = true;
