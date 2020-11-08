@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography; 
 
 
@@ -21,13 +22,13 @@ namespace StockBot
     {
         static void Main(string[] args)
         {
-            Stock stock1, stock2, stock3;
-            stock1 = new Stock("abc");
-            stock2 = new Stock("amd");
-            stock3 = new Stock("noob");
+            bool running = true;
 
-            User user1 = new User("james", "password");
-            user1.createPortfolio("main");
+            while(running)
+            {
+                Display.display();
+
+            }
 
 
 

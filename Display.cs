@@ -8,6 +8,11 @@ namespace StockBot
 
     public static class Display
     {
+        internal static void display()
+        {
+            Console.Clear();
 
+
+        }
     }
 }
