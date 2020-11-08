@@ -109,7 +109,13 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API.cs" />
+    <Compile Include="Display.cs" />
+    <Compile Include="Portfolio.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Stock.cs" />
+    <Compile Include="TradingBot.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".git\objects\info\" />
