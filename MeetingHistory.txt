@@ -7,3 +7,9 @@ Today, we will be discussing:
   Separate out responsibilities so we can start coding ASAP
   Let's try to stay concious of the engineering principles we have learned
   I might keep a little cheat sheet near me when I'm working with the important design concepts
+
+11/9/2020
+  Agenda for today:
+    get caught up on the code
+    assign duties to individuals
+    discuss next step for project (What to implement, how to implement)
