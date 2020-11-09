@@ -24,6 +24,7 @@ namespace StockBot
         static void createMenu()
         {
             Menu mainMenu = new Menu(false);
+            //MenuItem mainMenuItem = new MenuItem();
         }
 
 
@@ -34,7 +35,7 @@ namespace StockBot
 
             while(running)
             {
-                Display.display();
+                createMenu();
 
             }
 
