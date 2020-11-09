@@ -6,18 +6,16 @@ using System.Text;
 namespace StockBot
 {
 
-    public class Display
+    public static class Display
     {
-        Menu currentMenu;
-        bool running = true;
+        public static Menu currentMenu;
+        static bool running = true;
 
-        public Display(Menu mainMenu)
-        {  
-            currentMenu = mainMenu;
-        }
+        
 
-        public void run()
+        public static void run(Menu mainMenu)
         {
+            currentMenu = mainMenu;
             while(running)
             {
 

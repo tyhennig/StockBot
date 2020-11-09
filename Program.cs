@@ -37,8 +37,7 @@ namespace StockBot
         {
             Menu mainMenu = new Menu(null, "main");//The "root" of the menu tree
             createMenu(mainMenu);
-            Display display = new Display(mainMenu);
-            display.run();
+            Display.run(mainMenu);
 
         }
     }
