@@ -5,51 +5,54 @@ using System.Text;
 
 namespace StockBot
 {
-    class Menu
+    public class Menu
     {
-        private bool isSubMenu;
-        //private List<MenuItem> menuItems;
+       
         private static int currentMenuID = 0;
         private int menuID;
-        private int parentID;
+        private Nullable<int> parentID;
+        private string title;
+
+        private List<Menu> childMenus;
 
 
-        public Menu(bool isSubMenu)
+        public Menu(Nullable<int> parentID, string title)
         {
-            menuID = ++currentMenuID;
-            isSubMenu = this.isSubMenu;
+            this.menuID = ++currentMenuID;
+            this.parentID = parentID;
+            this.title = title;
+            childMenus = new List<Menu>();
+
         }
 
-        public void createMenuItem(string title)
+        public List<Menu> getChildMenuList()
         {
-            menuItems.Add(new MenuItem(title));
+            return childMenus;
+        }
+
+        public Menu createChildMenu(string title)
+        {
+            Menu newMenu = new Menu(this.menuID, title);
+            childMenus.Add(newMenu);
+
+            return newMenu;
         }
 
 
 
         public void displayMenu()
         {
+            Console.Clear();
             Console.SetCursorPosition(0,0);
-            foreach(MenuItem menuItem in menuItems)
+            int childNumber = 1;
+            foreach(Menu childMenu in childMenus)
             {
-                Console.WriteLine(menuItem.title);
+                Console.WriteLine(childNumber + ". " + childMenu.title);
+                childNumber++;
             }
         }
 
 
     }
 
-    /*
-    class MenuItem
-    {
-        private string title{get; set;}
-        private int parentMenuID;
-        private int childMenuID;
-        MenuItem(string title, int parentMenuID, )
-        {
-            title = this.title;
-
-        }
-    }
-    */
 }
