@@ -9,37 +9,35 @@ namespace StockBot
 {
 
 
-    /*TODO:
-     * 
-     * 11/5/2020
-     * Figure out how the portfolio class and user class will work
-     * Creating a portfolio through users? or creating protfolio from a user?
-     * 
-     */
+    
 
 
     class Program
     {
 
-        static void createMenu()
+        static void createMenu(Menu mainMenu)
         {
-            Menu mainMenu = new Menu(false);
-            //MenuItem mainMenuItem = new MenuItem();
+            Menu login = mainMenu.createChildMenu("Log In", true);
+            Menu createAccount = mainMenu.createChildMenu("Create Account", true);
+            Menu options = mainMenu.createChildMenu("Options", false);
+
+            Menu video = options.createChildMenu("Resolution", true);
+            Menu sound = options.createChildMenu("Sound", true);
+            Menu credits = options.createChildMenu("Credits", true);
+
+            Menu forgotPass = login.createChildMenu("Forgot Password", true);
+            Menu check = login.createChildMenu("Check something", true);
         }
+
+        
 
 
 
         static void Main(string[] args)
         {
-            bool running = true;
-
-            while(running)
-            {
-                createMenu();
-
-            }
-
-
+            Menu mainMenu = new Menu("main", false);//The "root" of the menu tree
+            createMenu(mainMenu);
+            Display.run(mainMenu);
 
         }
     }
