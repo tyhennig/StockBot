@@ -17,16 +17,16 @@ namespace StockBot
 
         static void createMenu(Menu mainMenu)
         {
-            Menu login = mainMenu.createChildMenu("Log In");
-            Menu createAccount = mainMenu.createChildMenu("Create Account");
-            Menu options = mainMenu.createChildMenu("Options");
+            Menu login = mainMenu.createChildMenu("Log In", true);
+            Menu createAccount = mainMenu.createChildMenu("Create Account", true);
+            Menu options = mainMenu.createChildMenu("Options", false);
 
-            Menu video = options.createChildMenu("Resolution");
-            Menu sound = options.createChildMenu("Sound");
-            Menu credits = options.createChildMenu("Credits");
+            Menu video = options.createChildMenu("Resolution", true);
+            Menu sound = options.createChildMenu("Sound", true);
+            Menu credits = options.createChildMenu("Credits", true);
 
-            Menu forgotPass = login.createChildMenu("Forgot Password");
-            Menu check = login.createChildMenu("Check something");
+            Menu forgotPass = login.createChildMenu("Forgot Password", true);
+            Menu check = login.createChildMenu("Check something", true);
         }
 
         
@@ -35,7 +35,7 @@ namespace StockBot
 
         static void Main(string[] args)
         {
-            Menu mainMenu = new Menu(null, "main");//The "root" of the menu tree
+            Menu mainMenu = new Menu("main", false);//The "root" of the menu tree
             createMenu(mainMenu);
             Display.run(mainMenu);
 

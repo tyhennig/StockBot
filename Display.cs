@@ -21,16 +21,26 @@ namespace StockBot
 
                 currentMenu.displayMenu();
                 int selection;
-                if(Int32.TryParse(Console.ReadKey().KeyChar.ToString(), out selection))
+                ConsoleKeyInfo readKey = Console.ReadKey();
+                if (Int32.TryParse(readKey.KeyChar.ToString(), out selection))
                 {
-                    if(selection > 0 && selection <= currentMenu.getChildMenuList().Count)
+                    if (selection > 0 && selection <= currentMenu.getChildMenuList().Count)
                     {
-                        currentMenu = currentMenu.getChildMenuList()[selection-1];
+                        currentMenu = currentMenu.getChildMenuList()[selection - 1];
                     }
                     else
                     {
                         Console.WriteLine("Please Input value between 0 and " + currentMenu.getChildMenuList().Count);
                     }
+                }
+                else if (readKey.Key == ConsoleKey.Escape)
+                {
+                    if (currentMenu == mainMenu && readKey.Key == ConsoleKey.Escape)
+                    {
+                        running = false;
+                    }
+                    else
+                        currentMenu = currentMenu.getParentMenu();
                 }
                 else
                 {
