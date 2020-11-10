@@ -118,6 +118,7 @@
     <Compile Include="Stock.cs" />
     <Compile Include="TradingBot.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".git\objects\info\" />
