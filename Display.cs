@@ -10,43 +10,30 @@ namespace StockBot
     {
         public static Menu currentMenu;
         static bool running = true;
+        static bool clearScreen = true;
+        static int selection = 0;
 
         
 
         public static void run(Menu mainMenu)
         {
             currentMenu = mainMenu;
+            
             while(running)
             {
+                currentMenu.displayChildren();
+                
+                Console.MoveBufferArea(0, selection, 10, 1, 1, 0);
+                Console.SetCursorPosition(0, selection);
+                Console.Write(">");
+                ConsoleKeyInfo key = Console.ReadKey();
+                switch(key)
+                {
+                    case ConsoleKey.UpArrow:
 
-                currentMenu.displayMenu();
-                int selection;
-                ConsoleKeyInfo readKey = Console.ReadKey();
-                if (Int32.TryParse(readKey.KeyChar.ToString(), out selection))
-                {
-                    if (selection > 0 && selection <= currentMenu.getChildMenuList().Count)
-                    {
-                        currentMenu = currentMenu.getChildMenuList()[selection - 1];
-                    }
-                    else
-                    {
-                        Console.WriteLine("Please Input value between 0 and " + currentMenu.getChildMenuList().Count);
-                    }
+                    case ConsoleKey.DownArrow:
                 }
-                else if (readKey.Key == ConsoleKey.Escape)
-                {
-                    if (currentMenu == mainMenu && readKey.Key == ConsoleKey.Escape)
-                    {
-                        running = false;
-                    }
-                    else
-                        currentMenu = currentMenu.getParentMenu();
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input!");
-                }
-            
+
             }
             
 

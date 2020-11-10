@@ -19,7 +19,7 @@ namespace StockBot
 
         public void display()
         {
-            Console.WriteLine(content);
+            Console.WriteLine("WOW PARTNER " + content);
         }
     }
 }
