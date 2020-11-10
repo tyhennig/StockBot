@@ -12,6 +12,7 @@ namespace StockBot
         private string password;
         private Dictionary<string, Portfolio> portfolios;
         //DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
+        private double buyingPower = 0.00; //perhaps this should be global (static)
 
         public User(string username, string password)
         {
@@ -23,6 +24,21 @@ namespace StockBot
         public string getUsername()
         {
             return username;
+        }
+
+        public double getBuyingPower()
+        {
+            return buyingPower;
+        }
+
+        public void addBuyingPower(double amountAdded)
+        {
+            buyingPower += amountAdded;
+        }
+
+        public void subBuyingPower(double amountRemoved)
+        {
+            buyingPower -= amountRemoved;
         }
 
         private bool portfolioExists(string displayName)
