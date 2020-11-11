@@ -11,7 +11,7 @@ namespace StockBot
         public static Menu currentMenu;
         static bool running = true;
         static bool clearScreen = true;
-        static int selection = 1;
+        static int selection = 0;
 
         
 
