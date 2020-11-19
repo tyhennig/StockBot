@@ -32,13 +32,24 @@ namespace StockBot
         
 
 
+        
+
+
 
         static void Main(string[] args)
         {
-            Menu mainMenu = new Menu("main", false);//The "root" of the menu tree
-            createMenu(mainMenu);
-            Display.run(mainMenu);
+            //Menu mainMenu = new Menu("main", false);//The "root" of the menu tree
+            //createMenu(mainMenu);
+            //Display.run(mainMenu);
+            UserDB db = new UserDB();
+            db.addUser("Elite561", "Batman98");
+            Console.WriteLine(db.userDB["Elite561"]);
+            db.signInAttempt("Elite561", "Batman98");
 
+            var url = "https://finance.yahoo.com/gainers";
+            TradingBot bot = new TradingBot();
+            bot.scrapeHTML(url);
+            Console.ReadLine();
         }
     }
 

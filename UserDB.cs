@@ -5,19 +5,22 @@ using System.Text;
 
 namespace StockBot
 {
-    class UserDB
+    //May have to store all data in here. Perhaps only have one user to make things simple
+    public class UserDB
     {
-        private Dictionary<string, string> userDB;
+        public Dictionary<string, string> userDB = new Dictionary<string, string>();
 
         public UserDB()
         {
 
         }
 
-        private void addUser(string username, string password)
+        public void addUser(string username, string password)
         {
             if (userDB.ContainsKey(username))
+            {
                 Console.WriteLine("Username taken.");
+            }
             else
             {
                 userDB.Add(username, password);
@@ -32,18 +35,28 @@ namespace StockBot
             {
                 userDB.Remove(username);
                 Console.WriteLine("User " + username + " removed.");
-            } 
-            else
-            {
+            } else{
                 Console.WriteLine("Username " + username + " does not exist.");
             }
             
         }
 
-        private void signIn(string username, string password)
+        public void signInAttempt(string username, string password)
         {
-            //if (userDB.ContainsKey(username))
-                //if (userDB.AsParallel[username] == password)
+            bool success = false;
+            if (userDB.ContainsKey(username))
+                //This loop is infinite if the username is correct but the password is wrong
+                while(!success)
+                    if (userDB[username] == password)
+                    {
+                        success = true;
+                        Console.WriteLine("Access Granted");
+                    } else{
+                        Console.WriteLine("Try again");
+                    }
+            else{
+                Console.WriteLine("User does not exist");
+            }
         }
     }
 }
