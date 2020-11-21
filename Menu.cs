@@ -15,15 +15,18 @@ namespace StockBot
         private Menu parentMenu;
         private List<Menu> childMenus;
 
-        public Menu(string title, bool hasContent)
+        public Menu(string title)
         {
             
-            this.hasContent = hasContent;
             this.title = title;
             childMenus = new List<Menu>();
-            if(hasContent)
-                content = new MenuContent(this, "Howdy do day partner, this is content for " + title);
-
+        }
+        public Menu(string title, MenuContent content)
+        {
+            this.title = title;
+            childMenus = new List<Menu>();
+            this.content = content;
+            content.setOwner(this);
         }
         public bool getHasContent()
         {
@@ -46,9 +49,18 @@ namespace StockBot
         }
 
 
-        public Menu createChildMenu(string title, bool hasContent)
+        public Menu createChildMenu(string title, MenuContent content)
         {
-            Menu newMenu = new Menu(title, hasContent);
+            Menu newMenu = new Menu(title, content);
+            newMenu.parentMenu = this;
+            childMenus.Add(newMenu);
+
+            return newMenu;
+        }
+
+        public Menu createChildMenu(string title)
+        {
+            Menu newMenu = new Menu(title);
             newMenu.parentMenu = this;
             childMenus.Add(newMenu);
 

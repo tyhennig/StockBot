@@ -113,8 +113,10 @@
     <Compile Include="Display.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuContent.cs" />
+    <Compile Include="Pages\LogIn.cs" />
     <Compile Include="Portfolio.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="SelectableElement.cs" />
     <Compile Include="Stock.cs" />
     <Compile Include="TradingBot.cs" />
     <Compile Include="User.cs" />

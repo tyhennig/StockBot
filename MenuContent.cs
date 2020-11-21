@@ -6,20 +6,31 @@ using System.Text;
 
 namespace StockBot
 {
-    public class MenuContent
+
+    //hey nerd  ̿̿ ̿̿ ̿̿ ̿'̿'\̵͇̿̿\з= ( ▀ ͜͞ʖ▀) =ε/̵͇̿̿/’̿’̿ ̿ ̿̿ ̿̿ ̿̿
+    //hey sexy ;)       (ง'̀-'́)ง
+    //                                   (╯°□°)╯︵◓      ฅ^•ﻌ•^ฅ
+    //      ಠ_ಠ
+    public abstract class MenuContent
     {
-        private string content;
-        private Menu owner;
-        public MenuContent(Menu owner, string title)
+        private string title;
+        protected Menu owner;
+
+        protected List<SelectableElement> elements;
+
+        public MenuContent(string title)
         {
-            this.owner = owner;
-            content = title;
+            
+            this.title = title;
+            elements = new List<SelectableElement>();
         }
 
-
-        public void display()
+        public void setOwner(Menu menu)
         {
-            Console.WriteLine("WOW PARTNER " + content);
+            owner = menu;
         }
+        public abstract void display();
+        public abstract void run();
+
     }
 }
