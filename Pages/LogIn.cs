@@ -9,18 +9,23 @@ namespace StockBot
     {
         SelectableElement usernameInput;
         SelectableElement passwordInput;
-        public LogIn(string title) : base(title)
+        public LogIn(string title, Menu owner) : base(title, owner)
         {
             usernameInput = new SelectableElement(true, "Username: ", 10, 2);
             passwordInput = new SelectableElement(true, "Password: ", 10, 4);
             elements.Add(usernameInput);
             elements.Add(passwordInput);
+            loadElements();
 
         }
 
         public override void display()
         {
-            throw new NotImplementedException();
+            foreach(SelectableElement thing in elements)
+            {
+                Console.SetCursorPosition(thing.xLocation, thing.yLocation);
+                Console.Write(thing.displayedText);
+            }
         }
 
         public override void run()

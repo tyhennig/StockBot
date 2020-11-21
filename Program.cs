@@ -17,10 +17,12 @@ namespace StockBot
 
         static void createMenu(Menu mainMenu)
         {
-            LogIn loginPage = new LogIn("Log In Page");
-            Menu login = mainMenu.createChildMenu("Log In", loginPage);
+            
+            Menu login = mainMenu.createChildMenu("Log In");
             Menu createAccount = mainMenu.createChildMenu("Create Account");
             Menu options = mainMenu.createChildMenu("Options");
+
+            
 
             Menu video = options.createChildMenu("Resolution");
             Menu sound = options.createChildMenu("Sound");
@@ -28,6 +30,8 @@ namespace StockBot
 
             Menu forgotPass = login.createChildMenu("Forgot Password");
             Menu check = login.createChildMenu("Check something");
+
+            LogIn loginPage = new LogIn("Log In Page", login);
         }
 
         

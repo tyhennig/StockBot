@@ -111,6 +111,8 @@
   <ItemGroup>
     <Compile Include="API.cs" />
     <Compile Include="Display.cs" />
+    <Compile Include="BasicElement.cs" />
+    <Compile Include="Element.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuContent.cs" />
     <Compile Include="Pages\LogIn.cs" />

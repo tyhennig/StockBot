@@ -5,13 +5,9 @@ using System.Text;
 
 namespace StockBot
 {
-    public class SelectableElement
+    public class SelectableElement : Element
     {
         private bool takesText;
-        int xLocation;
-        int yLocation;
-
-        public string displayedText;
 
         public SelectableElement(bool takesText, string text, int x, int y)
         {
