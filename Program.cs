@@ -42,13 +42,15 @@ namespace StockBot
             //createMenu(mainMenu);
             //Display.run(mainMenu);
             UserDB db = new UserDB();
-            db.addUser("Elite561", "Batman98");
-            Console.WriteLine(db.userDB["Elite561"]);
-            db.signInAttempt("Elite561", "Batman98");
+            //db.addUser("Elite561", "Batman98");
+            //Console.WriteLine(db.userDB["Elite561"]);
+            //db.signInAttempt("Elite561", "Batman98");
 
             var url = "https://finance.yahoo.com/gainers";
             TradingBot bot = new TradingBot();
-            bot.scrapeHTML(url);
+            bot.FetchMovers();
+            Console.WriteLine(TradingBot.movers[0].symbol);
+            //bot.scrapeHTML(url);
             Console.ReadLine();
         }
     }

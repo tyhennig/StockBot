@@ -8,17 +8,19 @@ namespace StockBot
 
     public class User
     {
+        static int numInstantiated = 0;
+        int id; //numInstantiated increments every time a new user is created. Look at constructor
         private string username;
         private string password;
-        private Dictionary<string, Portfolio> portfolios;
-        //DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
-        private double buyingPower = 0.00; //perhaps this should be global (static)
+        private Dictionary<string, Portfolio> portfolios;//DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
+        private decimal buyingPower; //perhaps this should be global (static)
 
         public User(string username, string password)
         {
             this.username = username;
             this.password = password;
             portfolios = new Dictionary<string, Portfolio>();
+            id += numInstantiated;
         }
 
         public string getUsername()
@@ -26,19 +28,40 @@ namespace StockBot
             return username;
         }
 
-        public double getBuyingPower()
+        public decimal getBuyingPower()
         {
             return buyingPower;
         }
 
-        public void addBuyingPower(double amountAdded)
+        public void addBuyingPower(decimal amountAdded)
         {
-            buyingPower += amountAdded;
+            if(amountAdded > 0)
+            {
+                buyingPower += amountAdded;
+            }
+            else
+            {
+                Console.WriteLine("Enter a valid amount...");
+            }            
         }
 
-        public void subBuyingPower(double amountRemoved)
+        //may need some editing. May need a loop or might need to change
+        public void subBuyingPower(decimal amountRemoved)
         {
-            buyingPower -= amountRemoved;
+            decimal difference = buyingPower - amountRemoved;
+            if (amountRemoved < 0)
+            {
+                Console.WriteLine("Enter a non-negative number");
+            }
+            else if((difference < 0))
+            {
+                Console.WriteLine("Amount removed exceeds buying power by $" + difference);
+            }
+            else
+            {
+                buyingPower -= amountRemoved;
+            }
+            
         }
 
         private bool portfolioExists(string displayName)

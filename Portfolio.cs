@@ -9,7 +9,8 @@ namespace StockBot
     {
         private string displayName;
         //private string owner;
-        private List<Stock> contents;
+        public List<Stock> contents;
+        //private StockBot bot; //Each portfolio might have its own bot
 
         public Portfolio(string displayName)
         {
