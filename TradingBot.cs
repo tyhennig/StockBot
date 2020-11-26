@@ -10,15 +10,18 @@ namespace StockBot
 {
     class TradingBot
     {
-        
+        //fetching movers might have to be moved somewhere else.
         public string url = "https://finance.yahoo.com/gainers";
         public static List<dynamic> movers;
+        public bool active;
 
+        //add aggressive, normal, and safe options
         public TradingBot()
         {
-            
+            this.active = false;
         }
-
+        
+        //add something like if(active) then work
         public void FetchMovers()
         {
             string jsonString;
@@ -48,51 +51,9 @@ namespace StockBot
             //this.movers.Count;
         }
 
-        public void buyStock()
+        public void buyStock(dynamic stock)
         {
-            //this.movers
+            Portfolio.
         }
-
-
-
-
-        //public void StockPool
-
-        //public async void scrapeHTML(string url)
-        //{
-        //    //needs Microsoft.Hadoop.WebClient
-        //    var httpClient = new HttpClient();
-        //    //needs Microsoft.Bcl.Async
-        //    var html = await httpClient.GetStringAsync(url);
-
-        //    //needs HtmlAgilityPack
-        //    var htmlDocument = new HtmlDocument();
-        //    htmlDocument.LoadHtml(html);
-
-        //    var topDogsHtml = htmlDocument.DocumentNode.Descendants("table")
-        //        .Where(node => node.GetAttributeValue("class", "")
-        //        .Equals("W(100%)")).ToList();
-
-        //    var topDogsList = topDogsHtml[0].Descendants("tr")
-        //        .Where(node => node.GetAttributeValue("class", "")
-        //        .Contains("simpTblRow")).ToList();
-
-        //    //var x = topDogsHtml[0].InnerText;
-            
-
-        //    foreach (var topDog in topDogsList)
-        //    {
-        //        //Console.WriteLine(topDog.Descendants("a")
-        //        //    .Where(node => node.GetAttributeValue("class", "")
-        //        //    .Contains("Fw(600)")));
-        //        Console.WriteLine(topDog.InnerText);
-        //    }
-
-        //    //use json file to extract data
-
-        //    Console.WriteLine();
-            
-        //}
-
     }
 }

@@ -5,6 +5,13 @@ using System.Text;
 
 namespace StockBot
 {
+
+
+    //We might not need this class. The objects extracted from the json file are already functional
+
+
+
+
     //Structure of one mover
     //{ 
     //"symbol":"DADA",

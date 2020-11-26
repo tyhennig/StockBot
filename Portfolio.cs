@@ -7,15 +7,17 @@ namespace StockBot
 {
     public class Portfolio
     {
+        //we might need an id for each portfolio. Index may be handy for when you navigate
         private string displayName;
         //private string owner;
         public List<Stock> contents;
-        //private StockBot bot; //Each portfolio might have its own bot
+        private TradingBot bot; //Each portfolio might have its own bot
 
         public Portfolio(string displayName)
         {
             //this.owner = owner;
             this.displayName = displayName;
+            
             contents = new List<Stock>();
         }
 
