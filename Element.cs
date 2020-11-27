@@ -9,7 +9,6 @@ namespace StockBot
     {
         public int xLocation;
         public int yLocation;
-
         public string displayedText;
 
 
@@ -21,6 +20,14 @@ namespace StockBot
         public string getDisplayedText()
         {
             return displayedText;
+        }
+        public void setX(int x)
+        {
+            xLocation = x;
+        }
+        public void setY(int y)
+        {
+            yLocation = y;
         }
     }
 }

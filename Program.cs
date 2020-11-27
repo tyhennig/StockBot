@@ -8,30 +8,28 @@ using System.Security.Cryptography;
 namespace StockBot
 {
 
-
-    
-
-
     class Program
-    {
-
-        static void createMenu(Menu mainMenu)
+    { 
+        
+        static MenuTree createMenuTree()
         {
-            
-            Menu login = mainMenu.createChildMenu("Log In");
-            Menu createAccount = mainMenu.createChildMenu("Create Account");
-            Menu options = mainMenu.createChildMenu("Options");
+            MenuTree root = new MenuTree("Main Menu");
 
-            
+            MenuTree portfolio = root.createChildMenu("Portfolio");
+            MenuTree login = root.createChildMenu("Log In");
+            MenuTree options = root.createChildMenu("Options");
 
-            Menu video = options.createChildMenu("Resolution");
-            Menu sound = options.createChildMenu("Sound");
-            Menu credits = options.createChildMenu("Credits");
+            MenuTree video = options.createChildMenu("Resolution");
+            MenuTree sound = options.createChildMenu("Sound");
+            MenuTree credits = options.createChildMenu("Credits");
 
-            Menu forgotPass = login.createChildMenu("Forgot Password");
-            Menu check = login.createChildMenu("Check something");
+            MenuTree forgotPass = login.createChildMenu("Forgot Password");
+            MenuTree createAccount = login.createChildMenu("Create Account");
 
             LogIn loginPage = new LogIn("Log In Page", login);
+            MainMenu mainMenu = new MainMenu("Main Menu Page", root);
+
+            return root;
         }
 
         
@@ -40,9 +38,9 @@ namespace StockBot
 
         static void Main(string[] args)
         {
-            Menu mainMenu = new Menu("main");//The "root" of the menu tree
-            createMenu(mainMenu);
-            Display.run(mainMenu);
+            //The "root" of the menu tree
+            MenuTree root = createMenuTree();
+            Display.run(root);
 
         }
     }

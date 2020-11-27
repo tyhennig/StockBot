@@ -15,7 +15,12 @@ namespace StockBot
             displayedText = text;
             xLocation = x;
             yLocation = y;
-            
+        }
+
+        public SelectableElement(bool takesText, string text)
+        {
+            this.takesText = takesText;
+            displayedText = text;
         }
     }
 }

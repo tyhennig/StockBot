@@ -5,29 +5,24 @@ using System.Text;
 
 namespace StockBot
 {
-    class LogIn : MenuContent
+    public class MainMenu : MenuContent
     {
-        SelectableElement usernameInput;
-        SelectableElement passwordInput;
-        public LogIn(string title, MenuTree owner) : base(title, owner)
+        //private Element selectedElement;
+        public MainMenu(string title, MenuTree owner) : base(title, owner)
         {
-            usernameInput = new SelectableElement(true, "Username: ", 10, 2);
-            passwordInput = new SelectableElement(true, "Password: ", 10, 4);
-            elements.Insert(0, usernameInput);
-            elements.Insert(1, passwordInput);
-            selectedElement = usernameInput;
-
-            elements[2].xLocation = Console.WindowWidth / 2 - 5;
-            elements[2].yLocation = Console.WindowHeight - 8;
-
-            elements[3].xLocation = Console.WindowWidth / 2 - 5;
-            elements[3].yLocation = Console.WindowHeight - 6;
-
+            int i = 1;
+            foreach(Element element in elements)
+            {
+                element.xLocation = Console.WindowWidth / 2 - 5;
+                element.yLocation = (i * 2) + 5;
+                i++;
+            }
+            selectedElement = elements[0];
         }
 
         public override void display()
         {
-            foreach (Element element in elements)
+            foreach(Element element in elements)
             {
                 if (element == selectedElement)
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -35,13 +30,14 @@ namespace StockBot
                 Console.Write(element.displayedText);
                 Console.ForegroundColor = ConsoleColor.White;
             }
+
         }
 
         public override void run()
         {
             display();
             ConsoleKeyInfo key = Console.ReadKey();
-            switch (key.Key)
+            switch(key.Key)
             {
                 case ConsoleKey.UpArrow:
                     if (elements.IndexOf((SelectableElement)selectedElement) == 0)
@@ -62,9 +58,10 @@ namespace StockBot
                     break;
 
                 case ConsoleKey.Escape:
-                    Display.setCurrentMenu(owner.getParentMenu());
+                    Display.running = false;
                     break;
-            }
+
             }
         }
+    }
 }

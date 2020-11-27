@@ -7,42 +7,36 @@ using System.Text;
 namespace StockBot
 {
 
-    //hey nerd  ̿̿ ̿̿ ̿̿ ̿'̿'\̵͇̿̿\з= ( ▀ ͜͞ʖ▀) =ε/̵͇̿̿/’̿’̿ ̿ ̿̿ ̿̿ ̿̿
-    //hey sexy ;)       (ง'̀-'́)ง
-    //                                   (╯°□°)╯︵◓      ฅ^•ﻌ•^ฅ
-    //      ಠ_ಠ
     public abstract class MenuContent
     {
         private string title;
-        protected Menu owner;
+        protected MenuTree owner;
 
         protected List<SelectableElement> elements;
+        protected Element selectedElement;
 
-        public MenuContent(string title, Menu owner)
+        public MenuContent(string title, MenuTree owner)
         { 
             this.title = title;
             this.owner = owner;
             owner.setContent(this);
             elements = new List<SelectableElement>();
-            
+            loadInitialElements();
 
         }
 
-        public void setOwner(Menu menu)
+        public void setOwner(MenuTree menu)
         {
             owner = menu;
         }
 
-        public void loadElements()
+        public void loadInitialElements()
         {
-
             //int i = Console.BufferHeight - owner.getChildMenuList().Count();
-            int i = 5;
-            foreach(Menu child in owner.getChildMenuList())
+            foreach(MenuTree child in owner.getChildMenuList())
             {
-                SelectableElement temp = new SelectableElement(false, child.getTitle(), 5, i);
+                SelectableElement temp = new SelectableElement(false, child.getTitle());
                 elements.Add(temp);
-                i++;
             }
         }
         public List<SelectableElement> getSelectableElements()
