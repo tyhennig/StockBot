@@ -20,7 +20,8 @@ namespace StockBot
             this.username = username;
             this.password = password;
             portfolios = new Dictionary<string, Portfolio>();
-            id += numInstantiated;
+            id = numInstantiated;
+            numInstantiated++;
         }
 
         public string getUsername()
@@ -72,7 +73,7 @@ namespace StockBot
             }
             return false;
         }
-
+        
         public void createPortfolio(string displayName)
         {
             if (!portfolioExists(displayName))

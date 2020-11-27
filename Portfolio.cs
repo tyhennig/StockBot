@@ -7,18 +7,26 @@ namespace StockBot
 {
     public class Portfolio
     {
+        //private List<dynamic> movers;
+        private ISubject _bot;
         //we might need an id for each portfolio. Index may be handy for when you navigate
         private string displayName;
         //private string owner;
-        public List<Stock> contents;
-        private TradingBot bot; //Each portfolio might have its own bot
+        public List<dynamic> contents;
+        //private TradingBot bot; //Each portfolio might have its own bot
+        ISubject bot;
 
-        public Portfolio(string displayName)
+        public Portfolio(string dn)
         {
-            //this.owner = owner;
-            this.displayName = displayName;
-            
-            contents = new List<Stock>();
+            displayName = dn;
+            contents = new List<dynamic>();
+            //bot.RegisterObserver(this);
+        }
+
+        public void Update(dynamic m)
+        {
+            //this.movers = m;
+            Display();
         }
 
         public string getDisplayName()
@@ -26,12 +34,12 @@ namespace StockBot
             return displayName;
         }
 
-        public void addStock(Stock stock)
+        public void addStock(dynamic stock)
         {
             contents.Add(stock);
         }
 
-        public void removeStock(Stock stock)
+        public void removeStock(dynamic stock)
         {
             contents.Remove(stock);
         }
@@ -41,6 +49,18 @@ namespace StockBot
             foreach (Stock stock in contents) //iterates list, writes stock ToString() to console
             {
                 Console.WriteLine(stock);
+            }
+        }
+
+        public void Display()
+        {
+            Console.WriteLine("Top 25 movers from Yahoo Finance are: ");
+            for(int i = 0; i < TradingBot.movers.Count; i++)
+            {
+                Console.WriteLine(string.Format("{0} - \t{1} \t{2} \t{3} \t{4}% \t{5} \t{6} \t{7} \t{8} \t{9} \t{10}",
+                    i+1, TradingBot.movers[i].symbol, TradingBot.movers[i].shortName, TradingBot.movers[i].regularMarketPrice.raw, TradingBot.movers[i].regularMarketChange.raw,
+                    TradingBot.movers[i].regularMarketChangePercent.raw, TradingBot.movers[i].regularMarketVolume.raw, TradingBot.movers[i].averageDailyVolume3Month.raw, TradingBot.movers[i].marketCap.raw, TradingBot.movers[i].fiftyTwoWeekLow.raw,
+                    TradingBot.movers[i].fiftyTwoWeekHigh.raw, TradingBot.movers[i].regularMarketOpen.raw));
             }
         }
     }

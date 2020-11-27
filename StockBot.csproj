@@ -166,6 +166,9 @@
   <ItemGroup>
     <Compile Include="API.cs" />
     <Compile Include="Display.cs" />
+    <Compile Include="IDisplayElement.cs" />
+    <Compile Include="IObserver.cs" />
+    <Compile Include="ISubject.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuContent.cs" />
     <Compile Include="Portfolio.cs" />

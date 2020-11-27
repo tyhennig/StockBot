@@ -10,20 +10,52 @@ namespace StockBot
 {
     class TradingBot
     {
+        private List<dynamic> observers;
+
         //fetching movers might have to be moved somewhere else.
         public string url = "https://finance.yahoo.com/gainers";
-        public static List<dynamic> movers;
-        public bool active;
+        public static List<dynamic> movers = new List<dynamic>();
 
-        //add aggressive, normal, and safe options
         public TradingBot()
         {
-            this.active = false;
+            
         }
+
+        //Implement subject interface
+        public void RegisterObserver(IObserver o)
+        {
+            observers.Add(o);
+        }
+
+        public void RemoveObserver(IObserver o)
+        {
+            int i = observers.IndexOf(o);
+            if(i >= 0)
+            {
+                observers.Remove(i);
+            }
+        }
+
+        //public void NotifyObservers()
+        //{
+        //    foreach(IObserver observer in observers)
+        //    {
+        //        observer.Update(movers);
+        //    }
+        //}
+
+        //public void MoversChanged()
+        //{
+        //    NotifyObservers();
+        //}
+
+        //add aggressive, normal, and safe options
+        
         
         //add something like if(active) then work
         public void FetchMovers()
         {
+            movers.Clear();
             string jsonString;
             using (var wc = new System.Net.WebClient())
             {
@@ -33,8 +65,8 @@ namespace StockBot
             jsonString = jsonString.Split(new string[] { "\"results\":{\"rows\":" }, StringSplitOptions.None)[1];
             jsonString = jsonString.Split(new string[] { "]" }, StringSplitOptions.None)[0] + "]";
             List<dynamic> results = JsonConvert.DeserializeObject<List<dynamic>>(jsonString);
-            movers = new List<dynamic>();
-            movers.AddRange(results.Take(25));
+            movers.AddRange(results.Take(10));
+            //MoversChanged();
 
             //Console.WriteLine("Top 25 movers from Yahoo Finance are: ");
             //for(int i = 0; i < movers.Count; i++)
@@ -48,12 +80,15 @@ namespace StockBot
 
         public void aggressiveBuy()
         {
-            //this.movers.Count;
+            //if (this.movers.Count() > 0)
+            {
+
+            }
         }
 
         public void buyStock(dynamic stock)
         {
-            Portfolio.
+            //Portfolio.
         }
     }
 }

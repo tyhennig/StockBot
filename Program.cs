@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
-using System.Security.Cryptography; 
+using System.Security.Cryptography;
+using System.Threading;
 
 
 
@@ -47,9 +48,19 @@ namespace StockBot
             //db.signInAttempt("Elite561", "Batman98");
 
             var url = "https://finance.yahoo.com/gainers";
+            User paul = new User("A", "A");
+            paul.createPortfolio("chungus");
             TradingBot bot = new TradingBot();
-            bot.FetchMovers();
-            Console.WriteLine(TradingBot.movers[0].symbol);
+            Portfolio currentDisplay = new Portfolio("default");
+            //Portfolio port2 = new Portfolio(bot);
+            while(true)
+            {
+                Thread.Sleep(1000);
+                Console.Clear();
+                bot.FetchMovers();
+                currentDisplay.Display();
+            }
+            
             //bot.scrapeHTML(url);
             Console.ReadLine();
         }
