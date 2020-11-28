@@ -5,45 +5,59 @@ using System.Text;
 
 namespace StockBot
 {
-    class UserDB
+    //May have to store all data in here. Perhaps only have one user to make things simple. May have to be static
+    public class UserDB
     {
-        private Dictionary<string, string> userDB;
+        public Dictionary<int, User> userDB = new Dictionary<int, User>();
 
         public UserDB()
         {
 
         }
 
-        private void addUser(string username, string password)
+        public void addUser(string username, string password)
         {
-            if (userDB.ContainsKey(username))
-                Console.WriteLine("Username taken.");
-            else
-            {
-                userDB.Add(username, password);
-                Console.WriteLine("User created.");
-            }
+            //if (userDB.ContainsValue(username))
+            //{
+            //    Console.WriteLine("Username taken.");
+            //}
+            //else
+            //{
+
+            //    userDB.Add(username, password);
+            //    Console.WriteLine("User created.");
+            //}
         }
 
         //might be unecessary
         private void removeUser(string username)
         {
-            if (userDB.ContainsKey(username))
-            {
-                userDB.Remove(username);
-                Console.WriteLine("User " + username + " removed.");
-            } 
-            else
-            {
-                Console.WriteLine("Username " + username + " does not exist.");
-            }
+            //if (userDB.ContainsKey(username))
+            //{
+            //    userDB.Remove(username);
+            //    Console.WriteLine("User " + username + " removed.");
+            //} else{
+            //    Console.WriteLine("Username " + username + " does not exist.");
+            //}
             
         }
 
-        private void signIn(string username, string password)
+        public void signInAttempt(string username, string password)
         {
+            //bool success = false;
             //if (userDB.ContainsKey(username))
-                //if (userDB.AsParallel[username] == password)
+            //    //This loop is infinite if the username is correct but the password is wrong
+            //    while(!success)
+            //        if (userDB[username] == password)
+            //        {
+            //            success = true;
+            //            Console.WriteLine("Access Granted");
+            //        } else{
+            //            Console.WriteLine("Try again");
+            //        }
+            //else{
+            //    Console.WriteLine("User does not exist");
+            //}
         }
     }
 }
