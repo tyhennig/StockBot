@@ -69,6 +69,12 @@ namespace StockBot
             
         }
 
+        public void buyStock(string portfolio, dynamic stock)
+        {
+            portfolios[portfolio].buyStock(TradingBot.movers[4]);
+            //contents.Add(stock);
+        }
+
         private bool portfolioExists(string displayName)
         {
             if (portfolios.ContainsKey(displayName))

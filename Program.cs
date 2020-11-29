@@ -52,6 +52,8 @@ namespace StockBot
             paul.createPortfolio("default");
             paul.addBuyingPower(1000);
             paul.listPortfolios();
+            paul.buyStock("default", TradingBot.movers[4]);
+            //paul.buyStock(portfolioName, selectedstock);
             paul.portfolios["default"].buyStock(TradingBot.movers[4]);
             paul.portfolios["default"].displayPorfolioContent();
 
