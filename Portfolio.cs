@@ -14,7 +14,7 @@ namespace StockBot
         //private string owner;
         public List<dynamic> contents;
         //private TradingBot bot; //Each portfolio might have its own bot
-        ISubject bot;
+        
 
         public Portfolio(string dn)
         {
@@ -23,18 +23,12 @@ namespace StockBot
             //bot.RegisterObserver(this);
         }
 
-        public void Update(dynamic m)
-        {
-            //this.movers = m;
-            Display();
-        }
-
         public string getDisplayName()
         {
             return displayName;
         }
 
-        public void addStock(dynamic stock)
+        public void buyStock(dynamic stock)
         {
             contents.Add(stock);
         }
@@ -52,7 +46,17 @@ namespace StockBot
             }
         }
 
-        public void Display()
+        public void displayPorfolioContent()
+        {
+            foreach(dynamic stock in contents)
+            {
+                Console.WriteLine(stock.symbol);
+            }
+        }
+
+        
+
+        public void DisplayStocksDetail()
         {
             Console.WriteLine("Top 25 movers from Yahoo Finance are: ");
             for(int i = 0; i < TradingBot.movers.Count; i++)

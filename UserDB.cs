@@ -8,7 +8,7 @@ namespace StockBot
     //May have to store all data in here. Perhaps only have one user to make things simple. May have to be static
     public class UserDB
     {
-        public Dictionary<int, User> userDB = new Dictionary<int, User>();
+        public static Dictionary<int, User> userDB = new Dictionary<int, User>();
 
         public UserDB()
         {

@@ -10,9 +10,10 @@ namespace StockBot
     {
         static int numInstantiated = 0;
         int id; //numInstantiated increments every time a new user is created. Look at constructor
-        private string username;
-        private string password;
-        private Dictionary<string, Portfolio> portfolios;//DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
+        private string username { set; get; }
+        private string password { set; get; }
+        //Maybe a list is better? What happens when you delete a user, creating holes
+        public Dictionary<string, Portfolio> portfolios;//DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
         private decimal buyingPower; //perhaps this should be global (static)
 
         public User(string username, string password)
@@ -22,12 +23,15 @@ namespace StockBot
             portfolios = new Dictionary<string, Portfolio>();
             id = numInstantiated;
             numInstantiated++;
+            UserDB.userDB.Add(id, this);
         }
 
-        public string getUsername()
-        {
-            return username;
-        }
+        //public string getUsername()
+        //{
+        //    return username;
+        //}
+
+
 
         public decimal getBuyingPower()
         {
@@ -73,7 +77,15 @@ namespace StockBot
             }
             return false;
         }
-        
+
+        public void listPortfolios()
+        {
+            foreach (string portfolio in portfolios.Keys)
+            {
+                Console.WriteLine(portfolio);
+            }
+        }
+
         public void createPortfolio(string displayName)
         {
             if (!portfolioExists(displayName))

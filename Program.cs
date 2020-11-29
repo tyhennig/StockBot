@@ -46,19 +46,24 @@ namespace StockBot
             //db.addUser("Elite561", "Batman98");
             //Console.WriteLine(db.userDB["Elite561"]);
             //db.signInAttempt("Elite561", "Batman98");
-
-            var url = "https://finance.yahoo.com/gainers";
-            User paul = new User("A", "A");
-            paul.createPortfolio("chungus");
             TradingBot bot = new TradingBot();
-            Portfolio currentDisplay = new Portfolio("default");
+            bot.FetchMovers();
+            User paul = new User("Elite561", "ABC");
+            paul.createPortfolio("default");
+            paul.addBuyingPower(1000);
+            paul.listPortfolios();
+            paul.portfolios["default"].buyStock(TradingBot.movers[4]);
+            paul.portfolios["default"].displayPorfolioContent();
+
+            
+            //Portfolio currentDisplay = new Portfolio("default");
             //Portfolio port2 = new Portfolio(bot);
-            while(true)
+            //while(true)
             {
-                Thread.Sleep(1000);
-                Console.Clear();
-                bot.FetchMovers();
-                currentDisplay.Display();
+                //Thread.Sleep(1000);
+                //Console.Clear();
+                //bot.FetchMovers();
+                //bot.Display();
             }
             
             //bot.scrapeHTML(url);
