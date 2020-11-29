@@ -19,6 +19,7 @@ namespace StockBot
             MenuTree portfolio = root.createChildMenu("Portfolio");
             MenuTree login = root.createChildMenu("Log In");
             MenuTree options = root.createChildMenu("Options");
+            MenuTree movers = root.createChildMenu("Movers");
 
             MenuTree video = options.createChildMenu("Resolution");
             MenuTree sound = options.createChildMenu("Sound");
@@ -29,6 +30,7 @@ namespace StockBot
 
             LogIn loginPage = new LogIn("Log In Page", login);
             MainMenu mainMenu = new MainMenu("Main Menu Page", root);
+            Movers moversPage = new Movers("Movers Page", movers);
 
             return root;
         }
@@ -46,27 +48,18 @@ namespace StockBot
             MenuTree root = createMenuTree();
             Display.run(root);
 
-            //Menu mainMenu = new Menu("main", false);//The "root" of the menu tree
-            //createMenu(mainMenu);
-            //Display.run(mainMenu);
             UserDB db = new UserDB();
-            //db.addUser("Elite561", "Batman98");
-            //Console.WriteLine(db.userDB["Elite561"]);
-            //db.signInAttempt("Elite561", "Batman98");
+            
+
 
             var url = "https://finance.yahoo.com/gainers";
             User paul = new User("A", "A");
             paul.createPortfolio("chungus");
             TradingBot bot = new TradingBot();
             Portfolio currentDisplay = new Portfolio("default");
-            //Portfolio port2 = new Portfolio(bot);
-            while(true)
-            {
-                Thread.Sleep(1000);
-                Console.Clear();
-                bot.FetchMovers();
-                currentDisplay.Display();
-            }
+
+            
+            
             
             //bot.scrapeHTML(url);
             Console.ReadLine();

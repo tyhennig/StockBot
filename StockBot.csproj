@@ -171,13 +171,13 @@
     <Compile Include="IDisplayElement.cs" />
     <Compile Include="IObserver.cs" />
     <Compile Include="ISubject.cs" />
-    <Compile Include="Menu.cs" />
     <Compile Include="BasicElement.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="MenuTree.cs" />
     <Compile Include="MenuContent.cs" />
     <Compile Include="Pages\LogIn.cs" />
     <Compile Include="Pages\MainMenu.cs" />
+    <Compile Include="Pages\Movers.cs" />
     <Compile Include="Portfolio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SelectableElement.cs" />

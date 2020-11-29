@@ -8,24 +8,23 @@ namespace StockBot
     public class Portfolio
     {
         //private List<dynamic> movers;
-        private ISubject _bot;
+        //private ISubject _bot;
         //we might need an id for each portfolio. Index may be handy for when you navigate
         private string displayName;
         //private string owner;
         public List<dynamic> contents;
         //private TradingBot bot; //Each portfolio might have its own bot
-        ISubject bot;
+        //ISubject bot;
 
         public Portfolio(string dn)
         {
             displayName = dn;
             contents = new List<dynamic>();
-            //bot.RegisterObserver(this);
+            
         }
 
         public void Update(dynamic m)
         {
-            //this.movers = m;
             Display();
         }
 
