@@ -62,7 +62,8 @@ namespace StockBot
         static void Main(string[] args)
         {
 
-            UserDB.addUser("tyler", "password");
+            UserDB.addUser("tyler", "pass", "02/26/1999");
+
             Display.currentUser = UserDB.userDB["tyler"];
 
             UserDB.userDB["tyler"].createPortfolio("First Portfolio");
@@ -70,21 +71,14 @@ namespace StockBot
             UserDB.userDB["tyler"].createPortfolio("Third Portfolio");
             UserDB.userDB["tyler"].createPortfolio("Fourth Portfolio");
 
+            
+
+
+
             Console.SetWindowSize(160, 40);
             //The "root" of the menu tree
             MenuTree root = createMenuTree();
             Display.run(root);
-
-            
-            
-
-
-            var url = "https://finance.yahoo.com/gainers";
-            User paul = new User("A", "A");
-            paul.createPortfolio("chungus");
-            TradingBot bot = new TradingBot();
-            Portfolio currentDisplay = new Portfolio("default");
-
             
         }
     }

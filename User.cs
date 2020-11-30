@@ -16,11 +16,14 @@ namespace StockBot
 
 
         private decimal buyingPower; //perhaps this should be global (static)
+        private string bday = "";
+        
 
-        public User(string username, string password)
+        public User(string username, string password, string bday)
         {
             this.username = username;
             this.password = password;
+            this.bday = bday;
             portfolios = new Dictionary<string, Portfolio>();
             id = numInstantiated;
             numInstantiated++;
@@ -34,6 +37,11 @@ namespace StockBot
         public string getPassword()
         {
             return password;
+        }
+
+        public string getBday()
+        {
+            return bday;
         }
 
         public decimal getBuyingPower()

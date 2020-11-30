@@ -80,7 +80,7 @@ namespace StockBot
         public override void run()
         {
             display();
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 3 );
             ConsoleKeyInfo key = Console.ReadKey();
             switch (key.Key)
             {

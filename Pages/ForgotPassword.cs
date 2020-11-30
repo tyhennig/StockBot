@@ -13,9 +13,11 @@ namespace StockBot
         SelectableElement submit;
         public ForgotPassword(string title, MenuTree owner) : base(title, owner)
         {
+            Action del = new Action(submitCredentials2);
+
             usernameInput = new SelectableElement(true, "Username: ", 10, 2);
             birthdayInput = new SelectableElement(true, "Birthday: ", 10, 4);
-            submit = new SelectableElement(false, "Submit", 10, 6);
+            submit = new SelectableElement(false, "Submit", 10, 6, del);
 
             elements.Insert(0, usernameInput);
             elements.Insert(1, birthdayInput);
@@ -24,6 +26,20 @@ namespace StockBot
             selectedElement = elements[0];
         }
 
+        public void submitCredentials2()
+        {
+            string username = usernameInput.getValue();
+            string bday = birthdayInput.getValue();
+            string retrievedPass = UserDB.forgotPassword(username, bday);
+
+            if (retrievedPass != null)
+            {
+                Console.WriteLine("Pssst! Pass is: " + retrievedPass);
+            }
+            else Console.WriteLine("Wrong Information!");
+
+            Console.ReadKey();
+        }
 
         public override void display()
         {
