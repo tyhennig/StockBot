@@ -43,8 +43,6 @@ namespace StockBot
                 ySpacing = Console.WindowHeight - (i * 2);
                 SelectableElement temp = new SelectableElement(false, child.getTitle(), xSpacing, ySpacing);
 
-
-                SelectableElement temp = new SelectableElement(false, child.getTitle());
                 temp.IsMenu = true;
                 elements.Add(temp);
                 i++;
