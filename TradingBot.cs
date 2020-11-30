@@ -78,6 +78,7 @@ namespace StockBot
             }
         }
 
+
         public void aggressiveBuy()
         {
             //if (this.movers.Count() > 0)

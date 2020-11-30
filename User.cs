@@ -13,14 +13,16 @@ namespace StockBot
         private string username { set; get; }
         private string password { set; get; }
         //Maybe a list is better? What happens when you delete a user, creating holes
-        public Dictionary<string, Portfolio> portfolios;//DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
+        //public Dictionary<string, Portfolio> portfolios;//DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
+        public List<Portfolio> portfolios;
         private decimal buyingPower; //perhaps this should be global (static)
 
         public User(string username, string password)
         {
             this.username = username;
             this.password = password;
-            portfolios = new Dictionary<string, Portfolio>();
+            //portfolios = new Dictionary<string, Portfolio>();
+            portfolios = new List<Portfolio>();
             id = numInstantiated;
             numInstantiated++;
             UserDB.userDB.Add(id, this);
@@ -51,52 +53,109 @@ namespace StockBot
         }
 
         //may need some editing. May need a loop or might need to change
-        public void subBuyingPower(decimal amountRemoved)
+        //return something. Use in buyStock class. Think about it. DRY
+        public bool subBuyingPower(decimal amountRemoved)
         {
             decimal difference = buyingPower - amountRemoved;
             if (amountRemoved < 0)
             {
                 Console.WriteLine("Enter a non-negative number");
+                return false;
             }
             else if((difference < 0))
             {
                 Console.WriteLine("Amount removed exceeds buying power by $" + difference);
+                return false;
             }
             else
             {
-                buyingPower -= amountRemoved;
+                this.buyingPower -= amountRemoved;
+                return true;
             }
             
         }
 
-        public void buyStock(string portfolio, dynamic stock)
+        public void buyStock(Portfolio folio, dynamic stock, int quantity)
         {
-            portfolios[portfolio].buyStock(TradingBot.movers[4]);
-            //contents.Add(stock);
+            dynamic tmpStock = stock;
+            float p = tmpStock.regularMarketPrice.raw;
+            decimal price = Convert.ToDecimal(p);
+            if(subBuyingPower(price * quantity))
+            {
+                for (int i = 0; i < quantity; i++)
+                {
+                    folio.contents.Add(tmpStock);
+                }
+            }       
         }
 
-        private bool portfolioExists(string displayName)
+        public void sellStock(Portfolio folio, dynamic stock, int quantity)
         {
-            if (portfolios.ContainsKey(displayName))
+            dynamic tmpStock = stock;
+            float p = tmpStock.regularMarketPrice.raw;
+            decimal price = Convert.ToDecimal(p);
+
+            if (subBuyingPower(price * quantity))
             {
-                return true;
+                for (int i = 0; i < quantity; i++)
+                {
+                    folio.contents.Add(tmpStock);
+                }
             }
+        }
+
+        public void botBuy(Portfolio folio)
+        {
+            foreach(dynamic stock in folio.contents)
+            {
+                string symbol = stock.symbol;
+                for(int i = 0; i < 5; i++)
+                {
+                    if (TradingBot.movers[i].symbol.Equals(symbol))
+                    {
+                        Console.WriteLine("Match");
+                    }
+                }
+                
+            }
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    buyStock(folio, TradingBot.movers[i], 2);
+            //}
+
+        }
+
+        public void updateStock()
+        {
+
+        }
+
+        private bool portfolioExists(string folio)
+        {
+            foreach (Portfolio x in portfolios)
+            {
+                if (folio.Equals(x.getDisplayName()))
+                {
+                    return true;
+                }
+            }
+            
             return false;
         }
 
         public void listPortfolios()
         {
-            foreach (string portfolio in portfolios.Keys)
+            foreach (Portfolio portfolio in portfolios)
             {
-                Console.WriteLine(portfolio);
+                Console.WriteLine(portfolio.getDisplayName());
             }
         }
 
-        public void createPortfolio(string displayName)
+        public void createPortfolio(string folio)
         {
-            if (!portfolioExists(displayName))
+            if (!portfolioExists(folio))
             {
-                portfolios.Add(displayName, new Portfolio(displayName));
+                portfolios.Add(new Portfolio(folio));
             }
             else
             {

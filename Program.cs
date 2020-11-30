@@ -50,12 +50,17 @@ namespace StockBot
             bot.FetchMovers();
             User paul = new User("Elite561", "ABC");
             paul.createPortfolio("default");
+            paul.createPortfolio("default2");
             paul.addBuyingPower(1000);
             paul.listPortfolios();
-            paul.buyStock("default", TradingBot.movers[4]);
+            paul.buyStock(paul.portfolios[0], TradingBot.movers[4], 10);
+            paul.buyStock(paul.portfolios[0], TradingBot.movers[2], 5);
+            //paul.botBuy(paul.portfolios[0]);
             //paul.buyStock(portfolioName, selectedstock);
-            paul.portfolios["default"].buyStock(TradingBot.movers[4]);
-            paul.portfolios["default"].displayPorfolioContent();
+            //paul.portfolios["default"].buyStock(TradingBot.movers[4]);
+            paul.portfolios[0].displayPorfolioContent();
+            //paul.portfolios[0].updateStocksAsync();
+            Console.WriteLine(paul.getBuyingPower());
 
             
             //Portfolio currentDisplay = new Portfolio("default");
