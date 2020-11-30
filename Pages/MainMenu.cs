@@ -20,18 +20,6 @@ namespace StockBot
             selectedElement = elements[0];
         }
 
-        //public void display()
-        //{
-        //    foreach (Element element in elements)
-        //    {
-        //        if (element == selectedElement)
-        //            Console.ForegroundColor = ConsoleColor.Green;
-        //        Console.SetCursorPosition(element.xLocation, element.yLocation);
-        //        Console.Write(element.displayedText);
-        //        Console.ForegroundColor = ConsoleColor.White;
-        //    }
-
-        //}
 
         public override void run()
         {

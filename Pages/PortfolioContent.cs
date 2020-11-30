@@ -9,7 +9,7 @@ namespace StockBot
     {
         public PortfolioContent(string title, MenuTree owner) : base(title, owner)
         {
-            
+            selectedElement = elements[1];
 
         }
 
