@@ -9,12 +9,17 @@ namespace StockBot
     {
         SelectableElement usernameInput;
         SelectableElement passwordInput;
+        SelectableElement submit;
         public LogIn(string title, MenuTree owner) : base(title, owner)
         {
             usernameInput = new SelectableElement(true, "Username: ", 10, 2);
             passwordInput = new SelectableElement(true, "Password: ", 10, 4);
+            submit = new SelectableElement(false, "Submit", 10, 6);
+
             elements.Insert(0, usernameInput);
             elements.Insert(1, passwordInput);
+            elements.Insert(3, submit);
+
             selectedElement = usernameInput;
 
             elements[2].xLocation = Console.WindowWidth / 2 - 5;
@@ -22,6 +27,9 @@ namespace StockBot
 
             elements[3].xLocation = Console.WindowWidth / 2 - 5;
             elements[3].yLocation = Console.WindowHeight - 6;
+
+            elements[4].xLocation = Console.WindowWidth / 2 - 5;
+            elements[4].yLocation = Console.WindowHeight - 6;
 
         }
 
