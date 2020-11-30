@@ -18,15 +18,12 @@ namespace StockBot
 
             elements.Insert(0, usernameInput);
             elements.Insert(1, passwordInput);
-            elements.Insert(3, submit);
+            elements.Insert(2, submit);
 
             selectedElement = usernameInput;
 
-            elements[2].xLocation = Console.WindowWidth / 2 - 5;
-            elements[2].yLocation = Console.WindowHeight - 8;
-
             elements[3].xLocation = Console.WindowWidth / 2 - 5;
-            elements[3].yLocation = Console.WindowHeight - 6;
+            elements[3].yLocation = Console.WindowHeight - 8;
 
             elements[4].xLocation = Console.WindowWidth / 2 - 5;
             elements[4].yLocation = Console.WindowHeight - 6;
