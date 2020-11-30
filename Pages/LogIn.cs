@@ -47,6 +47,7 @@ namespace StockBot
             {
                 case 0:
                     Console.WriteLine("Successfully Logged In!");
+                    
                     break;
 
                 case 1:
@@ -57,6 +58,7 @@ namespace StockBot
                     Console.WriteLine("Account Does Not Exist!");
                     break;
             }
+            Console.ReadKey();
                 
         }
 
@@ -78,6 +80,7 @@ namespace StockBot
         public override void run()
         {
             display();
+            Console.SetCursorPosition(0, 0);
             ConsoleKeyInfo key = Console.ReadKey();
             switch (key.Key)
             {

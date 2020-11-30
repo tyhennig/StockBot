@@ -10,17 +10,17 @@ namespace StockBot
     {
         public static Dictionary<string, User> userDB = new Dictionary<string, User>();
 
-        public static void addUser(string username, string password)
+        public static bool addUser(string username, string password)
         {
             if (userDB.ContainsKey(username))
             {
-                Console.WriteLine("Username taken.");
+                return false;
             }
             else
             {
                 User createdUser = new User(username, password);
                 userDB.Add(username, createdUser);
-                Console.WriteLine("User created.");
+                return true;
             }
         }
 
@@ -45,6 +45,7 @@ namespace StockBot
             {
                 if (value.getPassword().Equals(password))
                 {
+                    Display.currentUser = value;
                     return 0;
                 }
                 else return 1;

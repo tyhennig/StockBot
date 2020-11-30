@@ -8,7 +8,7 @@ namespace StockBot
 
     public static class Display
     {
-        static User currentUser;
+        public static User currentUser;
 
         public static MenuTree currentMenu;
         public static bool running = true;
@@ -28,6 +28,9 @@ namespace StockBot
             {
                 Console.Clear();
                 Console.CursorVisible = false;
+                Console.SetCursorPosition(0, 0);
+                if(currentUser != null)
+                    Console.Write(currentUser.getUsername());
                 currentMenu.run();  
             }
             

@@ -12,15 +12,31 @@ namespace StockBot
         SelectableElement create;
         public CreateAccount(string title, MenuTree owner) : base(title, owner)
         {
+            Action del = new Action(submitCredentials);
+
             usernameInput = new SelectableElement(true, "Username: ", 10, 2);
             passwordInput = new SelectableElement(true, "Password: ", 10, 4);
-            create = new SelectableElement(false, "Create", 10, 6);
+            create = new SelectableElement(false, "Create", 10, 6, del);
 
             elements.Insert(0, usernameInput);
             elements.Insert(1, passwordInput);
             elements.Insert(2, create);
 
             selectedElement = elements[0];
+        }
+
+        public void submitCredentials()
+        {
+            string username = usernameInput.getValue();
+            string pass = passwordInput.getValue();
+
+            if (UserDB.addUser(username, pass))
+            {
+                Console.WriteLine("Successfully Created Account!");
+            }
+            else Console.WriteLine("Username Taken!");
+            Console.ReadKey();
+
         }
 
         public override void display()
