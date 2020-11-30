@@ -19,6 +19,8 @@ namespace StockBot
             get; set;
         }
 
+        Action a;
+
         public SelectableElement(bool takesText, string text, int x, int y)
         {
             this.TakesText = takesText;
@@ -27,13 +29,19 @@ namespace StockBot
             xLocation = x;
             yLocation = y;
             
-
+            
         }
 
-        public SelectableElement(bool takesText, string text)
+        public SelectableElement(bool takesText, string text, int x, int y, Action a)
         {
             this.TakesText = takesText;
+            this.IsMenu = false;
             displayedText = text;
+            xLocation = x;
+            yLocation = y;
+
+            this.a = a;
+
         }
 
        
@@ -55,9 +63,9 @@ namespace StockBot
                 value = value.Remove(value.Length - 1);
         }
         
-        public void runMethod(Func<bool> methodName)
+        public void runMethod()
         {
-            methodName();
+            a();
         }
     }
 }

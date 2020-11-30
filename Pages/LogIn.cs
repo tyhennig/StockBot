@@ -5,16 +5,23 @@ using System.Text;
 
 namespace StockBot
 {
+    public delegate void Action();
+
     class LogIn : MenuContent
     {
         SelectableElement usernameInput;
         SelectableElement passwordInput;
         SelectableElement submit;
+
         public LogIn(string title, MenuTree owner) : base(title, owner)
         {
+
+            Action del = new Action(submitCredentials);
+
             usernameInput = new SelectableElement(true, "Username: ", 10, 2);
             passwordInput = new SelectableElement(true, "Password: ", 10, 4);
-            submit = new SelectableElement(false, "Submit", 10, 6);
+            submit = new SelectableElement(false, "Submit", 10, 6, del);
+
 
             elements.Insert(0, usernameInput);
             elements.Insert(1, passwordInput);
@@ -28,9 +35,14 @@ namespace StockBot
             elements[4].xLocation = Console.WindowWidth / 2 - 5;
             elements[4].yLocation = Console.WindowHeight - 6;
 
+
         }
 
-
+        public void submitCredentials()
+        {
+            string username = usernameInput.getValue();
+            string pass = passwordInput.getValue();
+        }
 
         public override void display()
         {
@@ -70,6 +82,10 @@ namespace StockBot
                 case ConsoleKey.Enter:
                     if(selectedElement.IsMenu)
                         Display.setCurrentMenu(owner.getChildMenuList()[elements.IndexOf(selectedElement)]);
+                    else
+                    {
+                        selectedElement.runMethod();
+                    }
                     break;
 
                 case ConsoleKey.Escape:
