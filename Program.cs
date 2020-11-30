@@ -16,23 +16,27 @@ namespace StockBot
         {
             MenuTree root = new MenuTree("Main Menu");
 
-            MenuTree portfolio = root.createChildMenu("Portfolio");
+            MenuTree portfolios = root.createChildMenu("Portfolios");
             MenuTree login = root.createChildMenu("Log In");
-            MenuTree options = root.createChildMenu("Options");
+            MenuTree settings = root.createChildMenu("Settings");
             MenuTree movers = root.createChildMenu("Movers");
 
-            MenuTree video = options.createChildMenu("Resolution");
-            MenuTree sound = options.createChildMenu("Sound");
-            MenuTree credits = options.createChildMenu("Credits");
+            MenuTree video = settings.createChildMenu("Video");
+            MenuTree sound = settings.createChildMenu("Sound");
+            MenuTree credits = settings.createChildMenu("Credits");
 
             MenuTree forgotPass = login.createChildMenu("Forgot Password");
             MenuTree createAccount = login.createChildMenu("Create Account");
 
-            MenuTree test = login.createChildMenu("testing");
+            MenuTree delPort = portfolios.createChildMenu("Delete Portfolio");
+            MenuTree addPort = portfolios.createChildMenu("Create Portfolio");
 
             LogIn loginPage = new LogIn("Log In Page", login);
             MainMenu mainMenu = new MainMenu("Main Menu Page", root);
             Movers moversPage = new Movers("Movers Page", movers);
+            Settings settingPage = new Settings("Settings Page", settings);
+            PortfolioContent portfolioPage = new PortfolioContent("Portfolios Page", portfolios);
+
 
             return root;
         }

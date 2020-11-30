@@ -5,27 +5,20 @@ using System.Text;
 
 namespace StockBot
 {
-    class LogIn : MenuContent
+    class Settings : MenuContent
     {
-        SelectableElement usernameInput;
-        SelectableElement passwordInput;
-        public LogIn(string title, MenuTree owner) : base(title, owner)
+        public Settings(string title, MenuTree owner) : base(title, owner)
         {
-            usernameInput = new SelectableElement(true, "Username: ", 10, 2);
-            passwordInput = new SelectableElement(true, "Password: ", 10, 4);
-            elements.Insert(0, usernameInput);
-            elements.Insert(1, passwordInput);
-            selectedElement = usernameInput;
-
-            elements[2].xLocation = Console.WindowWidth / 2 - 5;
-            elements[2].yLocation = Console.WindowHeight - 8;
-
-            elements[3].xLocation = Console.WindowWidth / 2 - 5;
-            elements[3].yLocation = Console.WindowHeight - 6;
+            int i = 1;
+            foreach (Element element in elements)
+            {
+                element.xLocation = Console.WindowWidth / 2 - 5;
+                element.yLocation = (i * 2) + 5;
+                i++;
+            }
+            selectedElement = elements[0];
 
         }
-
-        
 
         public override void run()
         {
@@ -55,13 +48,7 @@ namespace StockBot
                     Display.setCurrentMenu(owner.getParentMenu());
                     break;
 
-                default:
-                    if(Char.IsLetterOrDigit(key.KeyChar))
-                    {
-                        usernameInput.setDisplayedText(usernameInput.getDisplayedText() + key.KeyChar);
-                    }
-                    break;
             }
         }
     }
-}
+} 

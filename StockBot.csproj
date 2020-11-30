@@ -178,6 +178,8 @@
     <Compile Include="Pages\LogIn.cs" />
     <Compile Include="Pages\MainMenu.cs" />
     <Compile Include="Pages\Movers.cs" />
+    <Compile Include="Pages\PortfolioContent.cs" />
+    <Compile Include="Pages\Settings.cs" />
     <Compile Include="Portfolio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ElementClasses\SelectableElement.cs" />
