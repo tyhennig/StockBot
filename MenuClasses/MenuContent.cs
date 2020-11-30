@@ -32,17 +32,26 @@ namespace StockBot
 
         public void loadInitialElements()
         {
-            int xLocation;
-            int yLocation;
+
+            
+            int xSpacing;
+            int ySpacing;
+            int i = 1;
+
 
             //int i = Console.BufferHeight - owner.getChildMenuList().Count();
             foreach(MenuTree child in owner.getChildMenuList())
             {
 
 
-                SelectableElement temp = new SelectableElement(false, child.getTitle());
+
+                xSpacing = Console.WindowWidth / 2 - 5;
+                ySpacing = Console.WindowHeight - (i * 2);
+                SelectableElement temp = new SelectableElement(false, child.getTitle(), xSpacing, ySpacing);
                 temp.IsMenu = true;
+
                 elements.Add(temp);
+                i++;
             }
         }
         public List<SelectableElement> getSelectableElements()

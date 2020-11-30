@@ -27,19 +27,8 @@ namespace StockBot
 
         
 
-        public override void display()
-        {
-            foreach (Element element in elements)
-            {
-                if (element == selectedElement)
-                    Console.ForegroundColor = ConsoleColor.Green;
-                Console.SetCursorPosition(element.xLocation, element.yLocation);
-                Console.Write(element.displayedText);
-                Console.ForegroundColor = ConsoleColor.White;
-                if (((SelectableElement)element).TakesText)
-                    Console.Write(((SelectableElement)element).getValue());
-            }
-        }
+
+     
 
         public override void run()
         {
@@ -84,6 +73,6 @@ namespace StockBot
                     }
                     break;
             }
-            }
         }
+    }
 }
