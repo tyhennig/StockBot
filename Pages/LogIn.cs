@@ -42,6 +42,22 @@ namespace StockBot
         {
             string username = usernameInput.getValue();
             string pass = passwordInput.getValue();
+
+            switch (UserDB.attemptLogin(username, pass))
+            {
+                case 0:
+                    Console.WriteLine("Successfully Logged In!");
+                    break;
+
+                case 1:
+                    Console.WriteLine("Incorrect Password!");
+                    break;
+
+                case 2:
+                    Console.WriteLine("Account Does Not Exist!");
+                    break;
+            }
+                
         }
 
         public override void display()

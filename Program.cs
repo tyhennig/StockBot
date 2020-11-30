@@ -9,6 +9,7 @@ using System.Threading;
 namespace StockBot
 {
 
+    
     class Program
     { 
         
@@ -58,12 +59,15 @@ namespace StockBot
 
         static void Main(string[] args)
         {
+
+            UserDB.addUser("tyler", "pass");
+
             Console.SetWindowSize(160, 40);
             //The "root" of the menu tree
             MenuTree root = createMenuTree();
             Display.run(root);
 
-            UserDB db = new UserDB();
+            
             
 
 
