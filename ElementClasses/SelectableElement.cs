@@ -55,5 +55,9 @@ namespace StockBot
                 value = value.Remove(value.Length - 1);
         }
         
+        public void runMethod(Func<bool> methodName)
+        {
+            methodName();
+        }
     }
 }
