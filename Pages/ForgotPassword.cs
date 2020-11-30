@@ -5,21 +5,25 @@ using System.Text;
 
 namespace StockBot
 {
-    class CreatePortfolio : MenuContent
+    class ForgotPassword : MenuContent
     {
-        SelectableElement portfolioName;
-        SelectableElement create;
 
-        public CreatePortfolio(string title, MenuTree owner) : base(title, owner)
+        SelectableElement usernameInput;
+        SelectableElement birthdayInput;
+        SelectableElement submit;
+        public ForgotPassword(string title, MenuTree owner) : base(title, owner)
         {
-            portfolioName = new SelectableElement(true, "Portfolio Name: ", 10, 2);
-            create = new SelectableElement(false, "Create", 10, 4);
+            usernameInput = new SelectableElement(true, "Username: ", 10, 2);
+            birthdayInput = new SelectableElement(true, "Birthday: ", 10, 4);
+            submit = new SelectableElement(false, "Submit", 10, 6);
 
-            elements.Insert(0, portfolioName);
-            elements.Insert(1, create);
+            elements.Insert(0, usernameInput);
+            elements.Insert(1, birthdayInput);
+            elements.Insert(2, submit);
 
             selectedElement = elements[0];
         }
+
 
         public override void display()
         {
@@ -34,6 +38,7 @@ namespace StockBot
                     Console.Write(((SelectableElement)element).getValue());
             }
         }
+
 
         public override void run()
         {
@@ -85,11 +90,5 @@ namespace StockBot
                     break;
             }
         }
-
-
-
-
-
-
     }
 }

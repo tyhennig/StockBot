@@ -9,16 +9,19 @@ namespace StockBot
     {
         SelectableElement usernameInput;
         SelectableElement passwordInput;
+        SelectableElement birthdayInput;
         SelectableElement create;
         public CreateAccount(string title, MenuTree owner) : base(title, owner)
         {
             usernameInput = new SelectableElement(true, "Username: ", 10, 2);
             passwordInput = new SelectableElement(true, "Password: ", 10, 4);
-            create = new SelectableElement(false, "Create", 10, 6);
+            birthdayInput = new SelectableElement(true, "Birthday: ", 10, 6);
+            create = new SelectableElement(false, "Create", 10, 8);
 
             elements.Insert(0, usernameInput);
             elements.Insert(1, passwordInput);
-            elements.Insert(2, create);
+            elements.Insert(2, birthdayInput);
+            elements.Insert(3, create);
 
             selectedElement = elements[0];
         }
@@ -59,7 +62,13 @@ namespace StockBot
 
                 case ConsoleKey.Enter:
                     if (selectedElement.IsMenu)
-                        Display.setCurrentMenu(owner.getChildMenuList()[elements.IndexOf(selectedElement)]);
+                    {
+                        Display.setCurrentMenu(owner.getChildMenuList().Where(menu => menu.getTitle().Equals(selectedElement.displayedText)).ToList()[0]);
+                    }
+                    else
+                    {
+                        selectedElement.runMethod();
+                    }
                     break;
 
                 case ConsoleKey.Escape:

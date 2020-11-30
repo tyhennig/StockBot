@@ -47,6 +47,7 @@ namespace StockBot
             CreateAccount createAccountPage = new CreateAccount("Create Account Page", createAccount);
             CreatePortfolio createPortfolioPage = new CreatePortfolio("Create Portfolio Page", createPort);
             DeletePortfolio deletePortfolioPage = new DeletePortfolio("Delete Portfolio Page", deletePort);
+            ForgotPassword forgotPasswordPage = new ForgotPassword("Forgot Password Page", forgotPass);
 
             return root;
         }
