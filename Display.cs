@@ -17,7 +17,12 @@ namespace StockBot
 
         public static void setCurrentMenu(MenuTree menu)
         {
+            foreach(SelectableElement element in currentMenu.getContent().getSelectableElements())
+            {
+                element.clearValue();
+            }
             currentMenu = menu;
+            
         }
 
         public static void run(MenuTree root)
@@ -30,7 +35,7 @@ namespace StockBot
                 Console.CursorVisible = false;
                 Console.SetCursorPosition(0, 0);
                 if(currentUser != null)
-                    Console.Write(currentUser.getUsername());
+                    Console.Write("Current User: " + currentUser.getUsername());
                 currentMenu.run();  
             }
             

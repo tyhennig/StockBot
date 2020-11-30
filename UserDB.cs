@@ -10,7 +10,7 @@ namespace StockBot
     {
         public static Dictionary<string, User> userDB = new Dictionary<string, User>();
 
-        public static bool addUser(string username, string password)
+        public static bool addUser(string username, string password, string bday)
         {
             if (userDB.ContainsKey(username))
             {
@@ -18,7 +18,7 @@ namespace StockBot
             }
             else
             {
-                User createdUser = new User(username, password);
+                User createdUser = new User(username, password, bday);
                 userDB.Add(username, createdUser);
                 return true;
             }
@@ -35,6 +35,18 @@ namespace StockBot
             //    Console.WriteLine("Username " + username + " does not exist.");
             //}
             
+        }
+
+        public static string forgotPassword(string username, string bday)
+        {
+            User value;
+            if(userDB.TryGetValue(username, out value))
+            {
+                if (value.getBday().Equals(bday))
+                    return value.getPassword();
+            } 
+            return null;
+                
         }
 
         public static int attemptLogin(string username, string password)

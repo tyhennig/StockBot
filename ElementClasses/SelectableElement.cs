@@ -51,6 +51,11 @@ namespace StockBot
             return value;
         }
 
+        public void clearValue()
+        {
+            value = "";
+        }
+
         public void addToValue(char added)
         {
             if(value.Length <= 12)
