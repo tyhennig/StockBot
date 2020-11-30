@@ -29,11 +29,10 @@ namespace StockBot
             MenuTree createAccount = login.createChildMenu("Create Account");
 
 
-
             //MenuTree test = login.createChildMenu("testing");
 
-            MenuTree addPort = portfolios.createChildMenu("Create Portfolio");
-            MenuTree delPort = portfolios.createChildMenu("Delete Portfolio");
+            MenuTree createPort = portfolios.createChildMenu("Create Portfolio");
+            MenuTree deletePort = portfolios.createChildMenu("Delete Portfolio");
             
 
             LogIn loginPage = new LogIn("Log In Page", login);
@@ -45,6 +44,8 @@ namespace StockBot
             Sound soundPage = new Sound("Sound Page", sound);
             Video videoPage = new Video("Video Page", video);
             CreateAccount createAccountPage = new CreateAccount("Create Account Page", createAccount);
+            CreatePortfolio createPortfolioPage = new CreatePortfolio("Create Portfolio Page", createPort);
+            DeletePortfolio deletePortfolioPage = new DeletePortfolio("Delete Portfolio Page", deletePort);
 
             return root;
         }

@@ -5,20 +5,21 @@ using System.Text;
 
 namespace StockBot
 {
-    class CreateAccount : MenuContent
+    class DeletePortfolio : MenuContent
     {
-        SelectableElement usernameInput;
-        SelectableElement passwordInput;
-        SelectableElement create;
-        public CreateAccount(string title, MenuTree owner) : base(title, owner)
-        {
-            usernameInput = new SelectableElement(true, "Username: ", 10, 2);
-            passwordInput = new SelectableElement(true, "Password: ", 10, 4);
-            create = new SelectableElement(false, "Create", 10, 6);
+        SelectableElement portfolioName;
+        SelectableElement delete;
 
-            elements.Insert(0, usernameInput);
-            elements.Insert(1, passwordInput);
-            elements.Insert(2, create);
+        public DeletePortfolio(string title, MenuTree owner) : base(title, owner)
+        {
+            portfolioName = new SelectableElement(true, "Portfolio Name: ", 10, 2);
+            delete = new SelectableElement(false, "Delete", 10, 4);
+
+            elements.Insert(0, portfolioName);
+            elements.Insert(1, delete);
+
+            elements[1].xLocation = Console.WindowWidth / 2 - 5;
+            elements[1].yLocation = Console.WindowHeight - 6;
 
             selectedElement = elements[0];
         }
@@ -81,5 +82,6 @@ namespace StockBot
                     break;
             }
         }
+
     }
 }
