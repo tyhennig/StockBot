@@ -8,6 +8,8 @@ namespace StockBot
 
     public static class Display
     {
+        static User currentUser;
+
         public static MenuTree currentMenu;
         public static bool running = true;
         static bool clearScreen = true;

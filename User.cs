@@ -29,6 +29,11 @@ namespace StockBot
             return username;
         }
 
+        public string getPassword()
+        {
+            return password;
+        }
+
         public decimal getBuyingPower()
         {
             return buyingPower;

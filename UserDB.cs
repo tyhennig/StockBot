@@ -6,31 +6,26 @@ using System.Text;
 namespace StockBot
 {
     //May have to store all data in here. Perhaps only have one user to make things simple. May have to be static
-    public class UserDB
+    public static class UserDB
     {
-        public Dictionary<int, User> userDB = new Dictionary<int, User>();
+        public static Dictionary<string, User> userDB = new Dictionary<string, User>();
 
-        public UserDB()
+        public static void addUser(string username, string password)
         {
-
-        }
-
-        public void addUser(string username, string password)
-        {
-            //if (userDB.ContainsValue(username))
-            //{
-            //    Console.WriteLine("Username taken.");
-            //}
-            //else
-            //{
-
-            //    userDB.Add(username, password);
-            //    Console.WriteLine("User created.");
-            //}
+            if (userDB.ContainsKey(username))
+            {
+                Console.WriteLine("Username taken.");
+            }
+            else
+            {
+                User createdUser = new User(username, password);
+                userDB.Add(username, createdUser);
+                Console.WriteLine("User created.");
+            }
         }
 
         //might be unecessary
-        private void removeUser(string username)
+        private static void removeUser(string username)
         {
             //if (userDB.ContainsKey(username))
             //{
@@ -42,22 +37,22 @@ namespace StockBot
             
         }
 
-        public void signInAttempt(string username, string password)
+        public static int attemptLogin(string username, string password)
         {
             //bool success = false;
-            //if (userDB.ContainsKey(username))
-            //    //This loop is infinite if the username is correct but the password is wrong
-            //    while(!success)
-            //        if (userDB[username] == password)
-            //        {
-            //            success = true;
-            //            Console.WriteLine("Access Granted");
-            //        } else{
-            //            Console.WriteLine("Try again");
-            //        }
-            //else{
-            //    Console.WriteLine("User does not exist");
-            //}
+            User value;
+            if (userDB.TryGetValue(username, out value))
+            {
+                if (value.getPassword().Equals(password))
+                {
+                    return 0;
+                }
+                else return 1;
+            }
+            else return 2;
+                //This loop is infinite if the username is correct but the password is wrong
+                
+            
         }
     }
 }
