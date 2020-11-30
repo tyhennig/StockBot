@@ -5,45 +5,67 @@ using System.Text;
 
 namespace StockBot
 {
-    class UserDB
+    //May have to store all data in here. Perhaps only have one user to make things simple. May have to be static
+    public static class UserDB
     {
-        private Dictionary<string, string> userDB;
+        public static Dictionary<string, User> userDB = new Dictionary<string, User>();
 
-        public UserDB()
-        {
-
-        }
-
-        private void addUser(string username, string password)
+        public static bool addUser(string username, string password, string bday)
         {
             if (userDB.ContainsKey(username))
-                Console.WriteLine("Username taken.");
+            {
+                return false;
+            }
             else
             {
-                userDB.Add(username, password);
-                Console.WriteLine("User created.");
+                User createdUser = new User(username, password, bday);
+                userDB.Add(username, createdUser);
+                return true;
             }
         }
 
         //might be unecessary
-        private void removeUser(string username)
+        private static void removeUser(string username)
         {
-            if (userDB.ContainsKey(username))
-            {
-                userDB.Remove(username);
-                Console.WriteLine("User " + username + " removed.");
-            } 
-            else
-            {
-                Console.WriteLine("Username " + username + " does not exist.");
-            }
+            //if (userDB.ContainsKey(username))
+            //{
+            //    userDB.Remove(username);
+            //    Console.WriteLine("User " + username + " removed.");
+            //} else{
+            //    Console.WriteLine("Username " + username + " does not exist.");
+            //}
             
         }
 
-        private void signIn(string username, string password)
+        public static string forgotPassword(string username, string bday)
         {
-            //if (userDB.ContainsKey(username))
-                //if (userDB.AsParallel[username] == password)
+            User value;
+            if(userDB.TryGetValue(username, out value))
+            {
+                if (value.getBday().Equals(bday))
+                    return value.getPassword();
+            } 
+            return null;
+                
+        }
+
+        public static int attemptLogin(string username, string password)
+        {
+            //bool success = false;
+            User value;
+            if (userDB.TryGetValue(username, out value))
+            {
+                if (value.getPassword().Equals(password))
+                {
+                    Display.currentUser = value;
+                    return 0;
+                }
+                else return 1;
+            }
+            else return 2;
+                //This loop is infinite if the username is correct but the password is wrong
+                
+            
         }
     }
 }

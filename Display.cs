@@ -8,45 +8,35 @@ namespace StockBot
 
     public static class Display
     {
-        public static Menu currentMenu;
-        static bool running = true;
+        public static User currentUser;
 
-        
+        public static MenuTree currentMenu;
+        public static bool running = true;
+        static bool clearScreen = true;
+        static int selection = 0;
 
-        public static void run(Menu mainMenu)
+        public static void setCurrentMenu(MenuTree menu)
         {
-            currentMenu = mainMenu;
+            foreach(SelectableElement element in currentMenu.getContent().getSelectableElements())
+            {
+                element.clearValue();
+            }
+            currentMenu = menu;
+            
+        }
+
+        public static void run(MenuTree root)
+        {
+            currentMenu = root;
+            
             while(running)
             {
-
-                currentMenu.displayMenu();
-                int selection;
-                ConsoleKeyInfo readKey = Console.ReadKey();
-                if (Int32.TryParse(readKey.KeyChar.ToString(), out selection))
-                {
-                    if (selection > 0 && selection <= currentMenu.getChildMenuList().Count)
-                    {
-                        currentMenu = currentMenu.getChildMenuList()[selection - 1];
-                    }
-                    else
-                    {
-                        Console.WriteLine("Please Input value between 0 and " + currentMenu.getChildMenuList().Count);
-                    }
-                }
-                else if (readKey.Key == ConsoleKey.Escape)
-                {
-                    if (currentMenu == mainMenu && readKey.Key == ConsoleKey.Escape)
-                    {
-                        running = false;
-                    }
-                    else
-                        currentMenu = currentMenu.getParentMenu();
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input!");
-                }
-            
+                Console.Clear();
+                Console.CursorVisible = false;
+                Console.SetCursorPosition(0, 0);
+                if(currentUser != null)
+                    Console.Write("Current User: " + currentUser.getUsername());
+                currentMenu.run();  
             }
             
 
