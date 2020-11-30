@@ -7,10 +7,10 @@ namespace StockBot
 {
     class PortfolioContent : MenuContent
     {
+
         public PortfolioContent(string title, MenuTree owner) : base(title, owner)
         {
             
-            selectedElement = elements[1];
 
         }
 
@@ -20,6 +20,7 @@ namespace StockBot
             foreach (Portfolio portfolio in Display.currentUser.getPortfolios().Values.ToList())
             {
                 Console.WriteLine(portfolio.getDisplayName());
+               
             }
         }
 
