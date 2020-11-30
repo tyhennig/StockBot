@@ -62,7 +62,13 @@ namespace StockBot
         static void Main(string[] args)
         {
 
-            UserDB.addUser("tyler", "pass");
+            UserDB.addUser("tyler", "password");
+            Display.currentUser = UserDB.userDB["tyler"];
+
+            UserDB.userDB["tyler"].createPortfolio("First Portfolio");
+            UserDB.userDB["tyler"].createPortfolio("Second Portfolio");
+            UserDB.userDB["tyler"].createPortfolio("Third Portfolio");
+            UserDB.userDB["tyler"].createPortfolio("Fourth Portfolio");
 
             Console.SetWindowSize(160, 40);
             //The "root" of the menu tree

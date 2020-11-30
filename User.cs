@@ -13,6 +13,8 @@ namespace StockBot
         private string username;
         private string password;
         private Dictionary<string, Portfolio> portfolios;//DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
+
+
         private decimal buyingPower; //perhaps this should be global (static)
 
         public User(string username, string password)
@@ -93,5 +95,12 @@ namespace StockBot
                 Console.WriteLine("Hey Bub! You already have a portfolio named this!");
             }
         }
+
+        public Dictionary<string, Portfolio> getPortfolios()
+        {
+                return portfolios;  
+        }
+
+
     }
 }

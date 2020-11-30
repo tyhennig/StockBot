@@ -14,6 +14,15 @@ namespace StockBot
 
         }
 
+        public override void display()
+        {
+            
+            foreach (Portfolio portfolio in Display.currentUser.getPortfolios().Values.ToList())
+            {
+                Console.WriteLine(portfolio.getDisplayName());
+            }
+        }
+
         public override void run()
         {
             display();
