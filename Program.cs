@@ -17,11 +17,14 @@ namespace StockBot
         {
             MenuTree root = new MenuTree("Main Menu");
 
+
+            //MenuTree StockOptions = root.createChildMenu("Stock Options");
             MenuTree portfolios = root.createChildMenu("Portfolios");
             MenuTree login = root.createChildMenu("Log In");
             MenuTree settings = root.createChildMenu("Settings");
             MenuTree movers = root.createChildMenu("Movers");
 
+            //MenuTree botSets = settings.createChildMenu("Stock Bot Settings");
             MenuTree video = settings.createChildMenu("Video");
             MenuTree sound = settings.createChildMenu("Sound");
             MenuTree credits = settings.createChildMenu("Credits");
@@ -30,7 +33,7 @@ namespace StockBot
             MenuTree createAccount = login.createChildMenu("Create Account");
 
 
-            //MenuTree test = login.createChildMenu("testing");
+            
 
             MenuTree createPort = portfolios.createChildMenu("Create Portfolio");
             MenuTree deletePort = portfolios.createChildMenu("Delete Portfolio");
@@ -63,15 +66,16 @@ namespace StockBot
         {
 
             UserDB.addUser("tyler", "pass", "02/26/1999");
+            //UserDB.addUser("james", "pass", "999");
 
-            Display.currentUser = UserDB.userDB["tyler"];
+            //Display.currentUser = UserDB.userDB["tyler"];
 
             UserDB.userDB["tyler"].createPortfolio("First Portfolio");
             UserDB.userDB["tyler"].createPortfolio("Second Portfolio");
             UserDB.userDB["tyler"].createPortfolio("Third Portfolio");
-            UserDB.userDB["tyler"].createPortfolio("Fourth Portfolio");
 
-            
+
+
 
 
 

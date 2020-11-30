@@ -186,6 +186,7 @@
     <Compile Include="Pages\PortfolioContent.cs" />
     <Compile Include="Pages\Settings.cs" />
     <Compile Include="Pages\Sound.cs" />
+    <Compile Include="Pages\StockListPage.cs" />
     <Compile Include="Pages\Video.cs" />
     <Compile Include="Portfolio.cs" />
     <Compile Include="Program.cs" />

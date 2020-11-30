@@ -33,6 +33,11 @@ namespace StockBot
             return displayName;
         }
 
+        public List<dynamic> getContents()
+        {
+            return contents;
+        }
+
         public void addStock(dynamic stock)
         {
             contents.Add(stock);

@@ -10,10 +10,12 @@ namespace StockBot
     public abstract class MenuContent
     {
         private string title;
+        protected User lastUser;
         protected MenuTree owner;
 
         protected List<SelectableElement> elements;
         protected SelectableElement selectedElement;
+
 
         public MenuContent(string title, MenuTree owner)
         { 
