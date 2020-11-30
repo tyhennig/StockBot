@@ -175,11 +175,15 @@
     <Compile Include="ElementClasses\Element.cs" />
     <Compile Include="MenuClasses\MenuTree.cs" />
     <Compile Include="MenuClasses\MenuContent.cs" />
+    <Compile Include="Pages\CreateAccount.cs" />
+    <Compile Include="Pages\Credits.cs" />
     <Compile Include="Pages\LogIn.cs" />
     <Compile Include="Pages\MainMenu.cs" />
     <Compile Include="Pages\Movers.cs" />
     <Compile Include="Pages\PortfolioContent.cs" />
     <Compile Include="Pages\Settings.cs" />
+    <Compile Include="Pages\Sound.cs" />
+    <Compile Include="Pages\Video.cs" />
     <Compile Include="Portfolio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ElementClasses\SelectableElement.cs" />
