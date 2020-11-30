@@ -36,7 +36,7 @@ namespace StockBot
             
             int xSpacing;
             int ySpacing;
-            int i = 1;
+            int i = 0;
 
 
             //int i = Console.BufferHeight - owner.getChildMenuList().Count();
@@ -46,7 +46,7 @@ namespace StockBot
 
 
                 xSpacing = Console.WindowWidth / 2 - 5;
-                ySpacing = Console.WindowHeight - (i * 2);
+                ySpacing = Console.WindowHeight - (8 - (2 * i));
                 SelectableElement temp = new SelectableElement(false, child.getTitle(), xSpacing, ySpacing);
                 temp.IsMenu = true;
 
