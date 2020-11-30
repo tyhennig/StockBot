@@ -80,8 +80,10 @@ namespace StockBot
                     break;
 
                 case ConsoleKey.Enter:
-                    if(selectedElement.IsMenu)
-                        Display.setCurrentMenu(owner.getChildMenuList()[elements.IndexOf(selectedElement)]);
+                    if (selectedElement.IsMenu)
+                    {
+                        Display.setCurrentMenu(owner.getChildMenuList().Where(menu => menu.getTitle().Equals(selectedElement.displayedText)).ToList()[0]);
+                    }
                     else
                     {
                         selectedElement.runMethod();
