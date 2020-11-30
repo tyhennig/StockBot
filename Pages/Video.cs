@@ -37,7 +37,13 @@ namespace StockBot
 
                 case ConsoleKey.Enter:
                     if (selectedElement.IsMenu)
-                        Display.setCurrentMenu(owner.getChildMenuList()[elements.IndexOf(selectedElement)]);
+                    {
+                        Display.setCurrentMenu(owner.getChildMenuList().Where(menu => menu.getTitle().Equals(selectedElement.displayedText)).ToList()[0]);
+                    }
+                    else
+                    {
+                        selectedElement.runMethod();
+                    }
                     break;
 
                 case ConsoleKey.Escape:
