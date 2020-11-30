@@ -43,7 +43,17 @@ namespace StockBot
         {
             return elements;
         }
-        public abstract void display();
+        public virtual void display()
+        {
+            foreach (Element element in elements)
+            {
+                if (element == selectedElement)
+                    Console.ForegroundColor = ConsoleColor.Green;
+                Console.SetCursorPosition(element.xLocation, element.yLocation);
+                Console.Write(element.displayedText);
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+        }
         public abstract void run();
 
     }

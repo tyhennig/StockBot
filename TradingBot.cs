@@ -22,19 +22,9 @@ namespace StockBot
         }
 
         //Implement subject interface
-        public void RegisterObserver(IObserver o)
-        {
-            observers.Add(o);
-        }
+        
 
-        public void RemoveObserver(IObserver o)
-        {
-            int i = observers.IndexOf(o);
-            if(i >= 0)
-            {
-                observers.Remove(i);
-            }
-        }
+        
 
         //public void NotifyObservers()
         //{

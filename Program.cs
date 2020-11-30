@@ -28,6 +28,8 @@ namespace StockBot
             MenuTree forgotPass = login.createChildMenu("Forgot Password");
             MenuTree createAccount = login.createChildMenu("Create Account");
 
+            MenuTree test = login.createChildMenu("testing");
+
             LogIn loginPage = new LogIn("Log In Page", login);
             MainMenu mainMenu = new MainMenu("Main Menu Page", root);
             Movers moversPage = new Movers("Movers Page", movers);
@@ -44,6 +46,7 @@ namespace StockBot
 
         static void Main(string[] args)
         {
+            Console.SetWindowSize(160, 40);
             //The "root" of the menu tree
             MenuTree root = createMenuTree();
             Display.run(root);
@@ -59,10 +62,6 @@ namespace StockBot
             Portfolio currentDisplay = new Portfolio("default");
 
             
-            
-            
-            //bot.scrapeHTML(url);
-            Console.ReadLine();
         }
     }
 

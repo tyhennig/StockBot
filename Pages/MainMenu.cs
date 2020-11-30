@@ -20,18 +20,18 @@ namespace StockBot
             selectedElement = elements[0];
         }
 
-        public override void display()
-        {
-            foreach(Element element in elements)
-            {
-                if (element == selectedElement)
-                    Console.ForegroundColor = ConsoleColor.Green;
-                Console.SetCursorPosition(element.xLocation, element.yLocation);
-                Console.Write(element.displayedText);
-                Console.ForegroundColor = ConsoleColor.White;
-            }
+        //public void display()
+        //{
+        //    foreach (Element element in elements)
+        //    {
+        //        if (element == selectedElement)
+        //            Console.ForegroundColor = ConsoleColor.Green;
+        //        Console.SetCursorPosition(element.xLocation, element.yLocation);
+        //        Console.Write(element.displayedText);
+        //        Console.ForegroundColor = ConsoleColor.White;
+        //    }
 
-        }
+        //}
 
         public override void run()
         {
@@ -41,7 +41,7 @@ namespace StockBot
             {
                 case ConsoleKey.UpArrow:
                     if (elements.IndexOf((SelectableElement)selectedElement) == 0)
-                        selectedElement = elements[2];
+                        selectedElement = elements[elements.Count - 1];
                     else
                         selectedElement = elements[elements.IndexOf((SelectableElement)selectedElement) - 1];
                     break;

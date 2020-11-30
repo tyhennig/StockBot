@@ -25,6 +25,8 @@ namespace StockBot
 
         }
 
+        
+
         public override void display()
         {
             foreach (Element element in elements)
@@ -45,7 +47,7 @@ namespace StockBot
             {
                 case ConsoleKey.UpArrow:
                     if (elements.IndexOf((SelectableElement)selectedElement) == 0)
-                        selectedElement = elements[2];
+                        selectedElement = elements[elements.Count - 1];
                     else
                         selectedElement = elements[elements.IndexOf((SelectableElement)selectedElement) - 1];
                     break;
@@ -63,6 +65,13 @@ namespace StockBot
 
                 case ConsoleKey.Escape:
                     Display.setCurrentMenu(owner.getParentMenu());
+                    break;
+
+                default:
+                    if(Char.IsLetterOrDigit(key.KeyChar))
+                    {
+                        usernameInput.setDisplayedText(usernameInput.getDisplayedText() + key.KeyChar);
+                    }
                     break;
             }
             }

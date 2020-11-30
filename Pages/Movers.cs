@@ -10,19 +10,24 @@ namespace StockBot
     {
         bool running;
         string url = "https://finance.yahoo.com/gainers";
-
         TradingBot bot;
-        Portfolio currentDisplay;
+
         public Movers(string title, MenuTree owner) : base(title, owner)
         {
             bot = new TradingBot();
-            currentDisplay = new Portfolio("default");
             running = true;
-
         }
         public override void display()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Top 25 movers from Yahoo Finance are: ");
+            
+            for (int i = 0; i < TradingBot.movers.Count; i++)
+            {
+                Console.WriteLine(string.Format("{0} - \t{1} \t{2} \t{3} \t{4}% \t{5} \t{6} \t{7} \t{8} \t{9} \t{10}",
+                    i + 1, TradingBot.movers[i].symbol, TradingBot.movers[i].shortName, TradingBot.movers[i].regularMarketPrice.raw, TradingBot.movers[i].regularMarketChange.raw,
+                    TradingBot.movers[i].regularMarketChangePercent.raw, TradingBot.movers[i].regularMarketVolume.raw, TradingBot.movers[i].averageDailyVolume3Month.raw, TradingBot.movers[i].marketCap.raw, TradingBot.movers[i].fiftyTwoWeekLow.raw,
+                    TradingBot.movers[i].fiftyTwoWeekHigh.raw, TradingBot.movers[i].regularMarketOpen.raw));
+            }
         }
 
         public override void run()
@@ -35,8 +40,8 @@ namespace StockBot
                     
                     bot.FetchMovers();
                     Console.Clear();
-                    if(running)
-                        currentDisplay.Display();
+                    if (running)
+                        display();
                     Thread.Sleep(1000);
                 }
             });
