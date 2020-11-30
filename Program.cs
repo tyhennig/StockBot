@@ -28,7 +28,7 @@ namespace StockBot
             MenuTree forgotPass = login.createChildMenu("Forgot Password");
             MenuTree createAccount = login.createChildMenu("Create Account");
 
-            MenuTree test = login.createChildMenu("testing");
+            //MenuTree test = login.createChildMenu("testing");
 
             LogIn loginPage = new LogIn("Log In Page", login);
             MainMenu mainMenu = new MainMenu("Main Menu Page", root);

@@ -10,7 +10,7 @@ namespace StockBot
         public int xLocation;
         public int yLocation;
         public string displayedText;
-
+        //internal bool TakesText;
 
         public void setDisplayedText(string text)
         {
@@ -29,5 +29,7 @@ namespace StockBot
         {
             yLocation = y;
         }
+
+       
     }
 }

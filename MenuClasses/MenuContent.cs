@@ -13,7 +13,7 @@ namespace StockBot
         protected MenuTree owner;
 
         protected List<SelectableElement> elements;
-        protected Element selectedElement;
+        protected SelectableElement selectedElement;
 
         public MenuContent(string title, MenuTree owner)
         { 
@@ -32,10 +32,16 @@ namespace StockBot
 
         public void loadInitialElements()
         {
+            int xLocation;
+            int yLocation;
+
             //int i = Console.BufferHeight - owner.getChildMenuList().Count();
             foreach(MenuTree child in owner.getChildMenuList())
             {
+
+
                 SelectableElement temp = new SelectableElement(false, child.getTitle());
+                temp.IsMenu = true;
                 elements.Add(temp);
             }
         }

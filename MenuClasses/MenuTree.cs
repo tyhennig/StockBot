@@ -55,7 +55,18 @@ namespace StockBot
 
         public void run()
         {
-            content.run();
+            try
+            {
+                content.run();
+            }
+            catch (NullReferenceException e)
+            {
+
+                Console.WriteLine("Not Implemented!");
+                Console.ReadKey();
+                Display.setCurrentMenu(this.getParentMenu());
+            }
+            
         }
     }
 
