@@ -41,7 +41,10 @@ namespace StockBot
             Movers moversPage = new Movers("Movers Page", movers);
             Settings settingPage = new Settings("Settings Page", settings);
             PortfolioContent portfolioPage = new PortfolioContent("Portfolios Page", portfolios);
-
+            Credits creditPage = new Credits("Credits Page", credits);
+            Sound soundPage = new Sound("Sound Page", sound);
+            Video videoPage = new Video("Video Page", video);
+            CreateAccount createAccountPage = new CreateAccount("Create Account Page", createAccount);
 
             return root;
         }
