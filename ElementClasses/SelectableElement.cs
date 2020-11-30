@@ -9,31 +9,50 @@ namespace StockBot
 {
     public class SelectableElement : Element
     {
-        private bool takesText;
-        private string value;
+        public bool TakesText
+        {
+            get;
+        }
+        private string value = "";
+        public bool IsMenu
+        {
+            get; set;
+        }
 
         public SelectableElement(bool takesText, string text, int x, int y)
         {
-            this.takesText = takesText;
+            this.TakesText = takesText;
+            this.IsMenu = false;
             displayedText = text;
             xLocation = x;
             yLocation = y;
+            
+
         }
 
         public SelectableElement(bool takesText, string text)
         {
-            this.takesText = takesText;
+            this.TakesText = takesText;
             displayedText = text;
         }
 
-        public void addToValue(string added)
+       
+
+        public string getValue()
         {
-            value = value + added;
+            return value;
+        }
+
+        public void addToValue(char added)
+        {
+            if(value.Length <= 12)
+                value = value + added;
         }
 
         public void delFromValue()
         {
-            value = value.Remove(value.Length - 1);
+            if(value.Length > 0)
+                value = value.Remove(value.Length - 1);
         }
         
     }
