@@ -57,9 +57,8 @@ namespace StockBot
             paul.buyStock(paul.portfolios[0], TradingBot.movers[2], 5);
             //paul.botBuy(paul.portfolios[0]);
             //paul.buyStock(portfolioName, selectedstock);
-            //paul.portfolios["default"].buyStock(TradingBot.movers[4]);
             paul.portfolios[0].displayPorfolioContent();
-            //paul.portfolios[0].updateStocksAsync();
+            paul.portfolios[0].updateStocksAsync();
             Console.WriteLine(paul.getBuyingPower());
 
             

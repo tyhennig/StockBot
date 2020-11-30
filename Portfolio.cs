@@ -69,9 +69,13 @@ namespace StockBot
                 var htmlDocument = new HtmlDocument();
                 htmlDocument.LoadHtml(html);
 
-                var updatedPrice = htmlDocument.DocumentNode.Descendants("div")
+                var updatedPrice = htmlDocument.DocumentNode.Descendants("span")
                     .Where(node => node.GetAttributeValue("class", "")
                     .Equals("Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)")).ToList();
+
+                decimal p = Convert.ToDecimal(updatedPrice[0].InnerText);
+
+                stock.regularMarketPrice.raw = p;
 
                 //stock.
 

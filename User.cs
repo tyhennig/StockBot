@@ -77,29 +77,27 @@ namespace StockBot
 
         public void buyStock(Portfolio folio, dynamic stock, int quantity)
         {
-            dynamic tmpStock = stock;
-            float p = tmpStock.regularMarketPrice.raw;
+            float p = stock.regularMarketPrice.raw;
             decimal price = Convert.ToDecimal(p);
             if(subBuyingPower(price * quantity))
             {
                 for (int i = 0; i < quantity; i++)
                 {
-                    folio.contents.Add(tmpStock);
+                    folio.contents.Add(stock);
                 }
             }       
         }
 
         public void sellStock(Portfolio folio, dynamic stock, int quantity)
         {
-            dynamic tmpStock = stock;
-            float p = tmpStock.regularMarketPrice.raw;
+            float p = stock.regularMarketPrice.raw;
             decimal price = Convert.ToDecimal(p);
 
             if (subBuyingPower(price * quantity))
             {
                 for (int i = 0; i < quantity; i++)
                 {
-                    folio.contents.Add(tmpStock);
+                    folio.contents.Add(stock);
                 }
             }
         }
