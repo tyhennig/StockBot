@@ -62,7 +62,8 @@ namespace StockBot
         static void Main(string[] args)
         {
 
-            UserDB.addUser("tyler", "password");
+            UserDB.addUser("tyler", "pass", "02/26/1999");
+
             Display.currentUser = UserDB.userDB["tyler"];
 
             UserDB.userDB["tyler"].createPortfolio("First Portfolio");
@@ -72,7 +73,6 @@ namespace StockBot
 
             
 
-            UserDB.addUser("tyler", "pass", "02/26/1999");
 
 
             Console.SetWindowSize(160, 40);
