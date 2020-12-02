@@ -12,28 +12,28 @@ namespace StockBot
         SelectableElement usernameInput;
         SelectableElement passwordInput;
         SelectableElement submit;
+        SelectableElement eleLogOut;
 
         public LogIn(string title, MenuTree owner) : base(title, owner)
         {
 
-            Action del = new Action(submitCredentials);
+            Action delegate1 = new Action(submitCredentials);
+            Action delegate2 = new Action(logOut);
 
             usernameInput = new SelectableElement(true, "Username: ", 10, 2);
             passwordInput = new SelectableElement(true, "Password: ", 10, 4);
-            submit = new SelectableElement(false, "Submit", 10, 6, del);
+            submit = new SelectableElement(false, "Submit", 10, 6, delegate1);
+            eleLogOut = new SelectableElement(false, "Log Out", 10, 8, delegate2);
 
 
             elements.Insert(0, usernameInput);
             elements.Insert(1, passwordInput);
             elements.Insert(2, submit);
+            elements.Insert(3, eleLogOut);
 
             selectedElement = elements[0];
 
-            elements[3].xLocation = Console.WindowWidth / 2 - 5;
-            elements[3].yLocation = Console.WindowHeight - 8;
-
-            elements[4].xLocation = Console.WindowWidth / 2 - 5;
-            elements[4].yLocation = Console.WindowHeight - 6;
+            
 
 
         }
@@ -62,6 +62,11 @@ namespace StockBot
                 
         }
 
+        public void logOut()
+        {
+            Display.currentUser = null;
+        }
+
         public override void display()
         {
             foreach (Element element in elements)
@@ -80,7 +85,7 @@ namespace StockBot
         public override void run()
         {
             display();
-            Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 3 );
+            
             ConsoleKeyInfo key = Console.ReadKey();
             switch (key.Key)
             {

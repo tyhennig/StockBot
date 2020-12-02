@@ -31,6 +31,7 @@ namespace StockBot
 
             MenuTree forgotPass = login.createChildMenu("Forgot Password");
             MenuTree createAccount = login.createChildMenu("Create Account");
+            //MenuTree logOut = login.createChildMenu("Log Out");
 
 
             

@@ -11,7 +11,7 @@ namespace StockBot
     class PortfolioContent : MenuContent
     {
 
-        private User lastUser = null;
+        
         public Action del;
         public PortfolioContent(string title, MenuTree owner) : base(title, owner)
         {

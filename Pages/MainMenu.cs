@@ -11,13 +11,12 @@ namespace StockBot
         public MainMenu(string title, MenuTree owner) : base(title, owner)
         {
             int i = 1;
-            foreach(Element element in elements)
+            foreach (Element element in elements)
             {
                 element.xLocation = Console.WindowWidth / 2 - 5;
                 element.yLocation = (i * 2) + 5;
                 i++;
             }
-            selectedElement = elements[0];
         }
 
 

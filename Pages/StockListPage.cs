@@ -7,7 +7,7 @@ namespace StockBot.Pages
 {
     class StockListPage : MenuContent
     {
-        private User lastUser = null;
+        
         Portfolio p;
         public StockListPage(string title, MenuTree owner, Portfolio p) : base(title, owner)
         {

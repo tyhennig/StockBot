@@ -11,7 +11,7 @@ namespace StockBot
     {
         private string title;
         protected User lastUser;
-        protected MenuTree owner;
+        protected MenuTree owner = null;
 
         protected List<SelectableElement> elements;
         protected SelectableElement selectedElement;
@@ -24,6 +24,9 @@ namespace StockBot
             owner.setContent(this);
             elements = new List<SelectableElement>();
             loadInitialElements();
+            if(elements.Count > 0)
+                selectedElement = elements[0];
+
 
         }
 
@@ -37,12 +40,12 @@ namespace StockBot
             int xSpacing;
             int ySpacing;
             int i = 1;
+            int count = owner.getChildMenuList().Count * 2 + 5;
 
             //int i = Console.BufferHeight - owner.getChildMenuList().Count();
             foreach(MenuTree child in owner.getChildMenuList())
             {
                 xSpacing = Console.WindowWidth / 2 - 5;
-                int count = owner.getChildMenuList().Count * 2 + 5;
                 ySpacing = Console.WindowHeight - count + (i * 2);
                 SelectableElement temp = new SelectableElement(false, child.getTitle(), xSpacing, ySpacing);
 

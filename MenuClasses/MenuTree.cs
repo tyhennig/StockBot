@@ -57,7 +57,10 @@ namespace StockBot
         {
             try
             {
-                content.run();
+                if (!(content == null))
+                    content.run();
+                else
+                    return;
             }
             catch (NullReferenceException e)
             {
