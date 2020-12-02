@@ -42,7 +42,8 @@ namespace StockBot
             foreach(MenuTree child in owner.getChildMenuList())
             {
                 xSpacing = Console.WindowWidth / 2 - 5;
-                ySpacing = Console.WindowHeight - (i * 2);
+                int count = owner.getChildMenuList().Count * 2 + 5;
+                ySpacing = Console.WindowHeight - count + (i * 2);
                 SelectableElement temp = new SelectableElement(false, child.getTitle(), xSpacing, ySpacing);
 
                 temp.IsMenu = true;

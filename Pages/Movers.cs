@@ -85,8 +85,8 @@ namespace StockBot
                             bot.FetchMovers();
                             Console.Clear();
                             updateElements();
-                selectedElement = elements[0];
-            }
+                            selectedElement = elements[0];
+                        }
 
                     
                     //Thread.Sleep(1000);

@@ -27,7 +27,7 @@ namespace StockBot
             foreach (Portfolio portfolio in Display.currentUser.getPortfolios().Values.ToList())
                 {
                 SelectableElement portElement = new SelectableElement(false, portfolio.getDisplayName(), Console.WindowWidth / 2 - 5, (i * 2) + 5, del);
-                elements.Add(portElement);
+                elements.Insert(i - 1, portElement);
                 i++;
                 }
 

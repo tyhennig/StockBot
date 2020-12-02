@@ -68,7 +68,7 @@ namespace StockBot
             UserDB.addUser("tyler", "pass", "02/26/1999");
             //UserDB.addUser("james", "pass", "999");
 
-            //Display.currentUser = UserDB.userDB["tyler"];
+            Display.currentUser = UserDB.userDB["tyler"];
 
             UserDB.userDB["tyler"].createPortfolio("First Portfolio");
             UserDB.userDB["tyler"].createPortfolio("Second Portfolio");
