@@ -53,7 +53,8 @@ namespace StockBot
             paul.createPortfolio("default2");
             paul.addBuyingPower(1000);
             paul.listPortfolios();
-            paul.buyStock(paul.portfolios[0], TradingBot.movers[4], 10);
+            paul.buyStock(paul.portfolios[0], TradingBot.movers[4], 3);
+            paul.buyStock(paul.portfolios[0], TradingBot.movers[4], 4);
             paul.buyStock(paul.portfolios[0], TradingBot.movers[2], 5);
             //paul.botBuy(paul.portfolios[0]);
             //paul.buyStock(portfolioName, selectedstock);

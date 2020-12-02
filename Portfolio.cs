@@ -14,7 +14,7 @@ namespace StockBot
         //we might need an id for each portfolio. Index may be handy for when you navigate
         private string displayName;
         //private string owner;
-        public List<dynamic> contents;
+        public Dictionary<string, List<dynamic>> contents;
         //private TradingBot bot; //Each portfolio might have its own bot
         public string url = "https://finance.yahoo.com/quote/";
 
@@ -22,7 +22,7 @@ namespace StockBot
         public Portfolio(string dn)
         {
             displayName = dn;
-            contents = new List<dynamic>();
+            contents = new Dictionary<string, List<dynamic>>();
             //bot.RegisterObserver(this);
         }
 
@@ -43,7 +43,7 @@ namespace StockBot
 
         public void displayPortfolio()
         {
-            foreach (Stock stock in contents) //iterates list, writes stock ToString() to console
+            foreach (dynamic stock in contents.Values) //iterates list, writes stock ToString() to console
             {
                 Console.WriteLine(stock);
             }

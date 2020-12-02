@@ -75,29 +75,51 @@ namespace StockBot
             
         }
 
+        //Create stock object
         public void buyStock(Portfolio folio, dynamic stock, int quantity)
         {
             float p = stock.regularMarketPrice.raw;
             decimal price = Convert.ToDecimal(p);
-            if(subBuyingPower(price * quantity))
+            string symbol = stock.symbol;
+            if (subBuyingPower(price * quantity))
             {
-                for (int i = 0; i < quantity; i++)
+                if (folio.contents.ContainsKey(symbol))
                 {
-                    folio.contents.Add(stock);
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        folio.contents[symbol].Add(stock);
+                    }
                 }
-            }       
+                else
+                {
+                    List<dynamic> stockPool = new List<dynamic>();
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        stockPool.Add(stock);
+                    }
+                    
+                    folio.contents.Add(symbol, stockPool);
+                }
+            }
         }
 
         public void sellStock(Portfolio folio, dynamic stock, int quantity)
         {
             float p = stock.regularMarketPrice.raw;
             decimal price = Convert.ToDecimal(p);
-
+            string symbol = stock.symbol;
             if (subBuyingPower(price * quantity))
             {
-                for (int i = 0; i < quantity; i++)
+                if (folio.contents.ContainsKey(symbol))
                 {
-                    folio.contents.Add(stock);
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        folio.contents[symbol].Add(stock);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Stock does not exist in p");
                 }
             }
         }
@@ -128,6 +150,8 @@ namespace StockBot
 
         }
 
+
+        //might have to change. Search if key exists inside portfolio
         private bool portfolioExists(string folio)
         {
             foreach (Portfolio x in portfolios)
@@ -141,6 +165,7 @@ namespace StockBot
             return false;
         }
 
+        //or print each key? Idk which is better
         public void listPortfolios()
         {
             foreach (Portfolio portfolio in portfolios)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StockBot
 {
-
+    //convert stock object in constructor
 
     //We might not need this class. The objects extracted from the json file are already functional
 
