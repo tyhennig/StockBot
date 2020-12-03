@@ -12,6 +12,7 @@ namespace StockBot
         private string title;
         protected User lastUser;
         protected MenuTree owner = null;
+        public bool RequiresUpdate { get; set; }
 
         protected List<SelectableElement> elements;
         protected SelectableElement selectedElement;
@@ -30,10 +31,18 @@ namespace StockBot
 
         }
 
+
+
         public void setOwner(MenuTree menu)
         {
             owner = menu;
         }
+
+        public virtual void updateElements()
+        {
+            return;
+        }
+        
 
         public void loadInitialElements()
         {

@@ -12,8 +12,8 @@ namespace StockBot
 
         public static MenuTree currentMenu;
         public static bool running = true;
-        static bool clearScreen = true;
-        static int selection = 0;
+        //static bool clearScreen = true;
+        //static int selection = 0;
 
         public static void setCurrentMenu(MenuTree menu)
         {
@@ -22,7 +22,6 @@ namespace StockBot
                 element.clearValue();
             }
             currentMenu = menu;
-            
         }
 
         public static void run(MenuTree root)
@@ -37,13 +36,18 @@ namespace StockBot
                 if(currentUser != null)
                     Console.Write("Current User: " + currentUser.getUsername());
                 Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 3);
+
                 currentMenu.run();  
             }
             
 
         }
 
-        
-
+        internal static void error(string v)
+        {
+            Console.Clear();
+            Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
+            Console.Write(v);
+        }
     }
 }

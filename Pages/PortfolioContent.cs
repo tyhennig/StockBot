@@ -20,9 +20,13 @@ namespace StockBot
             selectedElement = elements[0];
         }
 
-        public void updateElements()
+        public override void updateElements()
         {
-            
+            elements.Clear();
+            loadInitialElements();
+            selectedElement = elements[0];
+            if (Display.currentUser == null)
+                return;
             int i = 1;
             foreach (Portfolio portfolio in Display.currentUser.getPortfolios().Values.ToList())
                 {
@@ -31,9 +35,8 @@ namespace StockBot
                 i++;
                 }
 
-           
-
-            lastUser = Display.currentUser;
+            RequiresUpdate = false;
+ 
         }
 
         public void displayPortfolio()
@@ -52,14 +55,14 @@ namespace StockBot
 
         public override void run()
         {
-            if (Display.currentUser != lastUser)
+            if (Display.currentUser != lastUser || RequiresUpdate)
             {
-                elements.Clear();
-                loadInitialElements();
-                selectedElement = elements[0];
                 updateElements();
             }
-                
+
+
+            lastUser = Display.currentUser;
+  
             display();
             ConsoleKeyInfo key = Console.ReadKey();
             switch (key.Key)

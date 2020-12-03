@@ -18,8 +18,6 @@ namespace StockBot
             elements.Insert(0, portfolioName);
             elements.Insert(1, delete);
 
-            elements[1].xLocation = Console.WindowWidth / 2 - 5;
-            elements[1].yLocation = Console.WindowHeight - 6;
 
             selectedElement = elements[0];
         }

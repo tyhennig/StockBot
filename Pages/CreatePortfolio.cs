@@ -5,6 +5,8 @@ using System.Text;
 
 namespace StockBot
 {
+
+    //public delegate void Action();
     class CreatePortfolio : MenuContent
     {
         SelectableElement portfolioName;
@@ -12,13 +14,29 @@ namespace StockBot
 
         public CreatePortfolio(string title, MenuTree owner) : base(title, owner)
         {
+            Action delegate1 = new Action(createPortfolio);
+
             portfolioName = new SelectableElement(true, "Portfolio Name: ", 10, 2);
-            create = new SelectableElement(false, "Create", 10, 4);
+            create = new SelectableElement(false, "Create", 10, 4 , delegate1);
 
             elements.Insert(0, portfolioName);
             elements.Insert(1, create);
 
             selectedElement = elements[0];
+        }
+
+        void createPortfolio()
+        {
+            if (Display.currentUser == null)
+                Display.error("Not Logged In!");
+            else
+            {
+                Display.currentUser.createPortfolio(portfolioName.getValue());
+                owner.getParentMenu().getContent().RequiresUpdate = true;
+                Display.setCurrentMenu(owner.getParentMenu());
+
+            }
+
         }
 
         public override void display()
