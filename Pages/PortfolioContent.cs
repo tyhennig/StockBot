@@ -42,9 +42,11 @@ namespace StockBot
         public void displayPortfolio()
         {
             Portfolio selectedPort = Display.currentUser.getPortfolios()[selectedElement.getDisplayedText()];
-            MenuTree temp = owner.createChildMenu(selectedPort.getDisplayName());
-            StockListPage tempStockPage = new StockListPage(selectedPort.getDisplayName(), temp, selectedPort);
-            Display.setCurrentMenu(temp);
+            MenuTree tempStockTree = owner.createChildMenu(selectedPort.getDisplayName());
+            StockListPage tempStockPage = new StockListPage(selectedPort.getDisplayName(), tempStockTree, selectedPort);
+            //owner.setContent(tempStockPage);
+            Display.setCurrentMenu(tempStockTree);
+            owner.getChildMenuList().Remove(tempStockTree);
         }
 
         //public override void display()
@@ -55,6 +57,7 @@ namespace StockBot
 
         public override void run()
         {
+            
             if (Display.currentUser != lastUser || RequiresUpdate)
             {
                 updateElements();

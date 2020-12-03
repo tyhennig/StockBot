@@ -52,7 +52,9 @@ namespace StockBot
                     break;
 
                 case ConsoleKey.Escape:
-                    Display.running = false;
+                    Display.error("Are you sure you want to exit? (y/n)");
+                    if (string.Equals(Console.ReadKey().KeyChar.ToString(), "y", StringComparison.OrdinalIgnoreCase))
+                        Display.running = false;
                     break;
 
             }

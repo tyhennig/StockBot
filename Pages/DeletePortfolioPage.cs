@@ -5,21 +5,54 @@ using System.Text;
 
 namespace StockBot
 {
-    class DeletePortfolio : MenuContent
+    class DeletePortfolioPage : MenuContent
     {
         SelectableElement portfolioName;
         SelectableElement delete;
 
-        public DeletePortfolio(string title, MenuTree owner) : base(title, owner)
+        Action del;
+        public DeletePortfolioPage(string title, MenuTree owner) : base(title, owner)
         {
-            portfolioName = new SelectableElement(true, "Portfolio Name: ", 10, 2);
-            delete = new SelectableElement(false, "Delete", 10, 4);
+            del = new Action(deletePortfolio);
+            //portfolioName = new SelectableElement(true, "Portfolio Name: ", 10, 2);
+            //delete = new SelectableElement(false, "Delete", 10, 4);
 
-            elements.Insert(0, portfolioName);
-            elements.Insert(1, delete);
+            //elements.Insert(0, portfolioName);
+            //elements.Insert(1, delete);
 
 
+            //selectedElement = elements[0];
+        }
+
+        public void deletePortfolio()
+        {
+            Display.error("Are you sure you want to delete " + selectedElement.getDisplayedText() + "? (y/n)");
+            if (string.Equals(Console.ReadKey().KeyChar.ToString(), "y", StringComparison.OrdinalIgnoreCase))
+            {
+                Display.currentUser.getPortfolios().Remove(selectedElement.getDisplayedText());
+                RequiresUpdate = true;
+                owner.getParentMenu().getContent().RequiresUpdate = true;
+                Display.setCurrentMenu(owner.getParentMenu());
+            }
+        }
+
+        public override void updateElements()
+        {
+            elements.Clear();
+            loadInitialElements();
+            
+            if (Display.currentUser == null)
+                return;
+            int i = 1;
+            foreach (Portfolio portfolio in Display.currentUser.getPortfolios().Values.ToList())
+            {
+                SelectableElement portElement = new SelectableElement(false, portfolio.getDisplayName(), Console.WindowWidth / 2 - 5, (i * 2) + 5, del);
+                elements.Insert(i - 1, portElement);
+                i++;
+            }
             selectedElement = elements[0];
+            RequiresUpdate = false;
+
         }
 
         public override void display()
@@ -38,6 +71,16 @@ namespace StockBot
 
         public override void run()
         {
+            if (Display.currentUser.getPortfolios().Count != elements.Count)
+                RequiresUpdate = true;
+
+            if (Display.currentUser != lastUser || RequiresUpdate)
+            {
+                updateElements();
+            }
+
+            lastUser = Display.currentUser;
+
             display();
             ConsoleKeyInfo key = Console.ReadKey();
             switch (key.Key)

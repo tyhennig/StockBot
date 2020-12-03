@@ -178,7 +178,7 @@
     <Compile Include="Pages\CreateAccount.cs" />
     <Compile Include="Pages\CreatePortfolio.cs" />
     <Compile Include="Pages\Credits.cs" />
-    <Compile Include="Pages\DeletePortfolio.cs" />
+    <Compile Include="Pages\DeletePortfolioPage.cs" />
     <Compile Include="Pages\ForgotPassword.cs" />
     <Compile Include="Pages\LogIn.cs" />
     <Compile Include="Pages\MainMenu.cs" />
