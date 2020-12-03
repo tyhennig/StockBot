@@ -84,6 +84,7 @@ namespace StockBot
 
         public override void run()
         {
+            lastUser = Display.currentUser;
             display();
             
             ConsoleKeyInfo key = Console.ReadKey();
