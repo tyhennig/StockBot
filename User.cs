@@ -129,13 +129,9 @@ namespace StockBot
                     //decimal price = await TradingBot.updateStockPricesAsync();
                     decimal price = folio.updateStockPricesAsync(stock);
                     //not that easy buck-o
-                    decimal total = quantity * price;
+                    decimal total = folio.removeStock(symbol, price, quantity);
 
-                    //for (int i = 0; i < quantity; i++)
-                    //{
-                        folio.removeStock(symbol, quantity);
-                        //folio.contents[symbol].RemoveAt(folio.contents[symbol].Count - 1);
-                    //}
+
 
                     addBuyingPower(total);
                     Console.WriteLine("SOLD!");

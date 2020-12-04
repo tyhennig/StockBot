@@ -41,20 +41,26 @@ namespace StockBot
 
 
         //
-        public void removeStock(string symbol, int quantity)
+        public decimal removeStock(string symbol, decimal price, int quantity)
         {
             int qtyNeedToBeSold = quantity;
             int amountInLast = 0;
+            decimal total = 0m;
             while (qtyNeedToBeSold != 0)
             {
                 amountInLast = contents[symbol][contents[symbol].Count - 1].quantity;
                 contents[symbol][contents[symbol].Count - 1].quantity =
                 contents[symbol][contents[symbol].Count - 1].quantity - qtyNeedToBeSold;
 
+
+
                 if(contents[symbol][contents[symbol].Count - 1].quantity > 0)
                 {
+                    total += qtyNeedToBeSold * price;
                     break;
                 }
+
+                total += amountInLast * price;
                 
                 qtyNeedToBeSold -= amountInLast;
 
@@ -64,6 +70,7 @@ namespace StockBot
                 }
                 
             }
+            return total;
         }
 
         public void removeStock(dynamic stock)
