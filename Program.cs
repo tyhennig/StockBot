@@ -61,14 +61,13 @@ namespace StockBot
 
         
 
-
-
+      
         static void Main(string[] args)
         {
 
             var stockBot = new Thread(() =>
             {
-                while (true)
+                while (Display.running)
                 {
                     TradingBot.FetchMovers();
                     TradingBot.autoBot();
@@ -101,6 +100,8 @@ namespace StockBot
             //The "root" of the menu tree
             MenuTree root = createMenuTree();
             Display.run(root);
+
+            stockBot.Abort();
             
         }
     }
