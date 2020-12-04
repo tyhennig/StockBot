@@ -24,6 +24,8 @@ namespace StockBot.Pages
         public void updateElements()
         {
             int i = 1;
+            Console.SetCursorPosition(Console.WindowWidth / 3 - 6, 5);
+            Console.WriteLine(string.Format("{0, -7} {1, -35} {2, 13} {3, 10}", "Symbol", "Name", "Avg Price", "Shares"));
 
             foreach(List<Stock> stocks in p.contents.Values)
             {
@@ -38,7 +40,8 @@ namespace StockBot.Pages
 
                 avgPrice /= numOwned;
                 Stock stock = stocks[0];
-                SelectableElement portElement = new SelectableElement(false, string.Format("{0, -20} {1, -15} {2, -10} {3, -5} {4, 0} {5, 5}", stock.symbol, stock.shortName, avgPrice, stock.regularMarketChangePercent, stock.fiftyTwoWeekLow, numOwned), Console.WindowWidth / 2 - 5, (i * 2) + 5);
+                
+                SelectableElement portElement = new SelectableElement(false, string.Format("{0, -7} {1, -35} {2, 10} {3, 10}", stock.symbol, stock.shortName, avgPrice, numOwned), Console.WindowWidth / 3 - 6, (i * 2) + 5);
                 elements.Add(portElement);
                 i++;
             }
