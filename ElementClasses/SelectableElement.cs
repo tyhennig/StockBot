@@ -70,7 +70,10 @@ namespace StockBot
         
         public void runMethod()
         {
-            a();
+            if(a != null) //Only if there is something runnable 
+            {
+                a();
+            }
         }
     }
 }

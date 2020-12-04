@@ -249,7 +249,12 @@ namespace StockBot
         {
             if (!portfolioExists(folio))
             {
-                portfolios.Add(folio, new Portfolio(folio));
+                if (string.IsNullOrWhiteSpace(folio)) // Checks if the inputted Portfolio name is blank or purely spaces
+                {
+                    Display.error("Enter Valid Portfolio Name");
+                }
+                else
+                    portfolios.Add(folio, new Portfolio(folio));
             }
             else
             {

@@ -50,56 +50,63 @@ namespace StockBot
             owner.getChildMenuList().Remove(tempStockTree);
         }
 
-        //public override void display()
-        //{
-            
-            
-        //}
-
         public override void run()
         {
-            
-            if (Display.currentUser != lastUser || RequiresUpdate)
+            if (Display.currentUser != null)//If there is no user logged in -> no access to Portfolios
             {
-                updateElements();
+                if (Display.currentUser != lastUser || RequiresUpdate)
+                {
+                    updateElements();
+                }
+
+
+                lastUser = Display.currentUser;
+
+                display();
+                ConsoleKeyInfo key = Console.ReadKey();
+                switch (key.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (elements.IndexOf(selectedElement) == 0)
+                            selectedElement = elements[elements.Count - 1];
+                        else
+                            selectedElement = elements[elements.IndexOf(selectedElement) - 1];
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                        if (elements.IndexOf((SelectableElement)selectedElement) == elements.Count - 1)
+                            selectedElement = elements[0];
+                        else
+                            selectedElement = elements[elements.IndexOf((SelectableElement)selectedElement) + 1];
+                        break;
+
+                    case ConsoleKey.Enter:
+                        if (selectedElement.IsMenu)
+                        {
+                            Display.setCurrentMenu(owner.getChildMenuList().Where(menu => menu.getTitle().Equals(selectedElement.displayedText)).ToList()[0]);
+                        }
+                        else
+                        {
+                                selectedElement.runMethod();
+                        }
+                        break;
+
+                    case ConsoleKey.Escape:
+                        Display.setCurrentMenu(owner.getParentMenu());
+                        break;
+
+                }
             }
-
-
-            lastUser = Display.currentUser;
-  
-            display();
-            ConsoleKeyInfo key = Console.ReadKey();
-            switch (key.Key)
+            else
             {
-                case ConsoleKey.UpArrow:
-                    if (elements.IndexOf(selectedElement) == 0)
-                        selectedElement = elements[elements.Count - 1];
-                    else
-                        selectedElement = elements[elements.IndexOf(selectedElement) - 1];
-                    break;
-
-                case ConsoleKey.DownArrow:
-                    if (elements.IndexOf((SelectableElement)selectedElement) == elements.Count - 1)
-                        selectedElement = elements[0];
-                    else
-                        selectedElement = elements[elements.IndexOf((SelectableElement)selectedElement) + 1];
-                    break;
-
-                case ConsoleKey.Enter:
-                    if (selectedElement.IsMenu)
-                    {
-                        Display.setCurrentMenu(owner.getChildMenuList().Where(menu => menu.getTitle().Equals(selectedElement.displayedText)).ToList()[0]);
-                    }
-                    else
-                    {
-                        selectedElement.runMethod();
-                    }
-                    break;
-
-                case ConsoleKey.Escape:
-                    Display.setCurrentMenu(owner.getParentMenu());
-                    break;
-
+                Display.error("Please Login");
+                ConsoleKeyInfo key = Console.ReadKey();
+                switch (key.Key)
+                {
+                    case ConsoleKey.Escape:
+                        Display.setCurrentMenu(owner.getParentMenu());
+                        break;
+                }
             }
         }
     }

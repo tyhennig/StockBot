@@ -7,7 +7,6 @@ namespace StockBot
 {
     public class MenuTree
     {
-
         protected string title;
 
         private MenuContent content;

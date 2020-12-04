@@ -15,13 +15,32 @@ namespace StockBot
         {
             if (userDB.ContainsKey(username))
             {
+                Console.WriteLine("Username Taken!");
                 return false;
             }
             else
             {
-                User createdUser = new User(username, password, bday);
-                //userDB.Add(username, createdUser);
-                return true;
+                if (string.IsNullOrWhiteSpace(username)) // Checks if the inputted Username is blank or purely spaces
+                {
+                    Display.error("Enter Valid Username");
+                    return false;
+                }
+                else if (string.IsNullOrWhiteSpace(password)) // Checks if the inputted Password is blank or purely spaces
+                {
+                    Display.error("Enter Valid Password");
+                    return false;
+                }
+                else if (string.IsNullOrWhiteSpace(bday)) // Checks if the inputted Birthday is blank or purely spaces
+                {
+                    Display.error("Enter Valid Birthday");
+                    return false;
+                }
+                else
+                {
+                    User createdUser = new User(username, password, bday);
+                    //userDB.Add(username, createdUser);
+                    return true;
+                }
             }
         }
 

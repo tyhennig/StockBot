@@ -27,20 +27,23 @@ namespace StockBot
 
         void createPortfolio()
         {
-            if (Display.currentUser == null)
-                Display.error("Not Logged In!");
+            if(Display.currentUser.getPortfolios().Count >= 13) // Limits portfolios to 13 in order to not go past the childMenus
+            {
+                Display.error("Portfolio Limit is Reached!");
+                ConsoleKeyInfo key = Console.ReadKey();
+            } 
             else
             {
                 Display.currentUser.createPortfolio(portfolioName.getValue());
                 owner.getParentMenu().getContent().RequiresUpdate = true;
                 Display.setCurrentMenu(owner.getParentMenu());
-
             }
 
         }
 
         public override void display()
         {
+
             foreach (Element element in elements)
             {
                 if (element == selectedElement)
@@ -81,6 +84,7 @@ namespace StockBot
                     else
                     {
                         selectedElement.runMethod();
+                        selectedElement = elements[0];
                     }
                     break;
 
@@ -103,9 +107,6 @@ namespace StockBot
                     break;
             }
         }
-
-
-
 
 
 
