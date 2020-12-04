@@ -13,8 +13,8 @@ namespace StockBot
         private string username { set; get; }
         private string password { set; get; }
         //Maybe a list is better? What happens when you delete a user, creating holes
-        //public Dictionary<string, Portfolio> portfolios;//DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
-        public List<Portfolio> portfolios;
+        public Dictionary<string, Portfolio> portfolios;//DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
+        //public List<Portfolio> portfolios;
         private decimal buyingPower; //perhaps this should be global (static)
         private string bday = "";
         
@@ -24,12 +24,12 @@ namespace StockBot
             this.username = username;
             this.password = password;
             //portfolios = new Dictionary<string, Portfolio>();
-            portfolios = new List<Portfolio>(); //web-scrape code
+            //portfolios = new List<Portfolio>(); //web-scrape code
             this.bday = bday;
             portfolios = new Dictionary<string, Portfolio>();
             id = numInstantiated;
             numInstantiated++;
-            UserDB.userDB.Add(id, this);
+            UserDB.userDB.Add(username, this);
         }
 
         //public string getUsername()
