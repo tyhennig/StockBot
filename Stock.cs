@@ -81,16 +81,26 @@ namespace StockBot
         public decimal fiftyTwoWeekLow;
         public decimal fiftyTwoWeekHigh;
         public decimal regularMarketOpen;
+        public int quantity;
         public float price;
 
 
         //smaller version specifically ment for portfolio.contents
-        public Stock(dynamic stock)
+        public Stock(Stock stock)
         {
             this.symbol = stock.symbol;
             this.shortName = stock.shortName;
-            price = stock.regularMarketPrice.raw;
-            this.regularMarketPrice = Convert.ToDecimal(price);
+            this.regularMarketPrice = stock.regularMarketPrice;
+        }
+
+
+        //optimization to avoid loops. If many stocks are bought at once, just keep count of the quantity
+        public Stock(Stock stock, int quantity = 1)
+        {
+            this.symbol = stock.symbol;
+            this.shortName = stock.shortName;
+            this.regularMarketPrice = stock.regularMarketPrice;
+            this.quantity = quantity;
         }
 
         //longer version just in case?
@@ -143,6 +153,8 @@ namespace StockBot
             //interface with API or webpage to get the latest quote
             regularMarketPrice = price;
         }
+
+        
 
         public void updateHigh()
         {

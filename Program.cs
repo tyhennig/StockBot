@@ -48,25 +48,31 @@ namespace StockBot
             //db.signInAttempt("Elite561", "Batman98");
             TradingBot.FetchMovers();
             User paul = new User("Elite561", "ABC");
-            paul.createPortfolio("default");
+            paul.createPortfolio("default1");
             paul.createPortfolio("default2");
             paul.addBuyingPower(100000);
             paul.listPortfolios();
-            paul.buyStock(paul.portfolios[0], TradingBot.movers[4], 4);
-            paul.buyStock(paul.portfolios[0], TradingBot.movers[4], 4);
-            paul.buyStock(paul.portfolios[0], TradingBot.movers[2], 5);
+            paul.buyStock(paul.portfolios[1], TradingBot.movers[4], 4);
+            paul.buyStock(paul.portfolios[1], TradingBot.movers[4], 4);
+            paul.buyStock(paul.portfolios[1], TradingBot.movers[2], 5);
             //paul.botBuy(paul.portfolios[0]);
             //paul.buyStock(portfolioName, selectedstock);
-            paul.portfolios[0].displayPorfolioContent();
+            //maybe change to paul.displayPortfolioContent(portfolios[1]);
+            paul.portfolios[1].displayPorfolioContent();
             Console.WriteLine(paul.getBuyingPower());
 
-            paul.sellStock(paul.portfolios[0], paul.portfolios[0].contents["CYRBY"][0], 3);
+            paul.sellStock(paul.portfolios[1], paul.portfolios[1].contents["CYRBY"][0], 3);
             //Thread.Sleep(3000);
             //paul.portfolios[0].updateStockPricesAsync();
-            paul.portfolios[0].displayPorfolioContent();
+            paul.portfolios[1].displayPorfolioContent();
             Console.WriteLine(paul.getBuyingPower());
 
-            
+            paul.botbuy();
+            paul.portfolios[1].displayPorfolioContent();
+            Console.WriteLine(paul.getBuyingPower());
+
+
+
             //Portfolio currentDisplay = new Portfolio("default");
             //Portfolio port2 = new Portfolio(bot);
             //while(true)

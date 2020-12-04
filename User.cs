@@ -23,6 +23,7 @@ namespace StockBot
             this.password = password;
             //portfolios = new Dictionary<string, Portfolio>();
             portfolios = new List<Portfolio>();
+            createPortfolio("Botfolio");
             id = numInstantiated;
             numInstantiated++;
             UserDB.userDB.Add(id, this);
@@ -84,33 +85,29 @@ namespace StockBot
             //
         public void buyStock(Portfolio folio, dynamic stock, int quantity)
         {
-            Stock bStock = new Stock(stock);
+            Stock bStock = new Stock(stock, quantity);
             decimal price = folio.updateStockPricesAsync(bStock);
             bStock.updatePrice(price);
             if (subBuyingPower(price * quantity))
             {
                 if (folio.contents.ContainsKey(bStock.symbol))
                 {
-                    for (int i = 0; i < quantity; i++)
-                    {
-                        folio.contents[bStock.symbol].Add(bStock);
-                    }
+                    folio.contents[bStock.symbol].Add(bStock);
                 }
                 else
                 {
                     List<Stock> stockPool = new List<Stock>();
                     
-                    for (int i = 0; i < quantity; i++)
-                    {
-                        stockPool.Add(bStock);
-                    }
+                    stockPool.Add(bStock);
                     
                     folio.contents.Add(bStock.symbol, stockPool);
                     //might not be needed?
-                    folio.currentStockPrices.Add(bStock.symbol, bStock.regularMarketPrice);
+                    //folio.currentStockPrices.Add(bStock.symbol, bStock.regularMarketPrice);
                 }
             }
         }
+
+
 
         //The stock must exist in portfolio
         //The quantity anttempted to sell must not exceed the quantity owned
@@ -122,17 +119,24 @@ namespace StockBot
             string symbol = stock.symbol;
             if (folio.contents.ContainsKey(symbol))
             {
-                if(folio.contents[symbol].Count >= quantity)
+                int qtyOwned = 0; 
+                foreach(Stock stk in folio.contents[symbol])
                 {
-
+                    qtyOwned += stk.quantity;
+                }
+                if(qtyOwned >= quantity)
+                {
                     //decimal price = await TradingBot.updateStockPricesAsync();
                     decimal price = folio.updateStockPricesAsync(stock);
+                    //not that easy buck-o
                     decimal total = quantity * price;
-                    total += -10;
-                    for (int i = 0; i < quantity; i++)
-                    {
-                        folio.contents[symbol].RemoveAt(folio.contents[symbol].Count - 1);
-                    }
+
+                    //for (int i = 0; i < quantity; i++)
+                    //{
+                        folio.removeStock(symbol, qtyOwned);
+                        //folio.contents[symbol].RemoveAt(folio.contents[symbol].Count - 1);
+                    //}
+
                     addBuyingPower(total);
                     Console.WriteLine("SOLD!");
                 }
@@ -156,30 +160,36 @@ namespace StockBot
         //50% of buying power will be used by the bot
         //10% per stock
         //Stock quantity must be integer
-        public void botBuy()
+        public void botbuy()
         {
+            decimal singlestockbudget = (buyingPower * 0.5m) * 0.20m;
             for (int i = 0; i < 5; i++)
             {
-                folio.buyStock(folio, TradingBot.movers[i], 5);
-            }
-
-
-            foreach (dynamic stock in folio.contents)
-            {
-
-                string symbol = stock.symbol;
-                for (int i = 0; i < 5; i++)
+                Stock stock = new Stock(TradingBot.movers[i]);
+                int quantity = (int)(singlestockbudget / stock.regularMarketPrice);
+                if (quantity > 0)
                 {
-                    if (TradingBot.movers[i].symbol.Equals(symbol))
-                    {
-                        Console.WriteLine("Match");
-                    }
+                    buyStock(portfolios[0], stock, quantity);
                 }
-
             }
+
+
+            //foreach (dynamic stock in folio.contents)
+            //{
+
+            //    string symbol = stock.symbol;
+            //    for (int i = 0; i < 5; i++)
+            //    {
+            //        if (tradingbot.movers[i].symbol.equals(symbol))
+            //        {
+            //            console.writeline("match");
+            //        }
+            //    }
+
+            //}
             //for (int i = 0; i < 5; i++)
             //{
-            //    buyStock(folio, TradingBot.movers[i], 2);
+            //    buystock(folio, tradingbot.movers[i], 2);
             //}
 
         }

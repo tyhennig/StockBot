@@ -11,26 +11,15 @@ namespace StockBot
 {
     public static class TradingBot
     {
-        private static List<dynamic> observers;
 
         //fetching movers might have to be moved somewhere else.
         public static string url = "https://finance.yahoo.com/gainers";
-        public static List<dynamic> movers = new List<dynamic>();
+        public static List<Stock> movers = new List<Stock>();
+        public static List<Stock> shortMovers = new List<Stock>();
 
-        //Implement subject interface
-        public static void RegisterObserver(IObserver o)
-        {
-            observers.Add(o);
-        }
+        
 
-        public static void RemoveObserver(IObserver o)
-        {
-            int i = observers.IndexOf(o);
-            if(i >= 0)
-            {
-                observers.Remove(i);
-            }
-        }
+
 
         //public void NotifyObservers()
         //{
@@ -61,16 +50,23 @@ namespace StockBot
             jsonString = jsonString.Split(new string[] { "\"results\":{\"rows\":" }, StringSplitOptions.None)[1];
             jsonString = jsonString.Split(new string[] { "]" }, StringSplitOptions.None)[0] + "]";
             List<dynamic> results = JsonConvert.DeserializeObject<List<dynamic>>(jsonString);
-            movers.AddRange(results.Take(25));
+            //results.AddRange(results.Take(25)); 
+            results.RemoveRange(9, 14);
+            foreach (dynamic stock in results)
+            {
+                movers.Add(new Stock(stock, true));
+            }
+            
+
             //MoversChanged();
 
             Console.WriteLine("Top 25 movers from Yahoo Finance are: ");
             for(int i = 0; i < movers.Count; i++)
             {
-                Console.WriteLine(string.Format("{0} - \t{1} \t{2} \t{3} \t{4}% \t{5} \t{6} \t{7} \t{8} \t{9} \t{10}",
-                    i+1, movers[i].symbol, movers[i].shortName, movers[i].regularMarketPrice.raw, movers[i].regularMarketChange.raw,
-                    movers[i].regularMarketChangePercent.raw, movers[i].regularMarketVolume.raw, movers[i].averageDailyVolume3Month.raw, movers[i].marketCap.raw, movers[i].fiftyTwoWeekLow.raw,
-                    movers[i].fiftyTwoWeekHigh.raw, movers[i].regularMarketOpen.raw));
+                Console.WriteLine(string.Format("{0} - \t{1} \t{2} \t{3} \t{4}% \t{5} \t{6} \t{7} \t{8}",
+                    i+1, movers[i].symbol, movers[i].shortName, movers[i].regularMarketPrice, movers[i].regularMarketChange,
+                    movers[i].regularMarketChangePercent, movers[i].fiftyTwoWeekLow,
+                    movers[i].fiftyTwoWeekHigh, movers[i].regularMarketOpen));
             }
         }
 
