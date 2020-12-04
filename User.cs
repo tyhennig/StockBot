@@ -18,6 +18,7 @@ namespace StockBot
         public Portfolio botfolio;
         private decimal buyingPower; //perhaps this should be global (static)
         private string bday = "";
+        public bool EnabledBot { get; set; }
         
 
         public User(string username, string password, string bday)
@@ -175,26 +176,30 @@ namespace StockBot
         //50% of buying power will be used by the bot
         //10% per stock
         //Stock quantity must be integer
-        public void botbuy()
-        {
-            decimal singlestockbudget = (buyingPower * 0.5m) * 0.20m;
 
-            if (botfolio.contents.Count == 0)
-            {
-                for (int i = 0; i < 5; i++)
-                {
-                    Stock stock = new Stock(TradingBot.movers[i]);
-                    int quantity = (int)(singlestockbudget / stock.regularMarketPrice);
-                    if (quantity > 0)
-                    {
-                        buyStock(botfolio, stock, quantity);
-                    }
-                }
-            }
-            else
-            {
 
-            }
+
+        //public void botBuy()
+        //{
+        //    List<Stock> currentTop5;
+        //    decimal singlestockbudget = (buyingPower * 0.5m) * 0.20m;
+
+        //    if (botfolio.contents.Count == 0)
+        //    {
+        //        for (int i = 0; i < 5; i++)
+        //        {
+        //            Stock stock = new Stock(TradingBot.movers[i]);
+        //            int quantity = (int)(singlestockbudget / stock.regularMarketPrice);
+        //            if (quantity > 0)
+        //            {
+        //                buyStock(botfolio, stock, quantity);
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+
+        //    }
 
 
             //foreach (dynamic stock in folio.contents)
@@ -215,7 +220,7 @@ namespace StockBot
             //    buystock(folio, tradingbot.movers[i], 2);
             //}
 
-        }
+        
 
         public void updateStock()
         {

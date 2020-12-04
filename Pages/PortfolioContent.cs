@@ -35,6 +35,7 @@ namespace StockBot
                 i++;
                 }
 
+            //elements.Insert(0, new SelectableElement(false, "Bot-Folio", Console.WindowWidth / 2 - 5, ))
             RequiresUpdate = false;
  
         }
