@@ -66,6 +66,19 @@ namespace StockBot
         static void Main(string[] args)
         {
 
+            var stockBot = new Thread(() =>
+            {
+                while (true)
+                {
+                    TradingBot.FetchMovers();
+                    Thread.Sleep(5000);
+                }
+
+            });
+
+
+            stockBot.Start();
+
             UserDB.addUser("tyler", "pass", "02/26/1999");
             //UserDB.addUser("james", "pass", "999");
 

@@ -9,6 +9,7 @@ namespace StockBot.Pages
     {
         
         Portfolio p;
+        Stock selectedStock;
         public StockListPage(string title, MenuTree owner, Portfolio p) : base(title, owner)
         {
             this.p = p;
@@ -16,16 +17,32 @@ namespace StockBot.Pages
 
         public void sellSelectedStock()
         {
-            
-            
-            Console.ReadKey();
-        }
+            selectedStock = p.contents.Values.ToList()[0][0];
+
+            Console.Clear();
+            Console.SetCursorPosition(Console.WindowWidth / 3 - 6, 15);
+            Console.Write("How many do you wish to sell:  ");
+
+            if (int.TryParse(Console.ReadLine().ToString(), out int result))
+            {
+                Console.Clear();
+                Console.SetCursorPosition(Console.WindowWidth / 3 - 6, 15);
+                Console.Write("Are you sure you wish to sell " + result + " shares of " + selectedStock.shortName + "? (y/n)");
+                if (Console.ReadKey().KeyChar == 'y')
+                {
+                    Console.Clear();
+                    Console.SetCursorPosition(Console.WindowWidth / 3 - 6, 15);
+                    Display.currentUser.sellStock(p, selectedStock, result);
+                    Console.ReadKey();
+                }
+            }
+
+            }
 
         public void updateElements()
         {
             int i = 1;
-            Console.SetCursorPosition(Console.WindowWidth / 3 - 6, 5);
-            Console.WriteLine(string.Format("{0, -7} {1, -35} {2, 13} {3, 10}", "Symbol", "Name", "Avg Price", "Shares"));
+            
 
             foreach(List<Stock> stocks in p.contents.Values)
             {
@@ -42,6 +59,7 @@ namespace StockBot.Pages
                 Stock stock = stocks[0];
                 
                 SelectableElement portElement = new SelectableElement(false, string.Format("{0, -7} {1, -35} {2, 10} {3, 10}", stock.symbol, stock.shortName, avgPrice, numOwned), Console.WindowWidth / 3 - 6, (i * 2) + 5);
+                
                 elements.Add(portElement);
                 i++;
             }
@@ -54,6 +72,9 @@ namespace StockBot.Pages
                 updateElements();
 
             display();
+            Console.SetCursorPosition(Console.WindowWidth / 3 - 6, 5);
+            Console.WriteLine(string.Format("{0, -7} {1, -35} {2, 13} {3, 10}", "Symbol", "Name", "Avg Price", "Shares"));
+
             ConsoleKeyInfo key = Console.ReadKey();
             switch (key.Key)
             {

@@ -52,6 +52,8 @@ namespace StockBot
             List<dynamic> results = JsonConvert.DeserializeObject<List<dynamic>>(jsonString);
             //results.AddRange(results.Take(25)); 
             results.RemoveRange(9, 14);
+            movers.Clear();
+            //Console.WriteLine("Movers UPDATED!");
             foreach (dynamic stock in results)
             {
                 movers.Add(new Stock(stock, true));
@@ -60,14 +62,14 @@ namespace StockBot
 
             //MoversChanged();
 
-            Console.WriteLine("Top 25 movers from Yahoo Finance are: ");
-            for(int i = 0; i < movers.Count; i++)
-            {
-                Console.WriteLine(string.Format("{0} - \t{1} \t{2} \t{3} \t{4}% \t{5} \t{6} \t{7} \t{8}",
-                    i+1, movers[i].symbol, movers[i].shortName, movers[i].regularMarketPrice, movers[i].regularMarketChange,
-                    movers[i].regularMarketChangePercent, movers[i].fiftyTwoWeekLow,
-                    movers[i].fiftyTwoWeekHigh, movers[i].regularMarketOpen));
-            }
+            //Console.WriteLine("Top 25 movers from Yahoo Finance are: ");
+            //for(int i = 0; i < movers.Count; i++)
+            //{
+            //    Console.WriteLine(string.Format("{0} - \t{1} \t{2} \t{3} \t{4}% \t{5} \t{6} \t{7} \t{8}",
+            //        i+1, movers[i].symbol, movers[i].shortName, movers[i].regularMarketPrice, movers[i].regularMarketChange,
+            //        movers[i].regularMarketChangePercent, movers[i].fiftyTwoWeekLow,
+            //        movers[i].fiftyTwoWeekHigh, movers[i].regularMarketOpen));
+            //}
         }
 
         //public async void updateStockPricesAsync()

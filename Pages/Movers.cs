@@ -82,8 +82,7 @@ namespace StockBot
         public void updateElements()
         {
             int i = 1;
-            Console.SetCursorPosition(Console.WindowWidth / 4, 5);
-            Console.WriteLine(string.Format("{0, -7} {1, -35} {2, 10} {3, 10}% {4, 10} {5, 10}", "Symbol", "Name", "Price", "Growth", "52 wk Low", "52 wk High"));
+            
             foreach (Stock stock in TradingBot.movers)
             {
                 SelectableElement portElement = new SelectableElement(false, string.Format("{0, -7} {1, -35} {2, 10:C} {3, 10}% {4, 10:C} {5, 10:C}", 
@@ -122,6 +121,8 @@ namespace StockBot
 
             //worker.Start();
             display();
+            Console.SetCursorPosition(Console.WindowWidth / 4, 5);
+            Console.WriteLine(string.Format("{0, -7} {1, -35} {2, 10} {3, 10}% {4, 10} {5, 10}", "Symbol", "Name", "Price", "Growth", "52 wk Low", "52 wk High"));
             //if(Console.ReadKey().Key == ConsoleKey.Escape)
             //{
             //    running = false;
