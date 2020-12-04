@@ -39,7 +39,8 @@ namespace StockBot
             {
                 Console.WriteLine("Successfully Created Account!");
             }
-            else Console.WriteLine("Username Taken!");
+            else //Console.WriteLine("Username Taken!");
+            { }
             Console.ReadKey();
 
         }

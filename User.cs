@@ -93,7 +93,7 @@ namespace StockBot
         {
             if (!portfolioExists(displayName))
             {
-                if (string.IsNullOrWhiteSpace(displayName))
+                if (string.IsNullOrWhiteSpace(displayName)) // Checks if the inputted Portfolio name is blank or purely spaces
                 {
                     Display.error("Enter Valid Portfolio Name");
                 }
