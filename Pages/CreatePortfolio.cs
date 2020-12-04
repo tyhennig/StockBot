@@ -84,7 +84,6 @@ namespace StockBot
                     else
                     {
                         selectedElement.runMethod();
-
                         selectedElement = elements[0];
                     }
                     break;
