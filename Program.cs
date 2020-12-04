@@ -86,6 +86,7 @@ namespace StockBot
 
             Display.currentUser = UserDB.userDB["tyler"];
             Display.currentUser.addBuyingPower(10000);
+            Display.currentUser.EnabledBot = true;
 
             UserDB.userDB["tyler"].createPortfolio("First Portfolio");
             UserDB.userDB["tyler"].createPortfolio("Second Portfolio");

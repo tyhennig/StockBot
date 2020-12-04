@@ -19,11 +19,40 @@ namespace StockBot.Pages
         {
             selectedStock = p.contents.Values.ToList()[0][0];
 
-            Console.Clear();
-            Console.SetCursorPosition(Console.WindowWidth / 3 - 6, 15);
-            Console.Write("How many do you wish to sell:  ");
+            //Console.Clear();
+            //Console.SetCursorPosition(Console.WindowWidth / 3 - 6, 15);
+            //Console.Write("How many do you wish to sell:  ");
 
-            if (int.TryParse(Console.ReadLine().ToString(), out int result))
+
+            ConsoleKeyInfo k;
+            string val = "";
+            do
+            {
+                Console.Clear();
+                Console.SetCursorPosition(Console.WindowWidth / 3 - 6, 15);
+                Console.Write("How many do you wish to sell:  ");
+                Console.Write(val);
+
+                Console.SetCursorPosition(0, Console.WindowHeight - 1);
+
+                k = Console.ReadKey();
+                if (int.TryParse(k.KeyChar.ToString(), out int r))
+                {
+                    val = val + r;
+                }
+                else if (k.Key == ConsoleKey.Backspace)
+                {
+                    if (val.Length > 0)
+                        val = val.Remove(val.Length - 1);
+                }
+                else if (k.Key == ConsoleKey.Escape)
+                    return;
+                //else if (k.Key == ConsoleKey.Enter)
+
+                    
+            } while (k.Key != ConsoleKey.Enter);
+
+            if (int.TryParse(val, out int result))
             {
                 Console.Clear();
                 Console.SetCursorPosition(Console.WindowWidth / 3 - 6, 15);
@@ -36,6 +65,8 @@ namespace StockBot.Pages
                     Console.ReadKey();
                 }
             }
+            else if (Console.ReadKey().Key == ConsoleKey.Escape)
+                RequiresUpdate = true;
 
             }
 
