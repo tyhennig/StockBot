@@ -46,8 +46,8 @@ namespace StockBot
             //int i = 1;
             for (int i = 0; i < TradingBot.movers.Count; i++)
             {
-                SelectableElement portElement = new SelectableElement(false, (string.Format("{0} - {1} \t{2}",
-                    i + 1, TradingBot.movers[i].symbol, TradingBot.movers[i].regularMarketPrice.raw)), Console.WindowWidth / 2 - 5, (i * 2) + 5);
+                SelectableElement portElement = new SelectableElement(false, (string.Format("{0} - {1} \t{2} \t{3} \t{4} \t",
+                    i + 1,TradingBot.movers[i].shortname, TradingBot.movers[i].symbol, TradingBot.movers[i].regularMarketPrice.raw)), Console.WindowWidth / 2 - 5, (i * 2) + 5);
                 elements.Add(portElement);
                 //i++;
             }
