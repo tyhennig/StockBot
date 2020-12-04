@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace StockBot
 {
     //convert stock object in constructor
@@ -63,64 +64,84 @@ namespace StockBot
 
     public class Stock
     {
-        private string ticker;
-        private string name;
-        private decimal latestPrice;
-        private decimal dailyHigh; //or some other value we want to keep track of
-        private decimal dailyLow;
+        //private string ticker;
+        //private string name;
+        //private decimal latestPrice;
+        //private decimal dailyHigh; //or some other value we want to keep track of
+        //private decimal dailyLow;
 
-        private string symbol;
-        private string shortName;
-        private decimal regularMarketPrice;
-        private decimal regularMarketChange;
-        private decimal regularMarketChangePercent;
-        private decimal regularMarketVolume;
-        private decimal averageDailyVolume3Month;
-        private decimal marketCap;
-        private decimal fiftyTwoWeekLow;
-        private decimal fiftyTwoWeekHigh;
-        private decimal regularMarketOpen;
+        public string symbol;
+        public string shortName;
+        public decimal regularMarketPrice;
+        public decimal regularMarketChange;
+        public decimal regularMarketChangePercent;
+        //private decimal regularMarketVolume;
+        //private decimal averageDailyVolume3Month;
+        //private decimal marketCap;
+        public decimal fiftyTwoWeekLow;
+        public decimal fiftyTwoWeekHigh;
+        public decimal regularMarketOpen;
+        public float price;
 
 
-        public Stock(string s, string sn, decimal p, decimal c, decimal cp, decimal v, decimal adv, decimal mc, decimal ftwl, decimal ftwh, decimal mo)
+        //smaller version specifically ment for portfolio.contents
+        public Stock(dynamic stock)
         {
-            this.symbol = s;
-            this.shortName = sn;
-            this.regularMarketPrice = p;
-            this.regularMarketChange = c;
-            this.regularMarketChangePercent = cp;
-            this.regularMarketVolume = v;
-            this.averageDailyVolume3Month = adv;
-            this.marketCap = mc;
-            this.fiftyTwoWeekLow = ftwl;
-            this.fiftyTwoWeekHigh = ftwh;
-            this.regularMarketOpen = mo;
-    }
-
-        public Stock(string ticker)
-        {
-            if (API.isTicker(ticker)) //uses some API or something to check if it is a valid ticker
-            {
-                this.ticker = ticker;
-                updatePrice();
-                updateHigh();
-                updateLow();
-                getName();
-            }
-            else
-            {
-                throw new ArgumentException("You entered an invalid Ticker");
-            }
-        }
-        public override string ToString()
-        {
-            return ticker;
+            this.symbol = stock.symbol;
+            this.shortName = stock.shortName;
+            price = stock.regularMarketPrice.raw;
+            this.regularMarketPrice = Convert.ToDecimal(price);
         }
 
-        public void updatePrice()
+        //longer version just in case?
+        public Stock(dynamic stock, bool isMover)
+        {
+            this.symbol = stock.symbol;
+            this.shortName = stock.shortName;
+            price = stock.regularMarketPrice.raw;
+            this.regularMarketPrice = Convert.ToDecimal(price);
+            price = stock.regularMarketChange.raw;
+            this.regularMarketChange = Convert.ToDecimal(price);
+            price = stock.regularMarketChangePercent.raw;
+            this.regularMarketChangePercent = Convert.ToDecimal(price);
+            //this.regularMarketVolume = v;
+            //this.averageDailyVolume3Month = adv;
+            //this.marketCap = mc;
+            price = stock.fiftyTwoWeekLow.raw;
+            this.fiftyTwoWeekLow = Convert.ToDecimal(price);
+            price = stock.fiftyTwoWeekHigh.raw;
+            this.fiftyTwoWeekHigh = Convert.ToDecimal(price);
+            price = stock.regularMarketOpen.raw;
+            this.regularMarketOpen = Convert.ToDecimal(price);
+
+        }
+
+        
+
+        //public Stock(string ticker)
+        //{
+        //    if (API.isTicker(ticker)) //uses some API or something to check if it is a valid ticker
+        //    {
+        //        this.ticker = ticker;
+        //        updatePrice();
+        //        updateHigh();
+        //        updateLow();
+        //        getName();
+        //    }
+        //    else
+        //    {
+        //        throw new ArgumentException("You entered an invalid Ticker");
+        //    }
+        //}
+        //public override string ToString()
+        //{
+        //    return symbol;
+        //}
+
+        public void updatePrice(decimal price)
         {
             //interface with API or webpage to get the latest quote
-            //latestPrice = API.getPrice(ticker);
+            regularMarketPrice = price;
         }
 
         public void updateHigh()

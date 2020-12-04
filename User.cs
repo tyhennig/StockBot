@@ -75,68 +75,107 @@ namespace StockBot
             
         }
 
+        //Navigate through movers
+        //Select portfolio
         //Create stock object
+        //Check if symbol exists in portfolio
+            //If it does, add to list
+            //If not, create new key with new list, add to list
+            //
         public void buyStock(Portfolio folio, dynamic stock, int quantity)
         {
-            float p = stock.regularMarketPrice.raw;
-            decimal price = Convert.ToDecimal(p);
-            string symbol = stock.symbol;
+            Stock bStock = new Stock(stock);
+            decimal price = folio.updateStockPricesAsync(bStock);
+            bStock.updatePrice(price);
             if (subBuyingPower(price * quantity))
             {
-                if (folio.contents.ContainsKey(symbol))
+                if (folio.contents.ContainsKey(bStock.symbol))
                 {
                     for (int i = 0; i < quantity; i++)
                     {
-                        folio.contents[symbol].Add(stock);
+                        folio.contents[bStock.symbol].Add(bStock);
                     }
                 }
                 else
                 {
-                    List<dynamic> stockPool = new List<dynamic>();
+                    List<Stock> stockPool = new List<Stock>();
+                    
                     for (int i = 0; i < quantity; i++)
                     {
-                        stockPool.Add(stock);
+                        stockPool.Add(bStock);
                     }
                     
-                    folio.contents.Add(symbol, stockPool);
+                    folio.contents.Add(bStock.symbol, stockPool);
+                    //might not be needed?
+                    folio.currentStockPrices.Add(bStock.symbol, bStock.regularMarketPrice);
                 }
             }
         }
 
-        public void sellStock(Portfolio folio, dynamic stock, int quantity)
+        //The stock must exist in portfolio
+        //The quantity anttempted to sell must not exceed the quantity owned
+        //The most current price must be used
+        //Stocks must be removed from portfolio 
+        //Earnings/losings must be added to buyingPower
+        public void sellStock(Portfolio folio, Stock stock, int quantity)
         {
-            float p = stock.regularMarketPrice.raw;
-            decimal price = Convert.ToDecimal(p);
             string symbol = stock.symbol;
-            if (subBuyingPower(price * quantity))
+            if (folio.contents.ContainsKey(symbol))
             {
-                if (folio.contents.ContainsKey(symbol))
+                if(folio.contents[symbol].Count >= quantity)
                 {
+
+                    //decimal price = await TradingBot.updateStockPricesAsync();
+                    decimal price = folio.updateStockPricesAsync(stock);
+                    decimal total = quantity * price;
+                    total += -10;
                     for (int i = 0; i < quantity; i++)
                     {
-                        folio.contents[symbol].Add(stock);
+                        folio.contents[symbol].RemoveAt(folio.contents[symbol].Count - 1);
                     }
+                    addBuyingPower(total);
+                    Console.WriteLine("SOLD!");
                 }
                 else
                 {
-                    Console.WriteLine("Stock does not exist in p");
+                    Console.WriteLine("Quantity attempting to sell exceeds the owned quantity");
                 }
+                
+            }
+            else
+            {
+                Console.WriteLine("Stock does not exist in p");
             }
         }
 
-        public void botBuy(Portfolio folio)
+        //bot will buy the first 5 top movers
+        //if any of the 5 is replaced on top gainers,
+        //bot sells the replaced stock
+        //bot buys new stock
+        //Note: bot will buy in percentages of buyingPower
+        //50% of buying power will be used by the bot
+        //10% per stock
+        //Stock quantity must be integer
+        public void botBuy()
         {
-            foreach(dynamic stock in folio.contents)
+            for (int i = 0; i < 5; i++)
             {
+                folio.buyStock(folio, TradingBot.movers[i], 5);
+            }
+
+
+            foreach (dynamic stock in folio.contents)
+            {
+
                 string symbol = stock.symbol;
-                for(int i = 0; i < 5; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     if (TradingBot.movers[i].symbol.Equals(symbol))
                     {
                         Console.WriteLine("Match");
                     }
                 }
-                
+
             }
             //for (int i = 0; i < 5; i++)
             //{

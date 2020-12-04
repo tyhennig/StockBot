@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Net.Http;
 using HtmlAgilityPack;
+using System.Threading.Tasks;
 
 namespace StockBot
 {
@@ -14,7 +15,8 @@ namespace StockBot
         //we might need an id for each portfolio. Index may be handy for when you navigate
         private string displayName;
         //private string owner;
-        public Dictionary<string, List<dynamic>> contents;
+        public Dictionary<string, List<Stock>> contents;
+        public Dictionary<string, decimal> currentStockPrices;
         //private TradingBot bot; //Each portfolio might have its own bot
         public string url = "https://finance.yahoo.com/quote/";
 
@@ -22,7 +24,8 @@ namespace StockBot
         public Portfolio(string dn)
         {
             displayName = dn;
-            contents = new Dictionary<string, List<dynamic>>();
+            contents = new Dictionary<string, List<Stock>>();
+            currentStockPrices = new Dictionary<string, decimal>();
             //bot.RegisterObserver(this);
         }
 
@@ -51,20 +54,23 @@ namespace StockBot
 
         public void displayPorfolioContent()
         {
-            foreach(dynamic stock in contents)
+            foreach(var stock in contents)
             {
-                Console.WriteLine(stock.symbol);
+                Console.WriteLine(stock.Key + "  " + stock.Value.Count());
             }
         }
 
-        public async void updateStocksAsync()
+        //updates current price of stocks
+        //Will be used to calculate growth/shrink
+        //Needs to use WebClient. Not changing until needed
+        public async void updateStockPricesAsync()
         {
             var httpClient = new HttpClient();
             
-            foreach (dynamic stock in contents)
+            //stock string is null?????
+            foreach (var stock in currentStockPrices)
             {
-                string symbol = stock.symbol;
-                var html = await httpClient.GetStringAsync(url + symbol);
+                var html = await httpClient.GetStringAsync(url + stock.Key);
 
                 var htmlDocument = new HtmlDocument();
                 htmlDocument.LoadHtml(html);
@@ -75,7 +81,7 @@ namespace StockBot
 
                 decimal p = Convert.ToDecimal(updatedPrice[0].InnerText);
 
-                stock.regularMarketPrice.raw = p;
+                currentStockPrices[stock.Key] = p;
 
                 //stock.
 
@@ -109,11 +115,35 @@ namespace StockBot
             }
         }
 
+        public decimal updateStockPricesAsync(Stock stock)
+        {
+            var httpClient = new HttpClient();
+            string html;
+            using (var wc = new System.Net.WebClient())
+            {
+                html = wc.DownloadString(url + stock.symbol);
+            }
 
-        
+            //var html = await httpClient.GetStringAsync(url + stock.symbol);
+
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(html);
+
+            var updatedPrice = htmlDocument.DocumentNode.Descendants("span")
+                .Where(node => node.GetAttributeValue("class", "")
+                .Equals("Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)")).ToList();
+
+            decimal p = Convert.ToDecimal(updatedPrice[0].InnerText);
+
+            return p;
+            
+        }
 
 
-        
+
+
+
+
 
         public void DisplayStocksDetail()
         {

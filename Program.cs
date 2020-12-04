@@ -46,20 +46,24 @@ namespace StockBot
             //db.addUser("Elite561", "Batman98");
             //Console.WriteLine(db.userDB["Elite561"]);
             //db.signInAttempt("Elite561", "Batman98");
-            TradingBot bot = new TradingBot();
-            bot.FetchMovers();
+            TradingBot.FetchMovers();
             User paul = new User("Elite561", "ABC");
             paul.createPortfolio("default");
             paul.createPortfolio("default2");
-            paul.addBuyingPower(1000);
+            paul.addBuyingPower(100000);
             paul.listPortfolios();
-            paul.buyStock(paul.portfolios[0], TradingBot.movers[4], 3);
+            paul.buyStock(paul.portfolios[0], TradingBot.movers[4], 4);
             paul.buyStock(paul.portfolios[0], TradingBot.movers[4], 4);
             paul.buyStock(paul.portfolios[0], TradingBot.movers[2], 5);
             //paul.botBuy(paul.portfolios[0]);
             //paul.buyStock(portfolioName, selectedstock);
             paul.portfolios[0].displayPorfolioContent();
-            paul.portfolios[0].updateStocksAsync();
+            Console.WriteLine(paul.getBuyingPower());
+
+            paul.sellStock(paul.portfolios[0], paul.portfolios[0].contents["CYRBY"][0], 3);
+            //Thread.Sleep(3000);
+            //paul.portfolios[0].updateStockPricesAsync();
+            paul.portfolios[0].displayPorfolioContent();
             Console.WriteLine(paul.getBuyingPower());
 
             
@@ -72,7 +76,7 @@ namespace StockBot
                 //bot.FetchMovers();
                 //bot.Display();
             }
-            
+
             //bot.scrapeHTML(url);
             Console.ReadLine();
         }

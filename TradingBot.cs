@@ -3,31 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 
 namespace StockBot
 {
-    class TradingBot
+    public static class TradingBot
     {
-        private List<dynamic> observers;
+        private static List<dynamic> observers;
 
         //fetching movers might have to be moved somewhere else.
-        public string url = "https://finance.yahoo.com/gainers";
+        public static string url = "https://finance.yahoo.com/gainers";
         public static List<dynamic> movers = new List<dynamic>();
 
-        public TradingBot()
-        {
-            
-        }
-
         //Implement subject interface
-        public void RegisterObserver(IObserver o)
+        public static void RegisterObserver(IObserver o)
         {
             observers.Add(o);
         }
 
-        public void RemoveObserver(IObserver o)
+        public static void RemoveObserver(IObserver o)
         {
             int i = observers.IndexOf(o);
             if(i >= 0)
@@ -53,7 +49,7 @@ namespace StockBot
         
         
         //add something like if(active) then work
-        public void FetchMovers()
+        public static void FetchMovers()
         {
             movers.Clear();
             string jsonString;
@@ -78,8 +74,78 @@ namespace StockBot
             }
         }
 
+        //public async void updateStockPricesAsync()
+        //{
+        //    var httpClient = new HttpClient();
 
-        public void aggressiveBuy()
+        //    //stock string is null?????
+        //    foreach (var stock in currentStockPrices)
+        //    {
+        //        var html = await httpClient.GetStringAsync(url + stock.Key);
+
+        //        var htmlDocument = new HtmlDocument();
+        //        htmlDocument.LoadHtml(html);
+
+        //        var updatedPrice = htmlDocument.DocumentNode.Descendants("span")
+        //            .Where(node => node.GetAttributeValue("class", "")
+        //            .Equals("Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)")).ToList();
+
+        //        decimal p = Convert.ToDecimal(updatedPrice[0].InnerText);
+
+        //        currentStockPrices[stock.Key] = p;
+        //    }
+        //}
+
+        //public void botBuy(User user)
+        //{
+        //    for (int i = 0; i < 5; i++)
+        //    {
+        //        user.folio.buyStock(folio, TradingBot.movers[i], 5);
+        //    }
+
+
+        //    foreach (dynamic stock in folio.contents)
+        //    {
+
+        //        string symbol = stock.symbol;
+        //        for (int i = 0; i < 5; i++)
+        //        {
+        //            if (TradingBot.movers[i].symbol.Equals(symbol))
+        //            {
+        //                Console.WriteLine("Match");
+        //            }
+        //        }
+
+        //    }
+        //    //for (int i = 0; i < 5; i++)
+        //    //{
+        //    //    buyStock(folio, TradingBot.movers[i], 2);
+        //    //}
+
+        //}
+
+        public static async Task<decimal> updateStockPricesAsync(Stock stock)
+        {
+            var httpClient = new HttpClient();
+
+
+            var html = await httpClient.GetStringAsync(url + stock.symbol);
+
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(html);
+
+            var updatedPrice = htmlDocument.DocumentNode.Descendants("span")
+                .Where(node => node.GetAttributeValue("class", "")
+                .Equals("Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)")).ToList();
+
+            decimal p = Convert.ToDecimal(updatedPrice[0].InnerText);
+
+            return p;
+
+        }
+
+
+        public static void aggressiveBuy()
         {
             //if (this.movers.Count() > 0)
             {
@@ -87,7 +153,7 @@ namespace StockBot
             }
         }
 
-        public void buyStock(dynamic stock)
+        public static void buyStock(dynamic stock)
         {
             //Portfolio.
         }
