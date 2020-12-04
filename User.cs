@@ -93,6 +93,11 @@ namespace StockBot
         {
             if (!portfolioExists(displayName))
             {
+                if (string.IsNullOrWhiteSpace(displayName))
+                {
+                    Display.error("Enter Valid Portfolio Name");
+                }
+                else
                 portfolios.Add(displayName, new Portfolio(displayName));
             }
             else

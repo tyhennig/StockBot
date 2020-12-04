@@ -85,7 +85,7 @@ namespace StockBot
                     }
                     else
                     {
-                        selectedElement.runMethod(); // Have to check whether a method has a run method
+                        selectedElement.runMethod();
                     }
                     break;
 
