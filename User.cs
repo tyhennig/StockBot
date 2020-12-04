@@ -112,14 +112,16 @@ namespace StockBot
                 else
                 {
                     List<Stock> stockPool = new List<Stock>();
-                    
+
                     stockPool.Add(bStock);
-                    
+
                     folio.contents.Add(bStock.symbol, stockPool);
                     //might not be needed?
                     //folio.currentStockPrices.Add(bStock.symbol, bStock.regularMarketPrice);
                 }
             }
+            else
+                Display.error("Not enough buying power!");
         }
 
 
