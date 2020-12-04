@@ -84,7 +84,9 @@ namespace StockBot
             int i = 1;
             foreach(Stock stock in TradingBot.movers)
             {
-                SelectableElement portElement = new SelectableElement(false, string.Format("{0, -20} {1, -15} {2, -10} {3, -5} {4, 0} {5, 5}", stock.symbol, stock.shortName, stock.regularMarketPrice, stock.regularMarketChangePercent, stock.fiftyTwoWeekLow, stock.fiftyTwoWeekHigh), Console.WindowWidth / 2 - 5, (i * 2) + 5);
+                SelectableElement portElement = new SelectableElement(false, string.Format("{0, -7} {1, -35} {2, 10:C} {3, 10}% {4, 10:C} {5, 10:C}", 
+                    stock.symbol, stock.shortName, stock.regularMarketPrice, stock.regularMarketChangePercent, stock.fiftyTwoWeekLow, stock.fiftyTwoWeekHigh),
+                    Console.WindowWidth / 4, (i * 2) + 5);
                 elements.Add(portElement);
                 i++;
             }
