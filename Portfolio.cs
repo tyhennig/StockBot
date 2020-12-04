@@ -47,10 +47,10 @@ namespace StockBot
             contents[symbol][contents[symbol].Count - 1].Remove();
         }
 
-        public void removeStock(dynamic stock)
-        {
-            contents.Remove(stock);
-        }
+        //public void removeStock(dynamic stock)
+        //{
+        //    contents.Remove(stock);
+        //}
 
 
 

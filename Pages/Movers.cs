@@ -12,7 +12,7 @@ namespace StockBot
         bool running;
         string url = "https://finance.yahoo.com/gainers";
         //TradingBot bot;
-        dynamic selectedStock;
+        Stock selectedStock;
 
         public Movers(string title, MenuTree owner) : base(title, owner)
         {
@@ -24,31 +24,62 @@ namespace StockBot
         public void addToPortfolio()
         {
             Console.Clear();
-            Console.WriteLine("Which Portfolio would you like to add to?");
-            int i = 1;
-            foreach(Portfolio folio in Display.currentUser.getPortfolios().Values)
-            {
-                Console.SetCursorPosition(Console.WindowWidth / 2 - 5, (i * 2) + 5);
-                Console.Write(i + ". " + folio.getDisplayName());
+            Console.Write("How many would you like to purchase:  ");
 
-                i++;
+
+            if (int.TryParse(Console.ReadLine().ToString(), out int result))
+            {
+                Console.Clear();
+                Console.WriteLine("Which Portfolio would you like to add to?");
+                int i = 1;
+                foreach (Portfolio folio in Display.currentUser.getPortfolios().Values)
+                {
+                    Console.SetCursorPosition(Console.WindowWidth / 2 - 5, (i * 2) + 5);
+                    Console.Write(i + ". " + folio.getDisplayName());
+
+                    i++;
+                }
+
+                int selectedFolioIndex = int.Parse(Console.ReadLine()) - 1;
+                Console.Clear();
+                Console.WriteLine("Confirm purchase of " + result + " " + selectedStock.shortName + ", for a total of $" + (decimal)(selectedStock.regularMarketPrice * result) + " (y/n)");
+                if (Console.ReadKey().KeyChar == 'y')
+                    Display.currentUser.buyStock(Display.currentUser.getPortfolios()[selectedElement.displayedText], selectedStock, result);
+            }
+            else
+            {
+                Display.error("Input Number");
             }
 
-            int temp = (int)char.GetNumericValue(Console.ReadKey().KeyChar);
+
+
+
+            //Console.Clear();
+            //Console.WriteLine("Which Portfolio would you like to add to?");
+            //int i = 1;
+            //foreach(Portfolio folio in Display.currentUser.getPortfolios().Values)
+            //{
+            //    Console.SetCursorPosition(Console.WindowWidth / 2 - 5, (i * 2) + 5);
+            //    Console.Write(i + ". " + folio.getDisplayName());
+
+            //    i++;
+            //}
+
+            //int temp = (int)char.GetNumericValue(Console.ReadKey().KeyChar);
             
 
-            Display.currentUser.getPortfolios().Values.ToList()[temp -1].addStock(selectedStock);
+            //Display.currentUser.getPortfolios().Values.ToList()[temp -1].addStock(selectedStock);
 
         }
 
         public void updateElements()
         {
-            //int i = 1;
+            int i = 1;
             foreach(Stock stock in TradingBot.movers)
             {
-                SelectableElement portElement = new SelectableElement(false, "{0, -20} {1, -15} {2, -10} {3, -5} {4, 0}", Console.WindowWidth / 2 - 5, (i * 2) + 5);
+                SelectableElement portElement = new SelectableElement(false, string.Format("{0, -20} {1, -15} {2, -10} {3, -5} {4, 0} {5, 5}", stock.symbol, stock.shortName, stock.regularMarketPrice, stock.regularMarketChangePercent, stock.fiftyTwoWeekLow, stock.fiftyTwoWeekHigh), Console.WindowWidth / 2 - 5, (i * 2) + 5);
                 elements.Add(portElement);
-                //i++;
+                i++;
             }
 
 
@@ -68,13 +99,13 @@ namespace StockBot
                     
                     
                     //if (running)
-                        if (Display.currentUser != lastUser || Display.currentUser == null)
-                        {
-                            bot.FetchMovers();
-                            Console.Clear();
-                            updateElements();
-                            selectedElement = elements[0];
-                        }
+            if (Display.currentUser != lastUser || Display.currentUser == null)
+            {
+                TradingBot.FetchMovers();
+                Console.Clear();
+                updateElements();
+                selectedElement = elements[0];
+            }
 
        
 

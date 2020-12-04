@@ -17,10 +17,20 @@ namespace StockBot.Pages
         public void updateElements()
         {
             int i = 1;
-            foreach(dynamic stock in p.getContents())
+
+            foreach(List<Stock> stocks in p.contents.Values)
             {
-                SelectableElement stockElement = new SelectableElement(false, (string)stock.symbol + "\t" + (string)stock.regularMarketPrice.raw, Console.WindowWidth / 2 - 5, (i * 2) + 5);
-                elements.Add(stockElement);
+                decimal avgPrice = 0;
+                int numOwned = stocks.Count;
+
+                foreach(Stock st in stocks)
+                {
+                    avgPrice += st.regularMarketPrice;
+                }
+                avgPrice /= numOwned;
+                Stock stock = stocks[0];
+                SelectableElement portElement = new SelectableElement(false, string.Format("{0, -20} {1, -15} {2, -10} {3, -5} {4, 0} {5, 5}", stock.symbol, stock.shortName, avgPrice, stock.regularMarketChangePercent, stock.fiftyTwoWeekLow, stock.fiftyTwoWeekHigh), Console.WindowWidth / 2 - 5, (i * 2) + 5);
+                elements.Add(portElement);
                 i++;
             }
 

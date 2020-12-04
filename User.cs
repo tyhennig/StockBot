@@ -10,7 +10,7 @@ namespace StockBot
     {
         static int numInstantiated = 0;
         int id; //numInstantiated increments every time a new user is created. Look at constructor
-        private string username { set; get; }
+        public string Username { get; }
         private string password { set; get; }
         //Maybe a list is better? What happens when you delete a user, creating holes
         public Dictionary<string, Portfolio> portfolios;//DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
@@ -21,7 +21,7 @@ namespace StockBot
 
         public User(string username, string password, string bday)
         {
-            this.username = username;
+            this.Username = username;
             this.password = password;
             //portfolios = new Dictionary<string, Portfolio>();
             //portfolios = new List<Portfolio>(); //web-scrape code
