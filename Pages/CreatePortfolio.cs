@@ -29,8 +29,13 @@ namespace StockBot
         {
             if (Display.currentUser == null)
                 Display.error("Not Logged In!");
+            else if(Display.currentUser.getPortfolios().Count >= 13) // Limits portfolios to 13 in order to not go past the childMenus
+            {
+                Display.error("Portfolio Limit is Reached!");
+            } 
             else
             {
+              
                 Display.currentUser.createPortfolio(portfolioName.getValue());
                 owner.getParentMenu().getContent().RequiresUpdate = true;
                 Display.setCurrentMenu(owner.getParentMenu());
@@ -80,7 +85,7 @@ namespace StockBot
                     }
                     else
                     {
-                        selectedElement.runMethod();
+                        selectedElement.runMethod(); // Have to check whether a method has a run method
                     }
                     break;
 
