@@ -220,21 +220,15 @@ namespace StockBot
         //might have to change. Search if key exists inside portfolio
         private bool portfolioExists(string folio)
         {
-            foreach (Portfolio x in portfolios)
-            {
-                if (folio.Equals(x.getDisplayName()))
-                {
-                    return true;
-                }
-            }
-            
+            if (portfolios.ContainsKey(folio))
+                return true;
             return false;
         }
 
         //or print each key? Idk which is better
         public void listPortfolios()
         {
-            foreach (Portfolio portfolio in portfolios)
+            foreach (Portfolio portfolio in portfolios.Values)
             {
                 Console.WriteLine(portfolio.getDisplayName());
             }
@@ -244,7 +238,7 @@ namespace StockBot
         {
             if (!portfolioExists(folio))
             {
-                portfolios.Add(new Portfolio(folio));
+                portfolios.Add(folio, new Portfolio(folio));
             }
             else
             {
