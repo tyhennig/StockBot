@@ -26,14 +26,14 @@ namespace StockBot
 
         public void deletePortfolio()
         {
-            Display.error("Are you sure you want to delete " + selectedElement.getDisplayedText() + "? (y/n)");
-            if (string.Equals(Console.ReadKey().KeyChar.ToString(), "y", StringComparison.OrdinalIgnoreCase))
-            {
-                Display.currentUser.getPortfolios().Remove(selectedElement.getDisplayedText());
-                RequiresUpdate = true;
-                owner.getParentMenu().getContent().RequiresUpdate = true;
-                Display.setCurrentMenu(owner.getParentMenu());
-            }
+                Display.error("Are you sure you want to delete " + selectedElement.getDisplayedText() + "? (y/n)");
+                if (string.Equals(Console.ReadKey().KeyChar.ToString(), "y", StringComparison.OrdinalIgnoreCase))
+                {
+                    Display.currentUser.getPortfolios().Remove(selectedElement.getDisplayedText());
+                    RequiresUpdate = true;
+                    owner.getParentMenu().getContent().RequiresUpdate = true;
+                    Display.setCurrentMenu(owner.getParentMenu());
+                }
         }
 
         public override void updateElements()
@@ -71,63 +71,77 @@ namespace StockBot
 
         public override void run()
         {
-            if (Display.currentUser.getPortfolios().Count != elements.Count)
-                RequiresUpdate = true;
-
-            if (Display.currentUser != lastUser || RequiresUpdate)
+            if (Display.currentUser.getPortfolios().Count >= 1) //If there is existing Portfolios, you can choose to delete one
             {
-                updateElements();
-            }
+                if (Display.currentUser.getPortfolios().Count != elements.Count)
+                    RequiresUpdate = true;
 
-            lastUser = Display.currentUser;
+                if (Display.currentUser != lastUser || RequiresUpdate)
+                {
+                    updateElements();
+                }
 
-            display();
-            ConsoleKeyInfo key = Console.ReadKey();
-            switch (key.Key)
-            {
-                case ConsoleKey.UpArrow:
-                    if (elements.IndexOf(selectedElement) == 0)
-                        selectedElement = elements[elements.Count - 1];
-                    else
-                        selectedElement = elements[elements.IndexOf(selectedElement) - 1];
-                    break;
+                lastUser = Display.currentUser;
 
-                case ConsoleKey.DownArrow:
-                    if (elements.IndexOf(selectedElement) == elements.Count - 1)
-                        selectedElement = elements[0];
-                    else
-                        selectedElement = elements[elements.IndexOf(selectedElement) + 1];
-                    break;
+                display();
+                ConsoleKeyInfo key = Console.ReadKey();
+                switch (key.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (elements.IndexOf(selectedElement) == 0)
+                            selectedElement = elements[elements.Count - 1];
+                        else
+                            selectedElement = elements[elements.IndexOf(selectedElement) - 1];
+                        break;
 
-                case ConsoleKey.Enter:
-                    if (selectedElement.IsMenu)
-                    {
-                        Display.setCurrentMenu(owner.getChildMenuList().Where(menu => menu.getTitle().Equals(selectedElement.displayedText)).ToList()[0]);
-                    }
-                    else
-                    {
-                        selectedElement.runMethod();
-                    }
-                    break;
+                    case ConsoleKey.DownArrow:
+                        if (elements.IndexOf(selectedElement) == elements.Count - 1)
+                            selectedElement = elements[0];
+                        else
+                            selectedElement = elements[elements.IndexOf(selectedElement) + 1];
+                        break;
 
-                case ConsoleKey.Escape:
-                    Display.setCurrentMenu(owner.getParentMenu());
-                    break;
+                    case ConsoleKey.Enter:
+                        if (selectedElement.IsMenu)
+                        {
+                            Display.setCurrentMenu(owner.getChildMenuList().Where(menu => menu.getTitle().Equals(selectedElement.displayedText)).ToList()[0]);
+                        }
+                        else
+                        {
+                            selectedElement.runMethod();
+                        }
+                        break;
 
-                case ConsoleKey.Backspace:
-                    if (selectedElement.TakesText)
-                        (selectedElement).delFromValue();
-                    break;
+                    case ConsoleKey.Escape:
+                        Display.setCurrentMenu(owner.getParentMenu());
+                        break;
 
-                default:
-                    if (Char.IsLetterOrDigit(key.KeyChar))
-                    {
+                    case ConsoleKey.Backspace:
                         if (selectedElement.TakesText)
-                            (selectedElement).addToValue(key.KeyChar);
-                        //usernameInput.setDisplayedText(usernameInput.getDisplayedText() + key.KeyChar);
-                    }
-                    break;
+                            (selectedElement).delFromValue();
+                        break;
+
+                    default:
+                        if (Char.IsLetterOrDigit(key.KeyChar))
+                        {
+                            if (selectedElement.TakesText)
+                                (selectedElement).addToValue(key.KeyChar);
+                            //usernameInput.setDisplayedText(usernameInput.getDisplayedText() + key.KeyChar);
+                        }
+                        break;
+                }
             }
+            else
+            {
+                Display.error("No Portfolios To Delete");
+                ConsoleKeyInfo key = Console.ReadKey();
+                switch (key.Key)
+                {
+                    case ConsoleKey.Escape:
+                        Display.setCurrentMenu(owner.getParentMenu());
+                        break;
+                }
+            }    
         }
 
     }

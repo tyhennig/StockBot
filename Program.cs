@@ -66,7 +66,7 @@ namespace StockBot
         static void Main(string[] args)
         {
 
-            UserDB.addUser("tyler", "pass", "02/26/1999");
+            UserDB.addUser("tyler", "pass", "02261999");
             //UserDB.addUser("james", "pass", "999");
 
             Display.currentUser = UserDB.userDB["tyler"];
