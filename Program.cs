@@ -71,7 +71,7 @@ namespace StockBot
             Console.WriteLine(paul.getBuyingPower());
 
             paul.botbuy();
-            paul.portfolios[1].displayPorfolioContent();
+            paul.botfolio.displayPorfolioContent();
             Console.WriteLine(paul.getBuyingPower());
 
 

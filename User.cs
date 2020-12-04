@@ -15,6 +15,7 @@ namespace StockBot
         //Maybe a list is better? What happens when you delete a user, creating holes
         //public Dictionary<string, Portfolio> portfolios;//DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
         public List<Portfolio> portfolios;
+        public Portfolio botfolio;
         private decimal buyingPower; //perhaps this should be global (static)
 
         public User(string username, string password)
@@ -23,7 +24,8 @@ namespace StockBot
             this.password = password;
             //portfolios = new Dictionary<string, Portfolio>();
             portfolios = new List<Portfolio>();
-            createPortfolio("Botfolio");
+            botfolio = new Portfolio("botfolio");
+            //createPortfolio("Botfolio");
             id = numInstantiated;
             numInstantiated++;
             UserDB.userDB.Add(id, this);
@@ -131,8 +133,6 @@ namespace StockBot
                     //not that easy buck-o
                     decimal total = folio.removeStock(symbol, price, quantity);
 
-
-
                     addBuyingPower(total);
                     Console.WriteLine("SOLD!");
                 }
@@ -159,14 +159,22 @@ namespace StockBot
         public void botbuy()
         {
             decimal singlestockbudget = (buyingPower * 0.5m) * 0.20m;
-            for (int i = 0; i < 5; i++)
+
+            if (botfolio.contents.Count == 0)
             {
-                Stock stock = new Stock(TradingBot.movers[i]);
-                int quantity = (int)(singlestockbudget / stock.regularMarketPrice);
-                if (quantity > 0)
+                for (int i = 0; i < 5; i++)
                 {
-                    buyStock(portfolios[0], stock, quantity);
+                    Stock stock = new Stock(TradingBot.movers[i]);
+                    int quantity = (int)(singlestockbudget / stock.regularMarketPrice);
+                    if (quantity > 0)
+                    {
+                        buyStock(botfolio, stock, quantity);
+                    }
                 }
+            }
+            else
+            {
+
             }
 
 

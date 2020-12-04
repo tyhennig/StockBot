@@ -78,6 +78,12 @@ namespace StockBot
             contents.Remove(stock);
         }
 
+        public bool isEmpty()
+        {
+            
+            return true;
+        }
+
 
 
         public void displayPortfolio()
