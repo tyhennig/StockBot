@@ -11,12 +11,12 @@ namespace StockBot
     {
         bool running;
         string url = "https://finance.yahoo.com/gainers";
-        TradingBot bot;
+        //TradingBot bot;
         dynamic selectedStock;
 
         public Movers(string title, MenuTree owner) : base(title, owner)
         {
-            bot = new TradingBot();
+            //bot = new TradingBot();
             running = true;
             
         }
@@ -44,10 +44,9 @@ namespace StockBot
         public void updateElements()
         {
             //int i = 1;
-            for (int i = 0; i < TradingBot.movers.Count; i++)
+            foreach(Stock stock in TradingBot.movers)
             {
-                SelectableElement portElement = new SelectableElement(false, (string.Format("{0} - {1} \t{2} \t{3} \t{4} \t",
-                    i + 1,TradingBot.movers[i].shortname, TradingBot.movers[i].symbol, TradingBot.movers[i].regularMarketPrice.raw)), Console.WindowWidth / 2 - 5, (i * 2) + 5);
+                SelectableElement portElement = new SelectableElement(false, "{0, -20} {1, -15} {2, -10} {3, -5} {4, 0}", Console.WindowWidth / 2 - 5, (i * 2) + 5);
                 elements.Add(portElement);
                 //i++;
             }
