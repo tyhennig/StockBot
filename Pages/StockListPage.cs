@@ -14,6 +14,13 @@ namespace StockBot.Pages
             this.p = p;
         }
 
+        public void sellSelectedStock()
+        {
+            
+            
+            Console.ReadKey();
+        }
+
         public void updateElements()
         {
             int i = 1;
@@ -35,18 +42,41 @@ namespace StockBot.Pages
                 elements.Add(portElement);
                 i++;
             }
-
-
-
+            selectedElement = elements[0];
             lastUser = Display.currentUser;
         }
         public override void run()
         {
-            if (Display.currentUser != lastUser)
+            if (Display.currentUser != lastUser || RequiresUpdate)
                 updateElements();
+
             display();
-            Console.ReadKey();
-            Display.setCurrentMenu(owner.getParentMenu());
+            ConsoleKeyInfo key = Console.ReadKey();
+            switch (key.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    if (elements.IndexOf(selectedElement) == 0)
+                        selectedElement = elements[elements.Count - 1];
+                    else
+                        selectedElement = elements[elements.IndexOf((SelectableElement)selectedElement) - 1];
+                    break;
+
+                case ConsoleKey.DownArrow:
+                    if (elements.IndexOf((SelectableElement)selectedElement) == elements.Count - 1)
+                        selectedElement = elements[0];
+                    else
+                        selectedElement = elements[elements.IndexOf((SelectableElement)selectedElement) + 1];
+                    break;
+
+                case ConsoleKey.Enter:
+                    sellSelectedStock();
+                    break;
+
+                case ConsoleKey.Escape:
+                    Display.setCurrentMenu(owner.getParentMenu());
+                    break;
+
+            }
         }
     }
 }

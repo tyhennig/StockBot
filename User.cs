@@ -121,7 +121,11 @@ namespace StockBot
                 }
             }
             else
+            {
                 Display.error("Not enough buying power!");
+                Console.ReadKey();
+            }
+
         }
 
 

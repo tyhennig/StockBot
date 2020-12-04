@@ -51,7 +51,7 @@ namespace StockBot
             Console.Clear();
             Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
             Console.Write(v);
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }
