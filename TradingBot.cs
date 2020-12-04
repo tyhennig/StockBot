@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,111 +17,42 @@ namespace StockBot
         public static string url = "https://finance.yahoo.com/gainers";
         public static List<Stock> movers = new List<Stock>();
         public static List<Stock> shortMovers = new List<Stock>();
+        public static string jsonString = "";
+        public static WebClient wc = new WebClient();
 
-        
-
-
-
-        //public void NotifyObservers()
-        //{
-        //    foreach(IObserver observer in observers)
-        //    {
-        //        observer.Update(movers);
-        //    }
-        //}
-
-        //public void MoversChanged()
-        //{
-        //    NotifyObservers();
-        //}
-
-        //add aggressive, normal, and safe options
-        
-        
-        //add something like if(active) then work
-        public static void FetchMovers()
+        public static void initializeBot()
         {
-            movers.Clear();
-            string jsonString;
-            using (var wc = new System.Net.WebClient())
-            {
-                jsonString = wc.DownloadString(url);
-            }
+            
+            
+        }
+
+
+public static void FetchMovers()
+        {
+           
+            jsonString = wc.DownloadString(url);
+            
 
             jsonString = jsonString.Split(new string[] { "\"results\":{\"rows\":" }, StringSplitOptions.None)[1];
             jsonString = jsonString.Split(new string[] { "]" }, StringSplitOptions.None)[0] + "]";
             List<dynamic> results = JsonConvert.DeserializeObject<List<dynamic>>(jsonString);
+            //Console.WriteLine("Finished JSON parsing");
             //results.AddRange(results.Take(25)); 
             results.RemoveRange(9, 14);
-            movers.Clear();
-            //Console.WriteLine("Movers UPDATED!");
+            //movers.Clear();
+           
             foreach (dynamic stock in results)
             {
-                movers.Add(new Stock(stock, true));
+                
+                movers.Insert(0, new Stock(stock, true));
+                
             }
-            
-
-            //MoversChanged();
-
-            //Console.WriteLine("Top 25 movers from Yahoo Finance are: ");
-            //for(int i = 0; i < movers.Count; i++)
-            //{
-            //    Console.WriteLine(string.Format("{0} - \t{1} \t{2} \t{3} \t{4}% \t{5} \t{6} \t{7} \t{8}",
-            //        i+1, movers[i].symbol, movers[i].shortName, movers[i].regularMarketPrice, movers[i].regularMarketChange,
-            //        movers[i].regularMarketChangePercent, movers[i].fiftyTwoWeekLow,
-            //        movers[i].fiftyTwoWeekHigh, movers[i].regularMarketOpen));
-            //}
+            if(movers.Count != results.Count)
+                movers.RemoveRange(9, movers.Count - 10);
+           
         }
 
-        //public async void updateStockPricesAsync()
-        //{
-        //    var httpClient = new HttpClient();
-
-        //    //stock string is null?????
-        //    foreach (var stock in currentStockPrices)
-        //    {
-        //        var html = await httpClient.GetStringAsync(url + stock.Key);
-
-        //        var htmlDocument = new HtmlDocument();
-        //        htmlDocument.LoadHtml(html);
-
-        //        var updatedPrice = htmlDocument.DocumentNode.Descendants("span")
-        //            .Where(node => node.GetAttributeValue("class", "")
-        //            .Equals("Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)")).ToList();
-
-        //        decimal p = Convert.ToDecimal(updatedPrice[0].InnerText);
-
-        //        currentStockPrices[stock.Key] = p;
-        //    }
-        //}
-
-        //public void botBuy(User user)
-        //{
-        //    for (int i = 0; i < 5; i++)
-        //    {
-        //        user.folio.buyStock(folio, TradingBot.movers[i], 5);
-        //    }
-
-
-        //    foreach (dynamic stock in folio.contents)
-        //    {
-
-        //        string symbol = stock.symbol;
-        //        for (int i = 0; i < 5; i++)
-        //        {
-        //            if (TradingBot.movers[i].symbol.Equals(symbol))
-        //            {
-        //                Console.WriteLine("Match");
-        //            }
-        //        }
-
-        //    }
-        //    //for (int i = 0; i < 5; i++)
-        //    //{
-        //    //    buyStock(folio, TradingBot.movers[i], 2);
-        //    //}
-
-        //}
+        
 
         public static async Task<decimal> updateStockPricesAsync(Stock stock)
         {

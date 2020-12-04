@@ -102,60 +102,7 @@ namespace StockBot
             }
         }
 
-        //updates current price of stocks
-        //Will be used to calculate growth/shrink
-        //Needs to use WebClient. Not changing until needed
-        //public async void updateStockPricesAsync()
-        //{
-        //    var httpClient = new HttpClient();
-            
-        //    //stock string is null?????
-        //    foreach (var stock in currentStockPrices)
-        //    {
-        //        var html = await httpClient.GetStringAsync(url + stock.Key);
-
-        //        var htmlDocument = new HtmlDocument();
-        //        htmlDocument.LoadHtml(html);
-
-        //        var updatedPrice = htmlDocument.DocumentNode.Descendants("span")
-        //            .Where(node => node.GetAttributeValue("class", "")
-        //            .Equals("Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)")).ToList();
-
-        //        decimal p = Convert.ToDecimal(updatedPrice[0].InnerText);
-
-        //        currentStockPrices[stock.Key] = p;
-
-        //        //stock.
-
-
-
-        //        //var symbol = stock.symbol;
-        //        //string jsonString;
-        //        //using (var wc = new System.Net.WebClient())
-        //        //{
-        //        //    jsonString = wc.DownloadString(url+symbol);
-        //        //}
-
-        //        //jsonString = jsonString.Split(new string[] { "\"results\":{\"rows\":" }, StringSplitOptions.None)[1];
-        //        //jsonString = jsonString.Split(new string[] { "]" }, StringSplitOptions.None)[0] + "]";
-        //        //List<dynamic> results = JsonConvert.DeserializeObject<List<dynamic>>(jsonString);
-        //        //results[0].
-
-
-
-        //        //movers.AddRange(results.Take(25));
-        //        ////MoversChanged();
-
-        //        //Console.WriteLine("Top 25 movers from Yahoo Finance are: ");
-        //        //for (int i = 0; i < movers.Count; i++)
-        //        //{
-        //        //    Console.WriteLine(string.Format("{0} - \t{1} \t{2} \t{3} \t{4}% \t{5} \t{6} \t{7} \t{8} \t{9} \t{10}",
-        //        //        i + 1, movers[i].symbol, movers[i].shortName, movers[i].regularMarketPrice.raw, movers[i].regularMarketChange.raw,
-        //        //        movers[i].regularMarketChangePercent.raw, movers[i].regularMarketVolume.raw, movers[i].averageDailyVolume3Month.raw, movers[i].marketCap.raw, movers[i].fiftyTwoWeekLow.raw,
-        //        //        movers[i].fiftyTwoWeekHigh.raw, movers[i].regularMarketOpen.raw));
-        //        //}
-        //    }
-        //}
+        
 
         public decimal updateStockPricesAsync(Stock stock)
         {

@@ -60,23 +60,6 @@ namespace StockBot
 
 
 
-
-            //Console.Clear();
-            //Console.WriteLine("Which Portfolio would you like to add to?");
-            //int i = 1;
-            //foreach(Portfolio folio in Display.currentUser.getPortfolios().Values)
-            //{
-            //    Console.SetCursorPosition(Console.WindowWidth / 2 - 5, (i * 2) + 5);
-            //    Console.Write(i + ". " + folio.getDisplayName());
-
-            //    i++;
-            //}
-
-            //int temp = (int)char.GetNumericValue(Console.ReadKey().KeyChar);
-            
-
-            //Display.currentUser.getPortfolios().Values.ToList()[temp -1].addStock(selectedStock);
-
         }
 
         public void updateElements()
@@ -101,17 +84,10 @@ namespace StockBot
         public override void run()
         {
             
-            //running = true;
-            //var worker = new Thread(() =>
-            //{
-            //    while (running)
-            //    {
-                    
-                    
-                    //if (running)
+           
             if (Display.currentUser != lastUser || Display.currentUser == null)
             {
-                TradingBot.FetchMovers();
+                //TradingBot.FetchMovers();
                 Console.Clear();
                 updateElements();
                 selectedElement = elements[0];
@@ -123,12 +99,7 @@ namespace StockBot
             display();
             Console.SetCursorPosition(Console.WindowWidth / 4, 5);
             Console.WriteLine(string.Format("{0, -7} {1, -35} {2, 10} {3, 10}% {4, 10} {5, 10}", "Symbol", "Name", "Price", "Growth", "52 wk Low", "52 wk High"));
-            //if(Console.ReadKey().Key == ConsoleKey.Escape)
-            //{
-            //    running = false;
-            //    Console.Clear();
-            //    Display.setCurrentMenu(owner.getParentMenu());
-            //}
+            
             ConsoleKeyInfo key = Console.ReadKey();
             switch (key.Key)
             {

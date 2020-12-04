@@ -64,20 +64,14 @@ namespace StockBot
 
     public class Stock
     {
-        //private string ticker;
-        //private string name;
-        //private decimal latestPrice;
-        //private decimal dailyHigh; //or some other value we want to keep track of
-        //private decimal dailyLow;
+       
 
         public string symbol;
         public string shortName;
         public decimal regularMarketPrice;
         public decimal regularMarketChange;
         public decimal regularMarketChangePercent;
-        //private decimal regularMarketVolume;
-        //private decimal averageDailyVolume3Month;
-        //private decimal marketCap;
+        
         public decimal fiftyTwoWeekLow;
         public decimal fiftyTwoWeekHigh;
         public decimal regularMarketOpen;
@@ -128,25 +122,6 @@ namespace StockBot
 
         
 
-        //public Stock(string ticker)
-        //{
-        //    if (API.isTicker(ticker)) //uses some API or something to check if it is a valid ticker
-        //    {
-        //        this.ticker = ticker;
-        //        updatePrice();
-        //        updateHigh();
-        //        updateLow();
-        //        getName();
-        //    }
-        //    else
-        //    {
-        //        throw new ArgumentException("You entered an invalid Ticker");
-        //    }
-        //}
-        //public override string ToString()
-        //{
-        //    return symbol;
-        //}
 
         public void updatePrice(decimal price)
         {

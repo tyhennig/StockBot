@@ -71,7 +71,9 @@ namespace StockBot
                 while (true)
                 {
                     TradingBot.FetchMovers();
-                    Thread.Sleep(5000);
+                   
+                    Thread.Sleep(10000);
+                    
                 }
 
             });
