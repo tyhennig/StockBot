@@ -39,18 +39,50 @@ namespace StockBot
         //    contents.Add(stock);
         //}
 
-        public void removeStock(string symbol, int quantity)
+
+        //
+        public decimal removeStock(string symbol, decimal price, int quantity)
         {
-            contents[symbol][contents[symbol].Count - 1].quantity =
-                contents[symbol][contents[symbol].Count - 1].quantity - quantity;
-            decimal qty = contents[symbol][contents[symbol].Count - 1].quantity;
-            contents[symbol][contents[symbol].Count - 1].Remove();
+            int qtyNeedToBeSold = quantity;
+            int amountInLast = 0;
+            decimal total = 0m;
+            while (qtyNeedToBeSold != 0)
+            {
+                amountInLast = contents[symbol][contents[symbol].Count - 1].quantity;
+                contents[symbol][contents[symbol].Count - 1].quantity =
+                contents[symbol][contents[symbol].Count - 1].quantity - qtyNeedToBeSold;
+
+
+
+                if(contents[symbol][contents[symbol].Count - 1].quantity > 0)
+                {
+                    total += qtyNeedToBeSold * price;
+                    break;
+                }
+
+                total += amountInLast * price;
+                
+                qtyNeedToBeSold -= amountInLast;
+
+                if(contents[symbol][contents[symbol].Count - 1].quantity <= 0)
+                {
+                    contents[symbol].RemoveAt(contents[symbol].Count - 1);
+                }
+                
+            }
+            return total;
         }
 
         //public void removeStock(dynamic stock)
         //{
         //    contents.Remove(stock);
         //}
+
+        public bool isEmpty()
+        {
+            
+            return true;
+        }
 
 
 

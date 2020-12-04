@@ -14,7 +14,8 @@ namespace StockBot
         private string password { set; get; }
         //Maybe a list is better? What happens when you delete a user, creating holes
         public Dictionary<string, Portfolio> portfolios;//DONE//I'm thinking about having a portfolio class instead, that way users can have more than one portfolio
-        //public List<Portfolio> portfolios;
+        
+        public Portfolio botfolio;
         private decimal buyingPower; //perhaps this should be global (static)
         private string bday = "";
         
@@ -27,6 +28,9 @@ namespace StockBot
             //portfolios = new List<Portfolio>(); //web-scrape code
             this.bday = bday;
             portfolios = new Dictionary<string, Portfolio>();
+            
+            botfolio = new Portfolio("botfolio");
+            //createPortfolio("Botfolio");
             id = numInstantiated;
             numInstantiated++;
             UserDB.userDB.Add(username, this);
@@ -140,13 +144,7 @@ namespace StockBot
                     //decimal price = await TradingBot.updateStockPricesAsync();
                     decimal price = folio.updateStockPricesAsync(stock);
                     //not that easy buck-o
-                    decimal total = quantity * price;
-
-                    //for (int i = 0; i < quantity; i++)
-                    //{
-                        folio.removeStock(symbol, qtyOwned);
-                        //folio.contents[symbol].RemoveAt(folio.contents[symbol].Count - 1);
-                    //}
+                    decimal total = folio.removeStock(symbol, price, quantity);
 
                     addBuyingPower(total);
                     Console.WriteLine("SOLD!");
@@ -174,14 +172,22 @@ namespace StockBot
         public void botbuy()
         {
             decimal singlestockbudget = (buyingPower * 0.5m) * 0.20m;
-            for (int i = 0; i < 5; i++)
+
+            if (botfolio.contents.Count == 0)
             {
-                Stock stock = new Stock(TradingBot.movers[i]);
-                int quantity = (int)(singlestockbudget / stock.regularMarketPrice);
-                if (quantity > 0)
+                for (int i = 0; i < 5; i++)
                 {
-                    buyStock(portfolios[0], stock, quantity);
+                    Stock stock = new Stock(TradingBot.movers[i]);
+                    int quantity = (int)(singlestockbudget / stock.regularMarketPrice);
+                    if (quantity > 0)
+                    {
+                        buyStock(botfolio, stock, quantity);
+                    }
                 }
+            }
+            else
+            {
+
             }
 
 
