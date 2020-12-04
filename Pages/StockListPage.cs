@@ -21,15 +21,17 @@ namespace StockBot.Pages
             foreach(List<Stock> stocks in p.contents.Values)
             {
                 decimal avgPrice = 0;
-                int numOwned = stocks.Count;
+                int numOwned = 0;
 
                 foreach(Stock st in stocks)
                 {
-                    avgPrice += st.regularMarketPrice;
+                    numOwned += st.quantity;
+                    avgPrice += st.regularMarketPrice * st.quantity;
                 }
+
                 avgPrice /= numOwned;
                 Stock stock = stocks[0];
-                SelectableElement portElement = new SelectableElement(false, string.Format("{0, -20} {1, -15} {2, -10} {3, -5} {4, 0} {5, 5}", stock.symbol, stock.shortName, avgPrice, stock.regularMarketChangePercent, stock.fiftyTwoWeekLow, stock.fiftyTwoWeekHigh), Console.WindowWidth / 2 - 5, (i * 2) + 5);
+                SelectableElement portElement = new SelectableElement(false, string.Format("{0, -20} {1, -15} {2, -10} {3, -5} {4, 0} {5, 5}", stock.symbol, stock.shortName, avgPrice, stock.regularMarketChangePercent, stock.fiftyTwoWeekLow, numOwned), Console.WindowWidth / 2 - 5, (i * 2) + 5);
                 elements.Add(portElement);
                 i++;
             }

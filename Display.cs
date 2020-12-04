@@ -34,7 +34,10 @@ namespace StockBot
                 Console.CursorVisible = false;
                 Console.SetCursorPosition(0, 0);
                 if(currentUser != null)
-                    Console.Write("Current User: " + currentUser.Username);
+                {
+                    Console.Write("Current User: " + currentUser.Username + "   " + "Buying Power: $" + currentUser.getBuyingPower());
+
+                }
                 Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 3);
 
                 currentMenu.run();  

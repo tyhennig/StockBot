@@ -20,7 +20,7 @@ namespace StockBot
             else
             {
                 User createdUser = new User(username, password, bday);
-                userDB.Add(username, createdUser);
+                //userDB.Add(username, createdUser);
                 return true;
             }
         }

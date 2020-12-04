@@ -23,28 +23,35 @@ namespace StockBot
 
         public void addToPortfolio()
         {
+            string s = "How many would you like to purchase:  ";
             Console.Clear();
-            Console.Write("How many would you like to purchase:  ");
+            Console.SetCursorPosition(Console.WindowWidth / 2 - s.Length / 2, Console.WindowHeight / 2);
+            Console.Write(s);
 
 
             if (int.TryParse(Console.ReadLine().ToString(), out int result))
             {
                 Console.Clear();
-                Console.WriteLine("Which Portfolio would you like to add to?");
+                s = "Which Portfolio would you like to add to?";
+                Console.SetCursorPosition(Console.WindowWidth / 2 - s.Length / 2, 5);
+                Console.WriteLine(s);
                 int i = 1;
                 foreach (Portfolio folio in Display.currentUser.getPortfolios().Values)
                 {
-                    Console.SetCursorPosition(Console.WindowWidth / 2 - 5, (i * 2) + 5);
-                    Console.Write(i + ". " + folio.getDisplayName());
+                    s = folio.getDisplayName();
+                    Console.SetCursorPosition(Console.WindowWidth / 2 - s.Length / 2, (i * 2) + 5);
+                    Console.Write(i + ". " + s);
 
                     i++;
                 }
 
-                int selectedFolioIndex = int.Parse(Console.ReadLine()) - 1;
+                int selectedFolioIndex = int.Parse(Console.ReadKey().KeyChar.ToString()) - 1;
                 Console.Clear();
-                Console.WriteLine("Confirm purchase of " + result + " " + selectedStock.shortName + ", for a total of $" + (decimal)(selectedStock.regularMarketPrice * result) + " (y/n)");
+                s = "Confirm purchase of " + result + " " + selectedStock.shortName + ", for a total of $" + (decimal)(selectedStock.regularMarketPrice * result) + "   Current Buying Power: " + Display.currentUser.getBuyingPower() + " (y/n)";
+                Console.SetCursorPosition((Console.WindowWidth / 2) - (s.Length / 2), Console.WindowHeight / 2);
+                Console.WriteLine(s);
                 if (Console.ReadKey().KeyChar == 'y')
-                    Display.currentUser.buyStock(Display.currentUser.getPortfolios()[selectedElement.displayedText], selectedStock, result);
+                    Display.currentUser.buyStock(Display.currentUser.getPortfolios().Values.ToList()[selectedFolioIndex], selectedStock, result);
             }
             else
             {
@@ -81,7 +88,7 @@ namespace StockBot
                 elements.Add(portElement);
                 i++;
             }
-
+             
 
 
             lastUser = Display.currentUser;
