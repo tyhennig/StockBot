@@ -55,18 +55,19 @@ namespace StockBot
             jsonString = jsonString.Split(new string[] { "\"results\":{\"rows\":" }, StringSplitOptions.None)[1];
             jsonString = jsonString.Split(new string[] { "]" }, StringSplitOptions.None)[0] + "]";
             List<dynamic> results = JsonConvert.DeserializeObject<List<dynamic>>(jsonString);
-            movers.AddRange(results.Take(10));
+            movers.AddRange(results.Take(25));
             //MoversChanged();
 
-            //Console.WriteLine("Top 25 movers from Yahoo Finance are: ");
-            //for(int i = 0; i < movers.Count; i++)
-            //{
-            //    Console.WriteLine(string.Format("{0} - \t{1} \t{2} \t{3} \t{4}% \t{5} \t{6} \t{7} \t{8} \t{9} \t{10}",
-            //        i+1, movers[i].symbol, movers[i].shortName, movers[i].regularMarketPrice.raw, movers[i].regularMarketChange.raw,
-            //        movers[i].regularMarketChangePercent.raw, movers[i].regularMarketVolume.raw, movers[i].averageDailyVolume3Month.raw, movers[i].marketCap.raw, movers[i].fiftyTwoWeekLow.raw,
-            //        movers[i].fiftyTwoWeekHigh.raw, movers[i].regularMarketOpen.raw));
-            //}
+            Console.WriteLine("Top 25 movers from Yahoo Finance are: ");
+            for(int i = 0; i < movers.Count; i++)
+            {
+                Console.WriteLine(string.Format("{0} - \t{1} \t{2} \t{3} \t{4}% \t{5} \t{6} \t{7} \t{8} \t{9} \t{10}",
+                    i+1, movers[i].symbol, movers[i].shortName, movers[i].regularMarketPrice.raw, movers[i].regularMarketChange.raw,
+                    movers[i].regularMarketChangePercent.raw, movers[i].regularMarketVolume.raw, movers[i].averageDailyVolume3Month.raw, movers[i].marketCap.raw, movers[i].fiftyTwoWeekLow.raw,
+                    movers[i].fiftyTwoWeekHigh.raw, movers[i].regularMarketOpen.raw));
+            }
         }
+
 
         public void aggressiveBuy()
         {
