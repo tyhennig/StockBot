@@ -53,7 +53,8 @@ namespace StockBot
             paul.addBuyingPower(100000);
             paul.listPortfolios();
             paul.buyStock(paul.portfolios[1], TradingBot.movers[4], 4);
-            paul.buyStock(paul.portfolios[1], TradingBot.movers[4], 4);
+            paul.buyStock(paul.portfolios[1], TradingBot.movers[4], 5);
+            paul.buyStock(paul.portfolios[1], TradingBot.movers[4], 6);
             paul.buyStock(paul.portfolios[1], TradingBot.movers[2], 5);
             //paul.botBuy(paul.portfolios[0]);
             //paul.buyStock(portfolioName, selectedstock);
@@ -61,7 +62,7 @@ namespace StockBot
             paul.portfolios[1].displayPorfolioContent();
             Console.WriteLine(paul.getBuyingPower());
 
-            paul.sellStock(paul.portfolios[1], paul.portfolios[1].contents["CYRBY"][0], 3);
+            paul.sellStock(paul.portfolios[1], paul.portfolios[1].contents["CYRBY"][0], 13);
             //Thread.Sleep(3000);
             //paul.portfolios[0].updateStockPricesAsync();
             paul.portfolios[1].displayPorfolioContent();

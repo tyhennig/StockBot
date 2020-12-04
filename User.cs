@@ -133,7 +133,7 @@ namespace StockBot
 
                     //for (int i = 0; i < quantity; i++)
                     //{
-                        folio.removeStock(symbol, qtyOwned);
+                        folio.removeStock(symbol, quantity);
                         //folio.contents[symbol].RemoveAt(folio.contents[symbol].Count - 1);
                     //}
 
